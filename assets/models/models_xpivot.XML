@@ -1,0 +1,7 @@
+<models>
+<model type="table" name="T_PRODUCTS" DDIC_type="ZPIVOT_PRODUCTS_S" mode="twoway">
+		<syncgroups>
+			<syncgroup syncid="GET_SYNC"></syncgroup>
+		</syncgroups>
+	</model>
+</models>
