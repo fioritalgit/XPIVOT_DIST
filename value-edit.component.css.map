@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/custom-components/value-edit/value-edit.component.css"],
-  "sourcesContent": ["input:focus {\n  outline: none;\n  /* Removes the default outline */\n}\n\ninput::-webkit-outer-spin-button,\ninput::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}"],
-  "mappings": ";AAAA,KAAK;AACH,WAAS;AAEX;AAEA,KAAK;AACL,KAAK;AACH,sBAAoB;AACpB,UAAQ;AACV;",
-  "names": []
-}

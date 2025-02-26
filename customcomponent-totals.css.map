@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/custom-components/total-row/customcomponent-totals.css"],
-  "sourcesContent": ["\ntable {\n    border-bottom: 1px solid black;\n}\nth {\n    font-weight: normal !important;\n    border-bottom: 1px solid black;\n    border-top: 0px ;\n    border-collapse: collapse;\n}\n\ntd {\n    font-weight: normal !important;\n    border-right: 1px solid black;\n    border-collapse: collapse;\n    text-align: center;\n}\n\ntr {\n    line-height: normal;\n}"],
-  "mappings": ";AACA;AACI,iBAAe,IAAI,MAAM;AAC7B;AACA;AACI,eAAa;AACb,iBAAe,IAAI,MAAM;AACzB,cAAY;AACZ,mBAAiB;AACrB;AAEA;AACI,eAAa;AACb,gBAAc,IAAI,MAAM;AACxB,mBAAiB;AACjB,cAAY;AAChB;AAEA;AACI,eAAa;AACjB;",
-  "names": []
-}
