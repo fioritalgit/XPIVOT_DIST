@@ -1,0 +1,117 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:net="sap.suite.ui.commons.networkgraph">
+	<Popover title="{$this>title}" class="" placement="Auto" id="ATPCPopover" contentWidth="87em" contentHeight="50em" verticalScrolling="false"
+		horizontalScrolling="false" modal="true" afterOpen="setZoom">
+		<subHeader>
+			<HBox height="3em" alignItems="Center" class="borderDivideATPCHdrBottom">
+				<VBox width="1em"></VBox>
+				<core:Icon src="sap-icon://overview-chart" size="1.5em"></core:Icon>
+				<VBox width="1em"></VBox>
+				<Title class="Big" text="ATPC number: "></Title>
+				<VBox width="2em"></VBox>
+				<Title id="headerATPCId" class="boldBig" text=""></Title>
+			</HBox>
+		</subHeader>
+		<content>
+			<html:style>
+				.smallScrollBarATPC div::-webkit-scrollbar-thumb { background-color: #f2f6fc; outline: 1px solid slategrey; } .smallScrollBarATPC
+				div::-webkit-scrollbar { width: 0.5em !important; } .graphItemMoveRight .sapSuiteUiCommonsNetworkNodeCircle
+				.sapSuiteUiCommonsNetworkGraphDivNodeTitle{ padding-left: 7em; width: 15em; text-align: left; } .borderDivideATPCGraph { border-right: 1px
+				solid lightgrey; } .borderDivideATPCHdrBottom { border-bottom: 1px solid lightgrey; } .textSupplyID { font-size: smaller !important; color:
+				lightgrey;}
+				
+				.atpclevel tr[data-atpclevel="X"]{
+					background-color: beige;
+				}
+			</html:style>
+			<HBox height="100%" width="100%" renderType="Bare" class="smallScrollBarATPC graphItemMoveRight">
+				<ScrollContainer height="100%" vertical="true" width="45%" class="borderDivideATPCGraph">
+					<net:Graph orientation="TopBottom" nodes="{ATPCMODEL>/nodes}" lines="{ATPCMODEL>/lines}" id="ATPCgraph" enableWheelZoom="false">
+						<net:nodes>
+							<net:Node key="{ATPCMODEL>key}" title="{ATPCMODEL>title}" icon="{ATPCMODEL>icon}" showExpandButton="false" showDetailButton="false"
+								showActionLinksButton="false" actionButtons="{path:'ATPCMODEL>actionButtons', templateShareable:true}"
+								attributes="{path:'ATPCMODEL>attributes', templateShareable:true}" status="{ATPCMODEL>status}" shape="{ATPCMODEL>shape}"
+								width="{ATPCMODEL>width}">
+								<net:customData>
+									<core:CustomData key="nodeType" value="{ATPCMODEL>nodeType}" writeToDom="true"/>
+									<core:CustomData key="nodeId" value="{ATPCMODEL>nodeId}" writeToDom="true"/>
+									<core:CustomData key="nodePosId" value="{ATPCMODEL>nodePosId}" writeToDom="true"/>
+								</net:customData>
+								<net:attributes>
+									<net:ElementAttribute icon="{ATPCMODEL>icon}" label="{ATPCMODEL>label}" value="{ATPCMODEL>value}"/>
+								</net:attributes>
+								<net:actionButtons>
+									<net:ActionButton icon="{ATPCMODEL>icon}" title="Custom button" press="nodeActionPress"/>
+								</net:actionButtons>
+							</net:Node>
+						</net:nodes>
+						<net:lines>
+							<net:Line from="{ATPCMODEL>from}" to="{ATPCMODEL>to}"></net:Line>
+						</net:lines>
+					</net:Graph>
+				</ScrollContainer>
+				<ScrollContainer height="100%" vertical="true" width="55%">
+					<Table id="ATPCpositionsDEtail" inset="false" items="{ATPCMODELLIST>/AtpcPos}" growing="false" sticky="ColumnHeaders" class="atpclevel">
+						<infoToolbar>
+						</infoToolbar>
+						<columns>
+							<Column width="10%">
+								<Text text=''/>
+							</Column>
+							<Column width="10%">
+								<Text text='lvl.'/>
+							</Column>
+							<Column width="20%">
+								<Text text="hub"/>
+							</Column>
+							<Column width="20%">
+								<Text text="tipo"/>
+							</Column>
+							<Column width="20%">
+								<Text text='arrivo'/>
+							</Column>
+							<Column width="20%">
+								<Text text="partenza"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem >
+								<customData>
+									<core:CustomData key="atpclevel" value="{ATPCMODELLIST>atpclevelinner}" writeToDom="true"/>
+								</customData>
+								<cells>
+									<core:Icon size="2em" src="{path:'ATPCMODELLIST>supplyType',formatter:'.formatIconSupplyType'}"
+									   color="{path:'ATPCMODELLIST>supplyType',formatter:'.formatIconSupplyTypeColor'}"></core:Icon>
+									<Text text="{ATPCMODELLIST>atpclevel}" visible="{= ${ATPCMODELLIST>atpclevel} === 0 ? false : true }"></Text>
+									<ObjectIdentifier title="{ATPCMODELLIST>node}" text="{ATPCMODELLIST>nodename}" class="noMargin"/>
+									<VBox>
+										<ObjectIdentifier title="{path:'ATPCMODELLIST>supplyType'}"
+											text="{parts:['ATPCMODELLIST>supplyId','ATPCMODELLIST>supplyType'],formatter:'.supplyIdFormatter'}" class="noMargin"/>
+										<Text text="{path:'ATPCMODELLIST>supplyId',formatter:'.deleteTrailZeros'}" class="textSupplyID"></Text>
+									</VBox>
+									<VBox>
+										<core:Icon src="sap-icon://arrow-bottom" visible="{path:'ATPCMODELLIST>foInDate',formatter:'.hideIconNoDate'}"></core:Icon>
+										<ObjectIdentifier title="{ATPCMODELLIST>foInDate}" text="{parts:['ATPCMODELLIST>foInDate','ATPCMODELLIST>foInTime'],formatter:'.formatNodeTime'}" class="noMargin"/>
+									</VBox>
+									<VBox>
+										<core:Icon src="sap-icon://forward" visible="{path:'ATPCMODELLIST>foOutDate',formatter:'.hideIconNoDate'}"></core:Icon>
+										<ObjectIdentifier title="{ATPCMODELLIST>foOutDate}" text="{parts:['ATPCMODELLIST>foOutDate','ATPCMODELLIST>foOutTime'],formatter:'.formatNodeTime'}" class="noMargin"/>
+									</VBox>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</HBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="close" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+		<dependents>
+			<fio:FreightOrderManager id="ATPCFOdetail"></fio:FreightOrderManager>
+		</dependents>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,124 @@
+import "./chunk-AJH3MT3R.js";
+
+// node_modules/@ui5/webcomponents-icons/dist/generated/assets/i18n/messagebundle_fr_CA.json
+var ICON_ACTION_SETTINGS = "Param\xE8tres";
+var ICON_ACTIVATE = "Activer";
+var ICON_ADD = "Ajouter";
+var ICON_ADD_CONTACT = "Ajouter un contact";
+var ICON_ADD_FILTER = "Ajouter un filtre";
+var ICON_ADD_PHOTO = "Ajouter une photo";
+var ICON_BACK_TO_TOP = "Retour au d\xE9but";
+var ICON_COLLAPSE = "R\xE9duire";
+var ICON_COLLAPSE_GROUP = "R\xE9duire le groupe";
+var ICON_CROP = "Rogner";
+var ICON_DECLINE = "Refuser";
+var ICON_DELETE = "Supprimer";
+var ICON_DISPLAY = "Afficher";
+var ICON_DOWN = "Vers le bas";
+var ICON_DOWNLOAD = "T\xE9l\xE9charger";
+var ICON_DRILL_DOWN = "Zoom avant";
+var ICON_DRILL_UP = "Zoom arri\xE8re";
+var ICON_ERROR = "Erreur";
+var ICON_EXIT_FULL_SCREEN = "Quitter le mode plein \xE9cran";
+var ICON_EXPAND = "D\xE9velopper";
+var ICON_EXPAND_GROUP = "D\xE9velopper le groupe";
+var ICON_FILTER = "Filtrer";
+var ICON_FLAG = "Marquer";
+var ICON_FORWARD = "Transf\xE9rer";
+var ICON_FULL_SCREEN = "Passer en mode plein \xE9cran";
+var ICON_GENERATE_SHORTCUT = "Cr\xE9er un raccourci";
+var ICON_GROUP_2 = "Regrouper";
+var ICON_HIDE = "Masquer";
+var ICON_IPAD = "Tablette";
+var ICON_IPHONE = "T\xE9l\xE9phone";
+var ICON_LAPTOP = "Ordinateur portable";
+var ICON_MESSAGE_ERROR = "Erreur";
+var ICON_MESSAGE_INFORMATION = "Informations";
+var ICON_MESSAGE_SUCCESS = "R\xE9ussite";
+var ICON_MESSAGE_WARNING = "Avertissement";
+var ICON_MOVE = "D\xE9placer";
+var ICON_MULTI_SELECT = "S\xE9lection multiple";
+var ICON_NAV_BACK = "Retourner en arri\xE8re";
+var ICON_OVERFLOW = "Plus";
+var ICON_REDO = "R\xE9tablir";
+var ICON_REFRESH = "Rafra\xEEchir";
+var ICON_RESIZE = "Redimensionner";
+var ICON_RESIZE_HORIZONTAL = "Redimensionner horizontalement";
+var ICON_RESIZE_VERTICAL = "Redimensionner verticalement";
+var ICON_RESPONSE = "R\xE9pondre";
+var ICON_SAVE = "Enregistrer";
+var ICON_SEARCH = "Rechercher";
+var ICON_SETTINGS = "Param\xE8tres";
+var ICON_SHOW = "Afficher";
+var ICON_SORT = "Trier";
+var ICON_SORT_ASCENDING = "Tri croissant";
+var ICON_SORT_DESCENDING = "Tri d\xE9croissant";
+var ICON_SYNCHRONIZE = "Synchroniser";
+var ICON_UNDO = "Annuler";
+var ICON_UP = "Vers le haut";
+var ICON_UPLOAD = "T\xE9l\xE9verser";
+var ICON_ZOOM_IN = "Zoom avant";
+var ICON_ZOOM_OUT = "Zoom arri\xE8re";
+var messagebundle_fr_CA_default = { ICON_ACTION_SETTINGS, ICON_ACTIVATE, ICON_ADD, ICON_ADD_CONTACT, ICON_ADD_FILTER, ICON_ADD_PHOTO, ICON_BACK_TO_TOP, ICON_COLLAPSE, ICON_COLLAPSE_GROUP, ICON_CROP, ICON_DECLINE, ICON_DELETE, ICON_DISPLAY, ICON_DOWN, ICON_DOWNLOAD, ICON_DRILL_DOWN, ICON_DRILL_UP, ICON_ERROR, ICON_EXIT_FULL_SCREEN, ICON_EXPAND, ICON_EXPAND_GROUP, ICON_FILTER, ICON_FLAG, ICON_FORWARD, ICON_FULL_SCREEN, ICON_GENERATE_SHORTCUT, ICON_GROUP_2, ICON_HIDE, ICON_IPAD, ICON_IPHONE, ICON_LAPTOP, ICON_MESSAGE_ERROR, ICON_MESSAGE_INFORMATION, ICON_MESSAGE_SUCCESS, ICON_MESSAGE_WARNING, ICON_MOVE, ICON_MULTI_SELECT, ICON_NAV_BACK, ICON_OVERFLOW, ICON_REDO, ICON_REFRESH, ICON_RESIZE, ICON_RESIZE_HORIZONTAL, ICON_RESIZE_VERTICAL, ICON_RESPONSE, ICON_SAVE, ICON_SEARCH, ICON_SETTINGS, ICON_SHOW, ICON_SORT, ICON_SORT_ASCENDING, ICON_SORT_DESCENDING, ICON_SYNCHRONIZE, ICON_UNDO, ICON_UP, ICON_UPLOAD, ICON_ZOOM_IN, ICON_ZOOM_OUT };
+export {
+  ICON_ACTION_SETTINGS,
+  ICON_ACTIVATE,
+  ICON_ADD,
+  ICON_ADD_CONTACT,
+  ICON_ADD_FILTER,
+  ICON_ADD_PHOTO,
+  ICON_BACK_TO_TOP,
+  ICON_COLLAPSE,
+  ICON_COLLAPSE_GROUP,
+  ICON_CROP,
+  ICON_DECLINE,
+  ICON_DELETE,
+  ICON_DISPLAY,
+  ICON_DOWN,
+  ICON_DOWNLOAD,
+  ICON_DRILL_DOWN,
+  ICON_DRILL_UP,
+  ICON_ERROR,
+  ICON_EXIT_FULL_SCREEN,
+  ICON_EXPAND,
+  ICON_EXPAND_GROUP,
+  ICON_FILTER,
+  ICON_FLAG,
+  ICON_FORWARD,
+  ICON_FULL_SCREEN,
+  ICON_GENERATE_SHORTCUT,
+  ICON_GROUP_2,
+  ICON_HIDE,
+  ICON_IPAD,
+  ICON_IPHONE,
+  ICON_LAPTOP,
+  ICON_MESSAGE_ERROR,
+  ICON_MESSAGE_INFORMATION,
+  ICON_MESSAGE_SUCCESS,
+  ICON_MESSAGE_WARNING,
+  ICON_MOVE,
+  ICON_MULTI_SELECT,
+  ICON_NAV_BACK,
+  ICON_OVERFLOW,
+  ICON_REDO,
+  ICON_REFRESH,
+  ICON_RESIZE,
+  ICON_RESIZE_HORIZONTAL,
+  ICON_RESIZE_VERTICAL,
+  ICON_RESPONSE,
+  ICON_SAVE,
+  ICON_SEARCH,
+  ICON_SETTINGS,
+  ICON_SHOW,
+  ICON_SORT,
+  ICON_SORT_ASCENDING,
+  ICON_SORT_DESCENDING,
+  ICON_SYNCHRONIZE,
+  ICON_UNDO,
+  ICON_UP,
+  ICON_UPLOAD,
+  ICON_ZOOM_IN,
+  ICON_ZOOM_OUT,
+  messagebundle_fr_CA_default as default
+};
+//# sourceMappingURL=chunk-BZCYO2FQ.js.map

@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<HBox>
+		<Button icon="{$this>left_button_icon}" text="{$this>left_button_text}" press="scrollLeftValue"  />
+		<Input value="{$this>value}" editable="{$this>editable}" />
+		<Button icon="{$this>right_button_icon}" text="{$this>right_button_text}" press="scrollRightValue" />
+	</HBox>
+</core:FragmentDefinition>

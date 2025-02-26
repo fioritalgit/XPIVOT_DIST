@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fiorital="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns:variant="sap.ui.comp.variants">
+	<HBox>
+		<Button icon="sap-icon://dimension" press="onPersoButtonPressed" tooltip="varianti per tabella" type="Transparent"/>
+		<HBox width="1.5em"></HBox>
+		<fiorital:FioritalVariantManagement variantItems="{path:'/',suspended: true}" enabled="true" showExecuteOnSelection="false"
+			showShare="false" id="Variants">
+			<fiorital:variantItems>
+				<variant:VariantItem text="{Name}" key="{Key}"/>
+			</fiorital:variantItems>
+		</fiorital:FioritalVariantManagement>
+	</HBox>
+</core:FragmentDefinition>

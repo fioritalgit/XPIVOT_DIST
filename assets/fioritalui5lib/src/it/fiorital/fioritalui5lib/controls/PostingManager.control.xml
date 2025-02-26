@@ -1,0 +1,231 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fiorital="it.fiorital.fioritalui5lib.controls"
+	xmlns:grid="sap.ui.layout.cssgrid" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover id="popoverPosting" contentHeight="100%" contentWidth="100%" verticalScrolling="false" title="Assegnazioni e posting"
+		placement="Auto" class="smallScrollBar sapUiSizeCompact" modal="true">
+		<html:style>
+			.sapFGridList { } .sapFGridList>.sapMListHdrText,.sapFGridList>.sapMListHdrTBar { margin-bottom: 0.5rem } .sapFGridList .sapMLIBCounter {
+			padding-right: 1rem } .sapFGridList ul:not(.sapUiLayoutCSSGridBoxLayoutPolyfill) { margin-bottom: 0.5rem } .sapFGridListDefault { display:
+			grid; grid-template-columns: repeat(auto-fit,minmax(10rem,1fr)); grid-gap: 0.5rem 0.5rem } .sapFGridListGroup>.sapMLIB.sapMGHLI {
+			background: none; border: none; padding-top: 0.25rem; grid-column: 1 / -1; width: 100% } .sapFGridListGroup>.sapMLIB.sapMGHLI .sapMGHLITitle
+			{ font-size: 1.125rem; color: #32363a } .sapFGridList .sapMLIB:not(.sapMGHLI) { border-radius: 0.25rem; border: none; box-shadow: 0 0 0
+			0.0625rem rgba(0,0,0,0.1),0 0.125rem 0.5rem 0 rgba(0,0,0,0.1) } .sapFGridList .sapMLIB:not(.sapMGHLI) .sapMLIBHighlight {
+			border-top-left-radius: 0.25rem; border-bottom-left-radius: 0.25rem } .sapFGridList .sapMLIB:not(.sapMGHLI)>.sapMLIBContent { height: 100% }
+			.sapFGridList .sapUiBlockLayerTabbable { position: absolute } .smallCustomerColor { color: darkcyan !important; } .availTextBold{
+			font-weight: bold !important} .smallScrollBarAltRoute div ::-webkit-scrollbar { width: 0.2em !important; } .noPaddingPanel
+			.sapMPanelContent{padding:0px;} .hdrAllocation1 { font-size: x-large; font-weight: bold} .noMargin { margin: 0px !important;} .FOlistBorder
+			{border-top: 1px solidlightgray;} .smallScrollBar::-webkit-scrollbar { height: 0.4rem !important; } .bigUMO { font-size:large !important;}
+			.bigSourceATPC { font-size:large !important; font-weight:bold !important} .smallRouteId {font-size:small !important; color:grey !important;}
+			.boldPopoverAlternativeRoute {font-weight: bold !important} .borderRightAlternativeRoutesPopup{ border-right: 1px solid lightgrey}
+			.textInRoute{color:darkgreen} .textOutRoute{color: darkred} .transparentSupplyTable{background: transparent;} .markClusterRed
+			tr[data-clusterok="X"]{background-color:#ff000059;} .blinking {animation:blinkingText 0.8s infinite;} @keyframes blinkingText{ 0%{ color:
+			red; } 49%{ color: transparent; } 50%{ color: transparent; } 99%{ color:transparent; } 100%{ color: red; } } .padTopTab .sapMITBHead{
+			padding-top: 0.9em; } .folarger {font-size: larger !important;} .matnrCluster .sapMTextBreakWord{ font-size: large !important;}
+			.infottoolLightColor .sapMListInfoTBar { background-color: cadetblue; } .vendorname { font-size: small !important;} .smalltextLabels{
+			font-size: smaller !important; color: darkgrey !important;} .charactRequirement{ font-weight: bold;} .moveIconLeft { left:-0.8em;}
+			.bordersubtable { border-bottom: 1px solid lightgrey;} div[data-LASTBATCH="X"]{ border-bottom: 0px !important; } .smallerRouteId
+			{font-size:smaller !important; color:grey!important;} .matnrsmall {font-size: small !important;} .matnrbold {font-weight: bold !important;}
+			.tdnopad td{ padding: 0px !important;} .itemPad3{padding-left:0.7em;} .smalltextCUST{ font-size: smaller !important; color: #ff8888
+			!important;} .genericBatch span[data-BATCHID="GENERIC"]{ color: brown !important; font-weight: bold !important; } .allocationtext
+			{font-size: larger !important;} .allocationtextbold {font-size: larger !important; font-weight: bold !important;} .smallCarrier
+			{font-size:small !important; color: cornflowerblue !important;} .routechain {font-size:small !important; color:#107e3e !important;}
+			.boldCustomerExistAlloc { font-weight: bold !important; } div[data-reacheable=""]{ visibility: hidden !important; }
+			tr[data-reacheablecluster=""]{ } .noPaddingtop { padding-top: 0.05em !important; } .allocationtypetxt { font-size: medium !important;
+			font-weight: bold; } .qtybatch { font-weight: bold; } .demandtype { color: cadetblue; } .qtybatch { font-weight: bold; } .colorcharactbatch
+			{ color: cornflowerblue; } .allocationQty { font-size: larger; font-weight: bold; } .colorcharactbatch { color: cornflowerblue; }
+			.noborderSelect li { outline: 0 !important; } .noborderSelect tr { outline: 0 !important; } .goodsQuality{font-size: x-small !important;
+			font-weight: bold !important; color: #085caf !important; }
+		</html:style>
+		<HBox width="100%" height="100%" renderType="Bare">
+			<ScrollContainer width="80%" height="100%" vertical="true" class="borderDivide">
+				<Table id="idSoftAllocationTables" items="{ path : 'SOFTALLOCATIONSLIST>/value' }" growing="true" growingThreshold="100"
+					busyIndicatorDelay="0" growingScrollToLoad="true" class="selectedRows collapseTableBorder" sticky="ColumnHeaders,InfoToolbar">
+					<headerToolbar></headerToolbar>
+					<infoToolbar>
+						<Toolbar active="ture">
+							<Button icon="sap-icon://synchronize" press=".refreshSoftClick"></Button>
+							<core:Icon src="sap-icon://multiselect-all" press=".selectAllRow"></core:Icon>
+							<Input placeholder="utente" value="{userinfos>/name}" id="softAllocationUser" width="7em"/>
+							<Input placeholder="trade item" id="softAllocationTradeItem" width="10em" change=".setFilterAllocations"/>
+							<core:Icon src="sap-icon://clear-filter" press=".clearFilterAllocations"></core:Icon>
+							<HBox width="2em"></HBox>
+							<Label text="Active ATPC assignations"/>
+							<ToolbarSpacer/>
+							<CheckBox id="checkboxCloseDemands" text="chiudi ordini riallocati"></CheckBox>
+							<Button icon="sap-icon://chevron-phase-2" text="conferma in allocazione" type="Accept" press=".confirmAllocationSelected"/>
+						</Toolbar>
+					</infoToolbar>
+					<columns>
+						<Column width="10%" mergeDuplicates="true">
+							<Text text=""/>
+						</Column>
+						<Column width="3%">
+							<Text text=""/>
+						</Column>
+						<Column width="3%">
+							<Text text=""/>
+						</Column>
+						<Column width="7%">
+							<Text text="doc. ref."/>
+						</Column>
+						<Column width="13%">
+							<Text text=""/>
+						</Column>
+						<Column width="13%">
+							<Text text="Trade Item"/>
+						</Column>
+						<Column width="8%">
+							<Text text="Assigned qty"/>
+						</Column>
+						<Column width="8%">
+							<Text text="Demand qty"/>
+						</Column>
+						<Column width="8%">
+							<Text text="Shipping node"/>
+						</Column>
+						<Column width="8%">
+							<Text text="Supply"/>
+						</Column>
+						<Column width="10%">
+							<Text text="demand date"/>
+						</Column>
+						<Column width="14%">
+							<Text text="demand requirements"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<customData>
+								<core:CustomData key="rowselection" value="" writeToDom="true"/>
+								<core:CustomData key="rowstatus" value="{SOFTALLOCATIONSLIST>processStatus}" writeToDom="true"/>
+							</customData>
+							<cells>
+								<ObjectIdentifier title="{path:'SOFTALLOCATIONSLIST>shiptocode',formatter:'.deleteTrailZeros'}"
+									text="{path:'SOFTALLOCATIONSLIST>shiptoname'}"></ObjectIdentifier>
+								<core:Icon src="sap-icon://multi-select" press=".selectRow"></core:Icon>
+								<VBox height="5em" justifyContent="Center">
+									<core:Icon src="sap-icon://chevron-phase" press=".confirmAssignation" color="green"></core:Icon>
+									<core:Icon src="sap-icon://delete" press=".deleteAssignation" color="red"></core:Icon>
+								</VBox>
+								<ObjectIdentifier title="{path:'SOFTALLOCATIONSLIST>docnr',formatter:'.deleteTrailZeros'}"
+									text="{path:'SOFTALLOCATIONSLIST>docpos',formatter:'.deleteTrailZeros'}"></ObjectIdentifier>
+								<VBox>
+									<HBox justifyContent="Center">
+										<VBox width="20%" justifyContent="Center" class="sapUiSmallMarginEnd">
+											<core:Icon src="sap-icon://journey-depart" size="2em" visible="{= ${SOFTALLOCATIONSLIST>reallocation} === 'X'}"></core:Icon>
+										</VBox>
+										<VBox width="80%" visible="{= ${SOFTALLOCATIONSLIST>reallocation} === 'X'}">
+											<ObjectIdentifier title="{path:'SOFTALLOCATIONSLIST>sourceDemand',formatter:'.deleteTrailZeros'}"
+												text="{path:'SOFTALLOCATIONSLIST>sourceDemandPos',formatter:'.deleteTrailZeros'}"></ObjectIdentifier>
+										</VBox>
+									</HBox>
+									<Text text="{path:'SOFTALLOCATIONSLIST>sourcedemandcustomername'}" class="textReallocationCustomer"
+										visible="{path:'SOFTALLOCATIONSLIST>rratargetnode',formatter:'.softListShowCustomer'}"></Text>
+									<HBox>
+										<Text text="{path:'SOFTALLOCATIONSLIST>rratargetnode'}" class="textReallocationCustomer qtybatch rraDestNode sapUiTinyMarginEnd"
+											visible="{path:'rratargetnode',formatter:'.softListShowCustomer'}"></Text>
+										<Text text="{path:'SOFTALLOCATIONSLIST>rratargetnodename'}" class="textReallocationCustomer"
+											visible="{path:'rratargetnodename',formatter:'.softListShowZDEM'}"></Text>
+									</HBox>
+								</VBox>
+								<VBox>
+									<ObjectIdentifier
+										title="{parts:['SOFTALLOCATIONSLIST>productcode','SOFTALLOCATIONSLIST>originalproductcode'],formatter:'.softAllocationProductcode'}"
+										text="{SOFTALLOCATIONSLIST>productdescr}" class="sapUiTinyMarginBottom">
+										<customData>
+											<core:CustomData key="DIFFPRODUCT" value="{= ${SOFTALLOCATIONSLIST>productcode} !== ${SOFTALLOCATIONSLIST>originalproductcode} ? 'X' : '' }"
+												writeToDom="true"/>
+										</customData>
+									</ObjectIdentifier>
+									<Text text="{SOFTALLOCATIONSLIST>batch}"></Text>
+								</VBox>
+								<HBox>
+									<Text text="{SOFTALLOCATIONSLIST>softallocationqty}"></Text>
+									<HBox width="1em"></HBox>
+									<Text text="{SOFTALLOCATIONSLIST>softallocationuom}"></Text>
+								</HBox>
+								<HBox>
+									<Text text="{= ${SOFTALLOCATIONSLIST>qty} > 0 ? ${SOFTALLOCATIONSLIST>qty} : ''}"></Text>
+									<HBox width="1em"></HBox>
+									<Text text="{SOFTALLOCATIONSLIST>uom}"></Text>
+								</HBox>
+								<ObjectIdentifier title="{SOFTALLOCATIONSLIST>shippingnode}" text="{SOFTALLOCATIONSLIST>shippingnodedescr}"></ObjectIdentifier>
+								<ObjectIdentifier title="{SOFTALLOCATIONSLIST>supplyType}" text="{SOFTALLOCATIONSLIST>node}"></ObjectIdentifier>
+								<ObjectIdentifier title="{SOFTALLOCATIONSLIST>freightorderfinalstopdate}" text="{= ${SOFTALLOCATIONSLIST>freightorderfinalstopdate} === null ? '' : ${SOFTALLOCATIONSLIST>freightorderfinalstoptime}}"></ObjectIdentifier>
+								<VBox justifyContent="Center">
+									<HBox>
+										<Text text="Origin: " class="colorcharactbatch"></Text>
+										<HBox width="1em"></HBox>
+										<Text text="{SOFTALLOCATIONSLIST>countryoforigin} - {SOFTALLOCATIONSLIST>countryoforiginlabel}"></Text>
+									</HBox>
+									<HBox>
+										<Text text="FAO zone: " class="colorcharactbatch"></Text>
+										<HBox width="1em"></HBox>
+										<Text text="{SOFTALLOCATIONSLIST>faozone} - {SOFTALLOCATIONSLIST>faozonelabel}"></Text>
+									</HBox>
+									<HBox>
+										<Text text="Fishing gear: " class="colorcharactbatch"></Text>
+										<HBox width="1em"></HBox>
+										<Text text="{SOFTALLOCATIONSLIST>fishinggear} - {SOFTALLOCATIONSLIST>fishinggearlabel}"></Text>
+									</HBox>
+									<HBox>
+										<Text text="Producer: " class="colorcharactbatch"></Text>
+										<HBox width="1em"></HBox>
+										<Text text="{SOFTALLOCATIONSLIST>producer} - {SOFTALLOCATIONSLIST>producerlabel}"></Text>
+									</HBox>
+								</VBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<ScrollContainer height="100%" width="20%" vertical="true" horizontal="false">
+				<Table id="idSoftAllocationLogTables" items="{SOFTALLOCATIONLOGS>/}" sticky="ColumnHeaders,InfoToolbar" width="100%"
+					noDataText="nessun log attivo">
+					<headerToolbar></headerToolbar>
+					<infoToolbar>
+						<Toolbar active="ture">
+							<core:Icon src="sap-icon://sap-logo-shape"></core:Icon>
+							<HBox width="2em"></HBox>
+							<Label text="Conversion logs"/>
+							<ToolbarSpacer/>
+							<ToolbarSeparator/>
+							<core:Icon src="sap-icon://sys-cancel" press=".deleteSAPlogs"></core:Icon>
+						</Toolbar>
+					</infoToolbar>
+					<columns>
+						<Column width="100%">
+							<Text text="log SAP"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<HBox width="100%" height="4.5em">
+									<VBox width="20%" height="100%" justifyContent="Center">
+										<core:Icon src="{SOFTALLOCATIONLOGS>icon}" size="1.5em" color="{path:'SOFTALLOCATIONLOGS>msgType',formatter:'.colorMessageType'}"></core:Icon>
+									</VBox>
+									<VBox width="80%" height="100%">
+										<HBox class="sapUiTinyMarginBottom">
+											<core:Icon src="sap-icon://history" color="darkgrey" class="sapUiTinyMarginEnd"></core:Icon>
+											<Text text="{SOFTALLOCATIONLOGS>logtime}"></Text>
+										</HBox>
+										<HBox>
+											<fiorital:FioritalIcon src="sap-icon://approvals" visible="{SOFTALLOCATIONLOGS>hasextended}" padEnd="0.3em" press=".showExtendedText"/>
+											<Text text="{SOFTALLOCATIONLOGS>msg}"></Text>
+										</HBox>
+									</VBox>
+								</HBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</HBox>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="Chiudi" press=".onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,295 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="it.fiorital.fioritalui5lib.controls.HuManager" xmlns="sap.m"
+	xmlns:commons="sap.suite.ui.commons" xmlns:flib="it.fiorital.fioritalui5lib.controls" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog id="dialogPalletManagerId" title="{sharedi18n>palletMgrDialogTitle}" contentWidth="60%" contentHeight="65%" verticalScrolling="true"
+		horizontalScrolling="true" showHeader="true" class="fullDialogHeight">
+		<html:style>
+			.tinyPaddingBegin{padding-left: 0.5rem !important;} .buttonsSeparator{padding-left: 0.5rem; margin: 0rem !important; border-left: 2px solid
+			#cccccc;} .noborder[role=toolbar]{border: 0px !important} .withBorder .sapMInputBaseContentWrapper { border: .0625rem solid #89919a
+			!important; }
+		</html:style>
+		<content>
+			<HBox height="94%">
+				<!-- PALLETS -->
+				<VBox id="palletListId" renderType="Bare" width="45%" class="sapUiTinyMarginBegin verticalBorderSeparator">
+					<IconTabBar stretchContentHeight="true" class="noPadding smallScrollBar" expandable="false" tabDensityMode="Compact">
+						<items>
+							<IconTabFilter text="{sharedi18n>palletLabel}" icon="sap-icon://inbox">
+								<content>
+									<ScrollContainer height="100%" vertical="true">
+										<Table id="palletMgrPalletTableId" noDataText="{sharedi18n>NotFound}" inset="false" sticky="ColumnHeaders,InfoToolbar"
+											class="sapUiTinyMarginTop" mode="MultiSelect" items="{ path: 'Pallets', length: 10000 ,sorter: [{path: 'huexternalid', descending: true}]}"
+											selectionChange=".onPalletCheckboxPress">
+											<infoToolbar>
+												<OverflowToolbar>
+													<ToolbarSpacer/>
+													<Label text="{sharedi18n>selectedPallets}: {SELECTED>/pallets}"/>
+												</OverflowToolbar>
+											</infoToolbar>
+											<columns>
+												<!-- hu nr -->
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>palletLabel}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+												</Column>
+												<!-- boxes -->
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>boxQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+												</Column>
+												<!-- tot wgt -->
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>totWgt}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+												</Column>
+												<!-- actions -->
+												<Column width="3rem" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem type="Active" vAlign="Middle" press=".onPalletChangePress">
+													<cells>
+														<!-- hu nr -->
+														<HBox>
+															<core:Icon src="sap-icon://inbox" class="sapUiTinyMarginEnd"/>
+															<Text text="{parts: ['huexternalid'], formatter: '.SharedFormatter.alphaOutput'}"/>
+														</HBox>
+														<!-- boxes -->
+														<Text text="{boxnested}"/>
+														<!-- tot wgt -->
+														<Text text="{boxweight} - {uom}"/>
+														<!-- actions -->
+														<core:Icon src="sap-icon://delete" press=".onDeletePalletPress" class="showCursorPointer" tooltip="{sharedi18n>deleteRowTooltip}"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</ScrollContainer>
+								</content>
+							</IconTabFilter>
+							<IconTabFilter visible="false">
+								<content></content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</VBox>
+				<!-- BOXES -->
+				<VBox id="boxListId" renderType="Bare" width="55%">
+					<IconTabBar id="palletMgrBoxesIconTabBarId" stretchContentHeight="true" class="noPadding smallScrollBar" expandable="false"
+						tabDensityMode="Compact" select=".onPalletIconTabBarSelectionChange">
+						<items>
+							<!-- AVAIL BOXES -->
+							<IconTabFilter id="palletManagerAvailableBoxTabBarId" key="palletManagerAvailableBoxKey" text="{sharedi18n>availableBoxes}"
+								icon="sap-icon://add-product">
+								<content>
+									<ScrollContainer height="100%" vertical="true">
+										<Table id="palletMgrAvailableBoxesTableId" noDataText="{sharedi18n>NotFound}" inset="false" sticky="ColumnHeaders"
+											class="sapUiTinyMarginTop" mode="MultiSelect" selectionChange=".onBoxSelection"
+											items="{ path: 'UnnestedBoxes', length: 10000, parameters: {$select: 'huexternalid,pallet', $count: true, $$updateGroupId: 'batchGroupAPI'}, sorter: {path: 'guid', descending: false, group: false} }">
+											<columns>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>boxId}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<OverflowToolbar>
+															<Text text="{sharedi18n>product}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<SearchField id="searchFieldProductUnnested" change=".onSearchProductUnnested"/>
+														</OverflowToolbar>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<OverflowToolbar>
+															<Text text="{sharedi18n>batch}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<SearchField id="searchFieldBatchUnnested" change=".onSearchBatchUnnested"/>
+														</OverflowToolbar>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>boxWgt}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem type="Inactive" vAlign="Middle">
+													<cells>
+														<Text text="{parts: ['huexternalid'], formatter: '.SharedFormatter.alphaOutput'}"/>
+														<Text text="{material}"/>
+														<Text text="{batch}"/>
+														<Text text="{boxweight}"/>
+														<core:Icon src="sap-icon://delete" press=".onDeleteBoxPress" class="showCursorPointer" tooltip="{sharedi18n>deleteRowTooltip}"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</ScrollContainer>
+								</content>
+							</IconTabFilter>
+							<IconTabSeparator/>
+							<!-- NESTED BOXES -->
+							<IconTabFilter id="palletManagerNestedBoxTabBarId" key="palletManagerNestedBoxKey" text="{sharedi18n>nestedBoxes}"
+								icon="sap-icon://database" enabled="false">
+								<content>
+									<ScrollContainer height="100%" vertical="true">
+										<Table id="palletMgrNestedBoxesTableId" noDataText="{sharedi18n>NotFound}" inset="false" sticky="ColumnHeaders,InfoToolbar"
+											class="sapUiTinyMarginTop palletMgrTableHeight" mode="MultiSelect" selectionChange=".onBoxSelection"
+											items="{ path:'/Hu' , length: 10000, suspended: true }">
+											<infoToolbar>
+												<OverflowToolbar>
+													<ToolbarSpacer/>
+													<Label text="{sharedi18n>selectedBoxes}: {SELECTED>/boxes}"/>
+												</OverflowToolbar>
+											</infoToolbar>
+											<columns>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>boxId}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<OverflowToolbar>
+															<Text text="{sharedi18n>product}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<SearchField id="searchFieldProductNested" change=".onSearchProductNested"/>
+														</OverflowToolbar>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<OverflowToolbar>
+															<Text text="{sharedi18n>batch}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<SearchField id="searchFieldBatchNester" change=".onSearchBatchNested"/>
+														</OverflowToolbar>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="{sharedi18n>boxWgt}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem type="Inactive" vAlign="Middle">
+													<cells>
+														<Text text="{parts: ['huexternalid'], formatter: '.SharedFormatter.alphaOutput'}"/>
+														<Text text="{material}"/>
+														<Text text="{batch}"/>
+														<Text text="{boxweight}"/>
+														<core:Icon src="sap-icon://delete" press=".onDeleteBoxPress" class="showCursorPointer" tooltip="{sharedi18n>deleteRowTooltip}"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</ScrollContainer>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</VBox>
+			</HBox>
+		</content>
+		<OverflowToolbar width="100%" class="tinyPaddingBegin noborder withBorder">
+			<content>
+				<HBox id="palletListButtonsId" renderType="Bare" width="50%">
+					<!--ADD PALLET W QTY-->
+					<HBox renderType="Bare">
+						<flib:FioritalInput value="1" type="Number" avoidNegatives="true" selectOnSelect="true" id="palletQtyId" width="3rem"
+							class="sapUiTinyMarginEnd"/>
+						<Button type="Accept" width="9rem" text="{sharedi18n>addPallet}" icon="sap-icon://add" press=".onCreatePalletPress"/>
+						<Button type="Reject" icon="sap-icon://delete" width="2rem" class="sapUiTinyMarginBegin" iconFirst="true"
+							press=".onPalletMassDelPress"/>
+						<Button type="Ghost" width="9rem" text="{sharedi18n>printPallet}" icon="sap-icon://print" press=".onPrintPallet"
+							class="sapUiTinyMarginBegin"/>
+						<Button icon="sap-icon://pdf-attachment" width="8rem" text="Pallet PDF" class="sapUiTinyMarginBegin" iconFirst="true"
+							press=".onPalletPDFPress"/>
+						<!--openChoosePalletQtyCreationPopover-->
+						<!--onCreatePalletPress-->
+					</HBox>
+				</HBox>
+				<HBox id="boxListButtonsId" renderType="Bare" class="buttonsSeparator">
+					<!--NEST-->
+					<Button type="Ghost" width="10rem" text="{sharedi18n>nestBox}" icon="sap-icon://close-command-field" press=".onNestButtonPress"
+						enabled="{= ${palletMgrDialogModel>/isPalletSelected} &amp;&amp; ${palletMgrDialogModel>/isBoxSelected} }"
+						visible="{palletMgrDialogModel>/isAvailableTabSelected}" class="sapUiTinyMarginEnd"/>
+					<!--MOVE-->
+					<Button id="moveBoxToPalletButtonId" type="Ghost" width="10rem" text="{sharedi18n>moveBox}" icon="sap-icon://move" press=".onMoveBoxPress"
+						enabled="{= ${palletMgrDialogModel>/isPalletSelected} &amp;&amp; ${palletMgrDialogModel>/isBoxSelected} }"
+						visible="{palletMgrDialogModel>/isNestedTabSelected}" class="sapUiTinyMarginEnd"/>
+					<!--UNNEST-->
+					<Button type="Ghost" width="10rem" text="{sharedi18n>unnestBox}" icon="sap-icon://open-command-field" press=".onUnnestButtonPress"
+						enabled="{= ${palletMgrDialogModel>/isPalletSelected} &amp;&amp; ${palletMgrDialogModel>/isBoxSelected} }"
+						visible="{palletMgrDialogModel>/isNestedTabSelected}" class="sapUiTinyMarginEnd"/>
+					<!-- SELECTION RANGE -->
+					<flib:FioritalInput value="{SELECTED>/from}" avoidNegatives="true" selectOnSelect="true" type="Number" width="4rem" id="rangeFrom"
+						class="sapUiTinyMarginBeginEnd"/>
+					<flib:FioritalInput value="{SELECTED>/to}" avoidNegatives="true" selectOnSelect="true" type="Number" width="4rem" id="rangeTo"
+						class="sapUiTinyMarginEnd"/>
+					<Button text="Seleziona" press=".onRangeSelection"/>
+					<!--PACKING LIST-->
+					<Button text="{sharedi18n>packingList}" type="Ghost" iconFirst="true" width="auto" visible="false" press=".onPackingListPress"
+						class="sapUiTinyMarginEnd"/>
+					<!--LOAD FROM FILE-->
+					<Button text="{sharedi18n>loadFile}" type="Ghost" iconFirst="true" width="auto" visible="false" press=".onLoadFilePress"
+						class="sapUiTinyMarginEnd"/>
+				</HBox>
+				<ToolbarSpacer/>
+				<Button text="{sharedi18n>cancelButton}" type="Reject" iconFirst="true" width="auto" press=".onPalletManagerClose"/>
+			</content>
+		</OverflowToolbar>
+		<dependents>
+			<!--CHOOSE PALLET TO MOVE BOX TO-->
+			<Popover id="choosePalletBoxMoveToPopoverId" placement="Top" showHeader="false" contentWidth="250px" contentHeight="80px">
+				<content>
+					<VBox renderType="Bare" class="sapUiTinyMargin">
+						<Label text="{sharedi18n>palletMoveTo}" class="sapUiTinyMarginBottom"/>
+						<Select id="choosePalletMoveToSelectionId" forceSelection="false" width="100%" change=".selectChange"
+							selectedKey="{path: 'palletMgr>/huexternalid', formatter: '.SharedFormatter.alphaOutput'}" items="{ path: 'palletJsonModel>/'}">
+							<items>
+								<core:Item text="{path: 'palletJsonModel>huexternalid', formatter: '.SharedFormatter.alphaOutput'}" key="{palletJsonModel>huexternalid}"/>
+							</items>
+						</Select>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button type="Accept" width="10rem" text="{sharedi18n>moveBoxToPallet}" icon="sap-icon://add" press=".onMoveBoxToPalletPress"/>
+					</Toolbar>
+				</footer>
+			</Popover>
+		</dependents>
+	</Dialog>
+</core:FragmentDefinition>

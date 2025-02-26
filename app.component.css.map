@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.component.css"],
+  "sourcesContent": ["\n\n  \n  .toolbar {\n    display: flex;\n    justify-content: start;\n    padding: 10px;\n    background-color: #f8f8f8;\n    border-bottom: 1px solid #ccc;\n  }\n\n  .copy-form {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-evenly;\n    align-items: flex-start;\n    margin: 3rem 6rem;\n}\n\n.copy-form > div {\n    display: grid;\n    width: 15rem;\n    margin-bottom: .5rem;\n}\n\n@media(max-width: 600px) {\n    .copy-form {\n        margin: 3rem 1rem;\n    }\n}\n\n.listRowDiv {\n  display: flex;\n  width: 80em;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  gap: 0.5em;\n}\n\n\n.noPadding::part(content){\n  padding: 0px;\n}"],
+  "mappings": ";AAGE,CAAC;AACC,WAAS;AACT,mBAAiB;AACjB,WAAS;AACT,oBAAkB;AAClB,iBAAe,IAAI,MAAM;AAC3B;AAEA,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,mBAAiB;AACjB,eAAa;AACb,UAAQ,KAAK;AACjB;AAEA,CARG,UAQQ,EAAE;AACT,WAAS;AACT,SAAO;AACP,iBAAe;AACnB;AAEA,OAAM,CAAC,SAAS,EAAE;AACd,GAfD;AAgBK,YAAQ,KAAK;AACjB;AACJ;AAEA,CAAC;AACC,WAAS;AACT,SAAO;AACP,kBAAgB;AAChB,mBAAiB;AACjB,eAAa;AACb,OAAK;AACP;AAGA,CAAC,SAAS,OAAO;AACf,WAAS;AACX;",
+  "names": []
+}

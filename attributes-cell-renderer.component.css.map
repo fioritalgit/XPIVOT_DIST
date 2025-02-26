@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/custom-components/attributes-cell-renderer/attributes-cell-renderer.component.css"],
+  "sourcesContent": ["\n.container {\n    width: 100%;\n    height: 100%;\n  }\n  \n  .suffix {\n    position: absolute;\n    right: 2px;\n    bottom:-3px;\n    font-size: 10px; /* Make it small */\n    color: darkgrey;\n  }\n\n  .tooltip-container {\n    position: relative;\n    display: inline-block;\n    cursor: pointer;\n    padding: 10px;\n    background: #ddd;\n    border-radius: 5px;\n  }\n  \n  .custom-tooltip {\n    position: absolute;\n    bottom: 120%;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: black;\n    color: white;\n    padding: 5px 10px;\n    border-radius: 5px;\n    white-space: nowrap;\n    opacity: 0;\n    transition: opacity 0.3s;\n    pointer-events: none;\n  }\n  \n  .tooltip-container:hover .custom-tooltip {\n    opacity: 1;\n  }"],
+  "mappings": ";AACA,CAAC;AACG,SAAO;AACP,UAAQ;AACV;AAEA,CAAC;AACC,YAAU;AACV,SAAO;AACP,UAAO;AACP,aAAW;AACX,SAAO;AACT;AAEA,CAAC;AACC,YAAU;AACV,WAAS;AACT,UAAQ;AACR,WAAS;AACT,cAAY;AACZ,iBAAe;AACjB;AAEA,CAAC;AACC,YAAU;AACV,UAAQ;AACR,QAAM;AACN,aAAW,WAAW;AACtB,oBAAkB;AAClB,SAAO;AACP,WAAS,IAAI;AACb,iBAAe;AACf,eAAa;AACb,WAAS;AACT,cAAY,QAAQ;AACpB,kBAAgB;AAClB;AAEA,CAxBC,iBAwBiB,OAAO,CAfxB;AAgBC,WAAS;AACX;",
+  "names": []
+}

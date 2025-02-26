@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/custom-components/custom-group-row-comp/custom-group-row-comp.component.css"],
+  "sourcesContent": ["\n\n.iconFilterClassFailed::part(icon){\n    color: red;\n}"],
+  "mappings": ";AAEA,CAAC,qBAAqB,OAAO;AACzB,SAAO;AACX;",
+  "names": []
+}

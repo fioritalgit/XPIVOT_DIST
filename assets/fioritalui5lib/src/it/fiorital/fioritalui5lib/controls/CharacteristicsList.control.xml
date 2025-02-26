@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<VBox>
+		<ObjectIdentifier title="{matnr}" text="{maktx}"></ObjectIdentifier>
+		<HBox visible="{path:'$this>uom',formatter:'.hideClusterChars'}">
+			<Text text="Uom:" width="6em"></Text>
+			<Text text="{$this>uom}"></Text>
+		</HBox>
+		<HBox height="1em"></HBox>
+		<HBox visible="{path:'$this>faozone',formatter:'.hideClusterChars'}">
+			<Text text="Faozone:" width="6em" class="smallerCharact"></Text>
+			<Text text="{$this>faozone}" class="smallerBoldCharact"></Text>
+		</HBox>
+		<HBox visible="{path:'$this>producer',formatter:'.hideClusterChars'}">
+			<Text text="Producer:" width="6em" class="smallerCharact"></Text>
+			<Text text="{$this>producer}" class="smallerBoldCharact"></Text>
+		</HBox>
+		<HBox visible="{path:'$this>fishgear',formatter:'.hideClusterChars'}">
+			<Text text="FishGear:" width="6em" class="smallerCharact"></Text>
+			<Text text="{$this>fishgear}" class="smallerBoldCharact"></Text>
+		</HBox>
+		<HBox visible="{path:'$this>pezzatura',formatter:'.hideClusterChars'}">
+			<Text text="Sizing:" width="6em" class="smallerCharact"></Text>
+			<Text text="{$this>pezzatura}" class="smallerBoldCharact"></Text>
+		</HBox>
+	</VBox>
+</core:FragmentDefinition>

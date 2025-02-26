@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover title="{$this>title}" class="" placement="Auto" id="FreightOrderListPopover" contentWidth="65em" contentHeight="50em"
+		verticalScrolling="false" horizontalScrolling="false" modal="true">
+		<subHeader>
+			<HBox height="3em" alignItems="Center">
+				<VBox width="1em"></VBox>
+				<Title class="Big" text="Freight order starting from: "></Title>
+				<VBox width="2em"></VBox>
+				<Title id="headerSloc" class="boldBig" text=""></Title>
+			</HBox>
+		</subHeader>
+		<content>
+			<html:style>
+				.FOpadding { padding: 2em; } .FOpaddingSmall { padding: 1em; } .border2 ul{border: 2px solid;} .stopColor li[data-startstoragelocation="X"]{ background:#d2dfe9!important;}
+				.boldBig {font-size:1.5em!important; font-weight:bold !important;} .Big {font-size:1.5em!important}
+			</html:style>
+			<ScrollContainer height="100%" width="100%" vertical="true">
+				<List id="FreightOrderListStops" items="{path:'/FreightOrder', suspended: true, templateShareable:true}" busyIndicatorDelay="0">
+					<CustomListItem type="Active" press="onFreightOrderSelect">
+						<HBox width="100%" renderType="Bare" class="FOpadding">
+							<VBox width="35%" justifyContent="Center">
+								<core:Icon src="sap-icon://shipping-status" size="2em"></core:Icon>
+								<VBox height="1em"></VBox>
+								<ObjectIdentifier title="{freightorderid}" text="freight order"/>
+								<VBox height="1em"></VBox>
+								<ObjectIdentifier title="{carrieridname}" text="carrier"/>
+							</VBox>
+							<HBox width="3em"></HBox>
+							<List items="{FreightOrderStage}" class="border2 stopColor">
+								<CustomListItem>
+									<customData>
+										<core:CustomData key="startstoragelocation" value="{path:'startstoragelocation',formatter:'.setStartLocationFlag'}" writeToDom="true"></core:CustomData>
+									</customData>
+									<HBox width="100%" renderType="Bare" height="6em" class="FOpaddingSmall">
+										<VBox width="25%">
+											<core:Icon src="sap-icon://arrow-top"></core:Icon>
+											<VBox height="1em"></VBox>
+											<ObjectIdentifier title="{startnode}" text="{startlocationid}"/>
+										</VBox>
+										<HBox width="3em"></HBox>
+										<VBox width="25%">
+											<core:Icon src="sap-icon://history"></core:Icon>
+											<VBox height="1em"></VBox>
+											<ObjectIdentifier title="{startnodedate}" text="{startnodetime}"/>
+										</VBox>
+										<HBox width="3em"></HBox>
+										<VBox width="25%">
+											<core:Icon src="sap-icon://arrow-bottom"></core:Icon>
+											<VBox height="1em"></VBox>
+											<ObjectIdentifier title="{endnode}" text="{endlocationid}"/>
+										</VBox>
+										<VBox width="25%">
+											<core:Icon src="sap-icon://history"></core:Icon>
+											<VBox height="1em"></VBox>
+											<ObjectIdentifier title="{endnodedate}" text="{endnodetime}"/>
+										</VBox>
+										<HBox width="3em"></HBox>
+									</HBox>
+								</CustomListItem>
+							</List>
+						</HBox>
+					</CustomListItem>
+				</List>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

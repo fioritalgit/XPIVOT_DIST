@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:fio="it.fiorital.fioritalui5lib.controls" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover title="EWM picking status" placement="Auto" id="EWMpopoverId" contentWidth="65em"
+		verticalScrolling="false" horizontalScrolling="false">
+		<content>
+			<Table items="{EWMPICK>/value}">
+				<infoToolbar>
+					<Toolbar active="true">
+						<Label text="Task prelievo magazzini presenti: {path:'EWMPICK>/value',formatter:'.sumTasks'}"/>
+					</Toolbar>
+				</infoToolbar>
+				<columns>
+					<Column width="5%" hAlign="Center" vAlign="Middle">
+						<Text text=""/>
+					</Column>
+					<Column width="25%" hAlign="Center" vAlign="Middle">
+						<Text text="Prodotto"/>
+					</Column>
+					<Column width="15%" hAlign="Center" vAlign="Middle">
+						<Text text="Quantità"/>
+					</Column>
+					<Column width="10%" hAlign="Center" vAlign="Middle">
+						<Text text="Partita"/>
+					</Column>
+					<Column width="10%" hAlign="Center" vAlign="Middle">
+						<Text text="Creato il"/>
+					</Column>
+					<Column width="10%" hAlign="Center" vAlign="Middle">
+						<Text text="Confermato il"/>
+					</Column>
+					<Column width="15%" hAlign="Center" vAlign="Middle">
+						<Text text="Freight Order"/>
+					</Column>
+					<Column width="10%" hAlign="Center" vAlign="Middle">
+						<Text text="picker"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<core:Icon src="{path:'EWMPICK>status',formatter:'.formatTaskIcon'}" color="{path:'EWMPICK>status',formatter:'.formatTaskIconColor'}"></core:Icon>
+							<ObjectIdentifier title="{EWMPICK>product}" text="{EWMPICK>productdescr}"></ObjectIdentifier>
+							<ObjectIdentifier title="{EWMPICK>qty} {EWMPICK>uom}" text="{EWMPICK>weight} {EWMPICK>uomweight}"></ObjectIdentifier>
+							<Text text="{EWMPICK>charg}"></Text>
+							<ObjectIdentifier title="{EWMPICK>creationdate}" text="{EWMPICK>creationtime}"></ObjectIdentifier>
+							<ObjectIdentifier title="{EWMPICK>confirmdate}" text="{EWMPICK>confirmtime}"></ObjectIdentifier>
+							<ObjectIdentifier title="{path:'EWMPICK>freightorderid',formatter:'.deleteTrailZeros'}" text="{EWMPICK>carrieridname}"></ObjectIdentifier>
+							<Text text="{EWMPICK>pickeruser}"></Text>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

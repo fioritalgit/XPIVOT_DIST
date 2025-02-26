@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<!--<Toolbar>-->
+		<HBox class="mySwiper" width="{$this>width}" height="{$this>height}" id="swiperMaster">
+			<HBox class="swiper-wrapper" id="swiperWrapper" width="100%" height="100%"></HBox>
+		</HBox>
+	<!--</Toolbar>-->
+</core:FragmentDefinition>

@@ -1,0 +1,35 @@
+
+.multiInputControlWhiteBack input{
+	 background-color: white;
+}
+
+.multiInputControlBold {
+	 font-weight: bold !important;
+}
+
+.smallScrollBar div::-webkit-scrollbar-thumb {
+  background-color: #f2f6fc;
+  outline: 1px solid slategrey;
+}
+
+.smallScrollBar div::-webkit-scrollbar {
+    width: 0.1em !important;
+}
+
+.flexGrowAlways {
+	flex-grow: 1 !important;
+}
+
+.multiControlBorder {
+	border: 1px solid #bfbfbf;
+    padding-left: 0.2em;
+}
+
+.multiControlSingleInputH2 .sapMInputBaseContentWrapper{
+	height: 2em;
+}
+
+.listNoLine li{
+	border-bottom: 0px;
+}
+

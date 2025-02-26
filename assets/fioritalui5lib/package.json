@@ -1,0 +1,25 @@
+{
+	"name": "fioritalui5lib",
+	"version": "1.0.1",
+	"private": true,
+	"devDependencies": {
+		"@sap/di.code-validation.js": "1.1.6",
+		"@sap/di.code-validation.xml": "1.1.16",
+		"@ui5/cli": "1.5.3",
+		"grunt": "1.0.1",
+		"grunt-run": "0.8.1"
+	},
+	"main": "Gruntfile.js",
+	"scripts": {
+		"clean": "rm -rf dist",
+		"build": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo ",
+		"build-for-deploy": "npm run build && npm run flatten && npm run clean-after-flatten",
+		"flatten": "cp -r dist/resources/it/fiorital/fioritalui5lib/* dist && cp -r dist/resources/it/fiorital/fioritalui5lib/.* dist && cp dist/resources/* dist || cp dist/resources/.* dist || true",
+		"clean-after-flatten": "rm -rf dist/resources dist/test-resources"
+	},
+	"license": "UNLICENSED",
+	"dependencies": {
+		"@openui5/sap.ui.core": "1.74",
+		"@openui5/themelib_sap_belize": "1.74"
+	}
+}

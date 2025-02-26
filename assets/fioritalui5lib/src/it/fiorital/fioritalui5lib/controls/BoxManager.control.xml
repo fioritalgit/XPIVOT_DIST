@@ -1,0 +1,269 @@
+<core:FragmentDefinition controllerName="it.fiorital.fioritalui5lib.controls.BoxManager" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:micro="sap.suite.ui.microchart" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:flib="it.fiorital.fioritalui5lib.controls">
+	<Dialog contentWidth="50%" contentHeight="75%" id="boxManagerDialogId" showHeader="true" title="{sharedi18n>boxManagerDialogTitle}" afterClose=".raiseCloseEvent"
+		horizontalScrolling="false" verticalScrolling="false">
+		<html:style>
+			.blinking{animation: blink 1s infinite;} .bigUM { font-size: x-large !important; font-weight: bold !important;} .bigProductDescr {
+			font-size: x-large !important;} .bigCode {font-size: large !important; } .qtyActual .sapSuiteBMCItemValue{ font-size: x-large !important;
+			top: -0.3em;} .qtyTarget .sapSuiteBMCTargetValue{ font-size: x-large !important;} .mediumCode {font-size: medium !important} .overflowContent{ overflow: overlay !important }
+		</html:style>
+		<content>
+			<!-- HEADER -->
+			<VBox renderType="Bare" direction="Column" height="11%" class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd sectionBgTop">
+				<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Bare"
+					visible="true" displayInline="false" class="sapUiSmallMarginBottom">
+					<!--PRODUCT-->
+					<VBox renderType="Bare" direction="Column" width="60%" class="sapUiSmallMarginEnd">
+						<Label text="{sharedi18n>product}" design="Standard" width="100%" textAlign="Begin" textDirection="Inherit"/>
+						<Text text="{boxMgrModel>/productdescr}" class="blueInfo bigProductDescr"/>
+						<HBox renderType="Bare" alignItems="End">
+							<Text text="{boxMgrModel>/productcode}" class="blueInfo bigCode sapUiTinyMarginEnd"/>
+							<!--SIZING -->
+							<HBox renderType="Bare">
+								<Text text="{parts: ['boxMgrModel>/sizing','boxMgrModel>/sizingbatch'], formatter: '.sizingFormatter'}"
+									class="blueInfo mediumCode sapUiTinyMarginEnd"
+									visible="{parts: ['boxMgrModel>/sizing','boxMgrModel>/sizingbatch'], formatter: '.visibleSizing'}"/>
+								<Text text="- {parts: ['boxMgrModel>/sizinglabel','boxMgrModel>/sizingbatchlabel'], formatter: '.sizingFormatter'}"
+									class="blueInfo mediumCode" visible="{parts: ['boxMgrModel>/sizing','boxMgrModel>/sizingbatch'], formatter: '.visibleSizing'}"/>
+							</HBox>
+						</HBox>
+					</VBox>
+					<!--UoM-->
+					<VBox renderType="Bare" direction="Column" width="10%" class="sapUiSmallMarginEnd">
+						<items>
+							<Label text="{sharedi18n>uom}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							<Text text="{boxMgrModel>/uom}" class="sapUiTinyMarginEnd blueInfo bigUM"/>
+						</items>
+					</VBox>
+					<!--CHART-->
+					<VBox renderType="Bare" direction="Column" width="20%" class="sapUiSmallMarginEnd">
+						<micro:BulletMicroChart id="boxesMicroChartId" mode="Actual" targetValue="" forecastValue="" size="S" class="qtyActual qtyTarget">
+							<micro:actual>
+								<micro:BulletMicroChartData id="boxesMicroChartDataId" value="{path:'BOXES>/value',formatter:'.formatSum'}" color="Critical"/>
+							</micro:actual>
+							<micro:thresholds>
+								<micro:BulletMicroChartData value="0" color="Critical"/>
+								<!--<micro:BulletMicroChartData id="boxesMicroChartThreshMiddleId" value="" class="microChartCustomColorGood" color="Good"/>
+								<micro:BulletMicroChartData id="boxesMicroChartThreshEndId" value="" class="microChartCustomColorCritical" color="Good"/>-->
+							</micro:thresholds>
+						</micro:BulletMicroChart>
+					</VBox>
+					<!--WGT ICON-->
+					<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="10%" height="auto" justifyContent="End" renderType="Bare"
+						visible="true" displayInline="false">
+						<VBox alignItems="Center" justifyContent="Center">
+							<Label text="{sharedi18n>variableWgtLabel}" visible="{= ${boxMgrModel>/isvariableweight} === 'V' }"
+								class="circleInfoLabelGreen sapUiTinyMarginBottom"/>
+							<Label text="{sharedi18n>variableWgtLabelDesc}" visible="{= ${boxMgrModel>/isvariableweight} === 'V' }"/>
+						</VBox>
+						<VBox alignItems="Center" justifyContent="Center">
+							<Label text="{sharedi18n>fixedWgtLabel}" visible="{= ${boxMgrModel>/isvariableweight} === 'F' }"
+								class="circleInfoLabelCyan sapUiTinyMarginBottom"/>
+							<Label text="{sharedi18n>fixedWgtLabelDesc}" visible="{= ${boxMgrModel>/isvariableweight} === 'F' }"/>
+						</VBox>
+					</HBox>
+				</HBox>
+			</VBox>
+			<!-- TABLE -->
+			<VBox renderType="Bare" direction="Column" height="72%" class="smallScrollBar sectionBgMiddle">
+				<ScrollContainer height="100%" vertical="true" class="noPadding overflowContent ">
+					<Table width="auto" visible="true" noDataText="{sharedi18n>noBoxCreated}" mode="MultiSelect" showSeparators="All"
+						class="sapUiSmallMarginBeginEnd" id="boxMgrDialogBoxesTableId" sticky="ColumnHeaders,InfoToolbar"
+						items="{ path: 'BOXES>/value', length: 9999, sorter: {path: 'BOXES>huexternalid', descending: false} }"
+						selectionChange=".onTableCheckboxPress">
+						<infoToolbar>
+							<Toolbar width="100%" design="Auto" visible="true" enabled="true">
+								<content>
+									<ToolbarSpacer/>
+									<Label text="{sharedi18n>selectedBoxes}: {SELECTED>/boxes}"/>
+								</content>
+							</Toolbar>
+						</infoToolbar>
+						<columns>
+							<Column width="35%" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+								<header>
+									<OverflowToolbar>
+										<Text text="{sharedi18n>number}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										<SearchField id="searchFieldBox" change=".onSearchBox"/>
+									</OverflowToolbar>
+								</header>
+							</Column>
+							<Column width="30%" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+								<header>
+									<OverflowToolbar>
+										<Text text="{sharedi18n>weight}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										<SearchField id="searchFieldWeight" change=".onSearchWeight"/>
+									</OverflowToolbar>
+								</header>
+							</Column>
+							<Column width="25%" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+								<header>
+									<OverflowToolbar>
+										<Text text="{sharedi18n>palletLabel}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										<SearchField id="searchFieldPallet" change=".onSearchPallet"/>
+									</OverflowToolbar>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem id="boxesTableColumnListItem" type="Inactive" vAlign="Middle">
+								<customData>
+									<core:CustomData key="isSelected" value=""/>
+								</customData>
+								<cells>
+									<VBox renderType="Bare">
+										<Link text="{path: 'BOXES>huexternalid', formatter: '.SharedFormatter.alphaOutput'}" emphasized="true" press=".askForData"/>
+										<Label text="{BOXES>guid}" class="tinyLabel blueInfo"/>
+									</VBox>
+									<HBox renderType="Bare" alignContent="Center" alignItems="Center">
+										<flib:FioritalInput value="{path: 'BOXES>boxweight', type: '.FloatFixed3Parse'}" selectOnSelect="true" type="Text"
+											enabled="{BOXES>boxMgrModel>/isWeightEnabled}" valueState="{path: 'BOXES>boxweight', formatter: '.valueStateWeightInput'}"
+											deleteZeroOnSelect="true" width="60%" change=".onWgtChange">
+											<flib:customData>
+												<core:CustomData key="REFCOL" value="1" writeToDom="true"/>
+											</flib:customData>
+										</flib:FioritalInput>
+										<Text text="{BOXES>uom}" class="boldHI blueInfo sapUiTinyMarginBegin"/>
+									</HBox>
+									<VBox renderType="Bare">
+										<Text text="{parts: ['BOXES>palletext'], formatter: '.SharedFormatter.alphaOutput'}" width="auto" maxLines="1" wrapping="false"
+											textAlign="Begin" textDirection="Inherit" visible="true"/>
+										<Label text="{BOXES>palletguid}" visible="{= ${BOXES>palletguid} === '' ? false : true }" class="tinyLabel blueInfo"/>
+									</VBox>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</VBox>
+			<!-- FAST ENTRY -->
+			<VBox renderType="Bare" height="15%" class="sapUiSmallMarginBeginEnd">
+				<HBox height="50%" alignItems="Center" direction="Row" fitContainer="false" justifyContent="Start" renderType="Bare" displayInline="false"
+					class="sectionBgBottom">
+					<flib:FioritalInput value="{SELECTED>/numberOfLabels}" width="3rem" id="numberOfLabels" avoidNegatives="true" selectOnSelect="true"
+						class="sapUiTinyMarginEnd" enabled="{= ${boxMgrModel>/isvariableweight} === 'F' &amp;&amp; ${SELECTED>/boxes} === 1 ? true : false }"/>
+					<ComboBox id="languageComboBox" width="4rem" items="{LANGUAGES>/language}" selectedKey="{SELECTED>/selectedLanguage}"
+						class="sapUiTinyMarginEnd" enabled="{= ${SELECTED>/boxes} === 0 ? false : true}">
+						<core:ListItem key="{LANGUAGES>value}" text="{LANGUAGES>value}"/>
+					</ComboBox>
+					<Button text="{sharedi18n>printLabels}" icon="sap-icon://print" enabled="{boxMgrModel>/enablePrint}" iconFirst="true"
+						class="sapUiSmallMarginEnd" press=".onMassPrintPress" tooltip="{sharedi18n>massBoxPrintLabelTooltip}"/>
+					<Button icon="sap-icon://pdf-attachment" text="Multi PDF" enabled="{boxMgrModel>/enablePrint}" class="sapUiSmallMarginEnd" iconFirst="true"
+						press=".onMultiLabelPress"/>
+					<Button icon="sap-icon://pdf-attachment" text="Single PDF" enabled="{boxMgrModel>/enablePrint}" class="sapUiSmallMarginEnd" iconFirst="true"
+						press=".onSingleLabelPress"/>
+					<HBox width="45%"/>
+					<Button type="Ghost" text="{sharedi18n>moveBox}" icon="sap-icon://move" press=".onMoveBoxPress" enabled="{= ${SELECTED>/disableControls} === false ? true : false }"/>
+					<flib:FioritalInput value="{SELECTED>/from}" avoidNegatives="true" selectOnSelect="true" type="Number" width="4rem" id="rangeFrom"
+						class="sapUiTinyMarginBeginEnd"/>
+					<flib:FioritalInput value="{SELECTED>/to}" avoidNegatives="true" selectOnSelect="true" type="Number" width="4rem" id="rangeTo"
+						class="sapUiTinyMarginEnd"/>
+					<Button text="Seleziona" press=".onRangeSelection"/>
+				</HBox>
+				<HBox height="50%" alignItems="Stretch" direction="Row" fitContainer="false" justifyContent="Start" renderType="Bare" displayInline="false">
+					<!-- box amount -->
+					<VBox renderType="Bare" width="10%" class="sapUiSmallMarginEnd">
+						<items>
+							<Label text="{sharedi18n>boxNumber}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+							<Input value="{path: 'boxMgrModel>/boxNumber'}" showValueHelp="false" enabled="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+						</items>
+					</VBox>
+					<!-- box wgt -->
+					<VBox renderType="Bare" width="10%" class="sapUiSmallMarginEnd">
+						<items>
+							<Label text="{sharedi18n>weight}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+							<Input type="Text" value="{path: 'boxMgrModel>/totwgt', type: '.FloatFixed3Parse'}" showValueHelp="false" width="auto" required="true"
+								maxLength="0" enabled="{boxMgrModel>/isWeightEnabled}"/>
+						</items>
+					</VBox>
+					<!-- guid popover -->
+					<VBox renderType="Bare" width="5%" class="sapUiSmallMarginEnd">
+						<VBox renderType="Bare" height="1rem"/>
+						<Button icon="sap-icon://bar-code" width="auto" type="{= ${boxMgrModel>/guid} === '' ? 'Ghost' : 'Accept' }" press=".guidButtonPress"
+							enabled="{= ${SELECTED>/disableControls} === false ? true : false }"/>
+					</VBox>
+					<!-- create pallet -->
+					<VBox renderType="Bare" width="23%" class="sapUiSmallMarginEnd">
+						<VBox renderType="Bare" height="1rem"/>
+						<Button type="Accept" width="auto" text="{sharedi18n>addPallet}" icon="sap-icon://add" press=".onCreatePalletFromBoxManagerPress"
+							enabled="{= ${SELECTED>/disableControls} === false ? true : false }"/>
+					</VBox>
+					<!-- assign pallet -->
+					<VBox renderType="Bare" width="20%" class="sapUiSmallMarginEnd">
+						<Label text="{sharedi18n>palletLabel}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"
+							visible="true"/>
+						<HBox renderType="Bare" alignItems="Center">
+							<Select selectedKey="{path: 'boxMgrModel>/huexternalid', formatter: '.SharedFormatter.alphaOutput'}" id="boxManagerDialogPalletComboId"
+								forceSelection="false" width="100%" change=".selectChange" items="{ path: 'Pallets', sorter: {path: 'huexternalid', descending: true} }">
+								<items>
+									<core:Item text="{path: 'huexternalid', formatter: '.SharedFormatter.alphaOutput'}" enabled="true" key="{huexternalid}"/>
+								</items>
+							</Select>
+							<core:Icon src="sap-icon://decline" press="clearSelectedPallet" color="#0854a0" class="sapUiTinyMarginBegin"/>
+						</HBox>
+					</VBox>
+					<!-- actions -->
+					<HBox renderType="Bare" width="30%">
+						<Button text="{sharedi18n>create}" icon="sap-icon://sys-enter-2" iconFirst="true" class="sapUiSmallMarginTop sapUiSmallMarginEnd"
+							press=".onCreateBoxPress" tooltip="{sharedi18n>createBoxTooltip}" enabled="{= ${SELECTED>/disableControls} === true ? false : true }"/>
+						<Button id="synchronizeButtonId" class="sapUiSmallMarginTop sapUiSmallMarginEnd" icon="sap-icon://synchronize"
+							enabled="{= ${boxMgrModel>/hasChanged} === true &amp;&amp; ${SELECTED>/disableControls} === false ? true : false }"
+							press=".onSyncronizeDataPress" tooltip="{sharedi18n>syncBoxesDataTooltip}"/>
+						<Button icon="sap-icon://delete" iconFirst="true" class="sapUiSmallMarginTop sapUiSmallMarginEnd" press=".ondDeleteHus" type="Reject"
+							enabled="{= ${SELECTED>/disableControls} === false ? true : false }"/>
+						<Button icon="sap-icon://paste" iconFirst="true" class="sapUiSmallMarginTop sapUiSmallMarginEnd" press=".onPasteClipboard" type="Reject"/>
+						<Button icon="sap-icon://notes" iconFirst="true" class="sapUiSmallMarginTop sapUiSmallMarginEnd" press=".onGetLabelNote" type="Ghost"
+							enabled="{= ${SELECTED>/disableControls} === false ? true : false }"/>
+					</HBox>
+					<HBox renderType="Bare" width="7%">
+						<Button text="{sharedi18n>cancelButton}" type="Reject" class="sapUiSmallMarginTop" press=".onBoxManagerClose" id="boxManagerCloseButton" busyIndicatorDelay="0"/>
+					</HBox>
+				</HBox>
+			</VBox>
+		</content>
+		<dependents>
+			<flib:BapiReturnDisplay id="BAPIret"/>
+			<Popover id="guidPopover" modal="true" placement="Top" showHeader="true" verticalScrolling="false" contentWidth="30%" contentHeight="10%"
+				title="{sharedi18n>guidPopoverTitle}">
+				<content>
+					<VBox renderType="Bare" height="100%" justifyContent="Center">
+						<VBox renderType="Bare" class="sapUiTinyMarginBottom">
+							<Label text="{sharedi18n>guidPopoverLabel}" design="Standard" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+								class="blueInfo sapUiTinyMarginBottom sapUiTinyMarginBegin"/>
+							<Input id="guidInput" type="Text" value="{boxMgrModel>/guid}" width="95%" textAlign="Begin"
+								class="sapMText sapUiSelectable sapMTextMaxWidth boldHI sapUiTinyMarginBegin"/>
+						</VBox>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer/>
+							<Button text="{sharedi18n>cancelButton}" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+								press=".onGuidPopoverClose"/>
+						</content>
+					</Toolbar>
+				</footer>
+			</Popover>
+			<!--CHOOSE PALLET TO MOVE BOX TO-->
+			<Popover id="choosePalletBoxMoveToPopoverId" placement="Top" showHeader="false" contentWidth="250px" contentHeight="80px">
+				<content>
+					<VBox renderType="Bare" class="sapUiTinyMargin">
+						<Label text="{sharedi18n>palletMoveTo}" class="sapUiTinyMarginBottom"/>
+						<Select id="choosePalletMoveToSelectionId" forceSelection="false" width="100%" items="{ path: 'palletJsonModel>/value'}">
+							<items>
+								<core:Item text="{path: 'palletJsonModel>huexternalid', formatter: '.SharedFormatter.alphaOutput'}" key="{palletJsonModel>huexternalid}"/>
+							</items>
+						</Select>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button type="Accept" width="10rem" text="{sharedi18n>moveBoxToPallet}" icon="sap-icon://add" press=".onMoveBoxToPalletPress"/>
+					</Toolbar>
+				</footer>
+			</Popover>
+		</dependents>
+	</Dialog>
+</core:FragmentDefinition>

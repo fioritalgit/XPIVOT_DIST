@@ -1,0 +1,27 @@
+--------------------------------------------------------------------------------
+YSCAN
+--------------------------------------------------------------------------------
+
+21.02.2019 - Prevedere custom  data che impone  su  campi  input  digitazione  di 
+             soli tasti numerici.
+
+-----------------------------------------------------------------------------
+DYN MODEL
+-----------------------------------------------------------------------------
+
+22.02.2019 - Gestire metadati da SAP per tipi DATE/TIME/TOMESTAMP 
+22.02.2019 - Rinominare UY5CORE 
+
+inseire gestione limitazione inserimento valori:
+possibili valori per customData su page > CHAR / CHARUPPER / CHARLOWER / INTEGER / NUM
+
+nota: per NUM sono OBBLIGATORIE anche le altre proprietà YSCAN_maxinteger / YSCAN_maxdecimal
+nota: per INTEGER è FACOLTATIVA la proprietà YSCAN_maxinteger
+ 
+ 
+	<Page title="{PAGE_TITLE>/TITLE}">
+		<customData>
+			<core:CustomData key="YSCAN_scanmode" value="NUM"/>
+			<core:CustomData key="YSCAN_maxinteger" value="2"/>
+			<core:CustomData key="YSCAN_maxdecimal" value="4"/>
+		</customData>

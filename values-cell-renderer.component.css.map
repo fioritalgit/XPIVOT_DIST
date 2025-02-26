@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/custom-components/values-cell-renderer/values-cell-renderer.component.css"],
+  "sourcesContent": ["\n  .container {\n    width: 100%;\n    height: 100%;\n  }\n  \n  .suffix {\n    position: absolute;\n    right: 2px;\n    bottom:-3px;\n    font-size: 10px; /* Make it small */\n    color: darkgrey;\n  }"],
+  "mappings": ";AACE,CAAC;AACC,SAAO;AACP,UAAQ;AACV;AAEA,CAAC;AACC,YAAU;AACV,SAAO;AACP,UAAO;AACP,aAAW;AACX,SAAO;AACT;",
+  "names": []
+}

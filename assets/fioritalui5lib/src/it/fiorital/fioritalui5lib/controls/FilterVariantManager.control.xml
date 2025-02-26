@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:net="sap.suite.ui.commons.networkgraph">
+	<Popover  class="" placement="Auto" id="FilterVariantManager" contentWidth="30em" verticalScrolling="false"
+		horizontalScrolling="false" modal="false" title="Variant Manager">
+		<subHeader>
+			<Toolbar>
+				<Label text="actual variant:" class="sapUiTinyMarginEnd"></Label>
+				<Text text="{VARIANTDATA>/actualVariant}"></Text>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<html:style>
+				
+			</html:style>
+				<List items="{VARIANTS>/}" mode="Delete" delete=".deleteVariant">
+					<StandardListItem icon="sap-icon://dimension" title="{VARIANTS>variant}" description="{VARIANTS>varDescr}" type="Active"
+					press=".selectVariant"></StandardListItem>
+				</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="saveVariant" icon="sap-icon://save" text="salva variante" press=".saveVariant" enabled="{path:'VARIANTDATA>/actualVariant',formatter:'.saveActive'}"/>
+				<Button id="newVariant" icon="sap-icon://sys-add" text="nuova variante" press=".CreateNewVariant"/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press=".close"/>
+			</Toolbar>
+		</footer>
+		<dependents>
+			<fio:FreightOrderManager id="ATPCFOdetail"></fio:FreightOrderManager>
+		</dependents>
+	</Popover>
+</core:FragmentDefinition>

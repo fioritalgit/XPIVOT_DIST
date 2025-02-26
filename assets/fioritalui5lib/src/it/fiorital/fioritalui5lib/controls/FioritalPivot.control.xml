@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<core:HTML content='' id="pivotContainer"></core:HTML>
+
+</core:FragmentDefinition>

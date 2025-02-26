@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/custom-components/attribut-edit-matchcode/attribut-edit-matchcode.component.css"],
+  "sourcesContent": [".matchcoder {\n    border-radius: 0.5em;\n    width: 60em;\n    border: 1px solid grey;\n    background-color: white;\n    padding: 0px;\n    text-align: center;\n    display: block;\n    outline: none;\n}\n\n.matchcoder::part(content) {\n    padding: 0px;\n    display: flex;\n    height: 40em;\n    flex-direction: column;\n}\n\n\n\n.default {\n    padding-left: 10px;\n    padding-right: 10px;\n    border: 1px solid transparent;\n    padding: 4px;\n}\n\n.selected {\n    padding-left: 10px;\n    padding-right: 10px;\n    border: 1px solid lightgreen;\n    padding: 4px;\n}\n\n"],
+  "mappings": ";AAAA,CAAC;AACG,iBAAe;AACf,SAAO;AACP,UAAQ,IAAI,MAAM;AAClB,oBAAkB;AAClB,WAAS;AACT,cAAY;AACZ,WAAS;AACT,WAAS;AACb;AAEA,CAXC,UAWU,OAAO;AACd,WAAS;AACT,WAAS;AACT,UAAQ;AACR,kBAAgB;AACpB;AAIA,CAAC;AACG,gBAAc;AACd,iBAAe;AACf,UAAQ,IAAI,MAAM;AAClB,WAAS;AACb;AAEA,CAAC;AACG,gBAAc;AACd,iBAAe;AACf,UAAQ,IAAI,MAAM;AAClB,WAAS;AACb;",
+  "names": []
+}

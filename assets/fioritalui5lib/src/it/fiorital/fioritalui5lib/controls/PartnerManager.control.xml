@@ -1,0 +1,141 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="it.fiorital.FullAppTemplate.controller.PartnerManager" xmlns="sap.m"
+	xmlns:layout="sap.ui.layout">
+	<Dialog id="partnerSchemaDialogId" horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="{sharedi18n>partnerManagerTitle}"
+		type="Standard" verticalScrolling="false" contentHeight="50%" contentWidth="60%">
+		<content>
+			<!--add partner -->
+			<HBox renderType="Bare" justifyContent="Start" alignItems="Stretch" displayInline="false" class="sapUiSmallMarginBeginEnd sapUiTinyMarginTop" visible="{= !${viewModel>/readOnly} }" height="10%">
+				<!-- partner role -->
+				<VBox renderType="Bare" direction="Column" class="sapUiSmallMarginEnd" width="30%">
+					<items>
+						<Label text="{sharedi18n>role}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						<HBox renderType="Bare" alignContent="Center" alignItems="Center">
+							<core:Icon src="sap-icon://collaborate" class="sapUiTinyMarginEnd"/>
+							<Select id="partnerRoleSelectionId" width="100%" change="_onSelectTypeChange"  forceSelection="false" items="{path: 'PossiblePartnerRoles', templateShareable: true}">
+								<items>
+									<core:Item text="{externalPartnerrole} - {partnerroledescr}" enabled="true" key="{partnerrole}"/>
+								</items>
+							</Select>
+						</HBox>
+					</items>
+				</VBox>
+				
+				<!-- partner -->
+				<VBox renderType="Bare" direction="Column" class="sapUiSmallMarginEnd" width="30%">
+					<items>
+						<Label text="{sharedi18n>name}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						<HBox renderType="Bare" alignContent="Center" alignItems="Center">
+							<core:Icon src="sap-icon://person-placeholder"  class="sapUiTinyMarginEnd"/>
+							<Input id="newPartnerSelectionId" type="Text" placeholder="{sharedi18n>selectPartnerPlaceholder}" showSuggestion="true" 
+								showTableSuggestionValueHelp="false" suggestionItemSelected="_onInputCodeChange" suggest="_onstartPartnerCodeSuggest"
+								enabled="{viewModel>/hasPartnerTypeValue}" suggestionRows ="{ path: '/PartnerWithRole', sorter: [ {path: 'partnernr' }, {path: 'name' } ], suspended: true, parameters:{$$groupId:'libraryGroup', templateShareable: true} }" 
+								maxSuggestionWidth="20em">
+								<suggestionColumns>
+									<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true" width="40%">
+										<Label text="{sharedi18n>code}"/>
+									</Column>
+									<Column hAlign="Begin" popinDisplay="Inline" demandPopin="false" width="60%">
+										<Label text="{sharedi18n>name}"/>
+									</Column>
+								</suggestionColumns>
+								<suggestionRows>
+									<ColumnListItem>
+										<cells>
+											<Label text="{partnernr}"/>
+											<Label text="{name}"/>
+										</cells>
+									</ColumnListItem>
+								</suggestionRows>
+							</Input>
+						</HBox>
+					</items>
+				</VBox>
+				<Button text="{sharedi18n>addPartner}" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="{viewModel>/isButtonEnabled}" 
+					class="sapUiSmallMarginTop" press="_onAddPartner"/>
+			</HBox>
+			
+			<!-- current partners -->
+			<ScrollContainer vertical="true" horizontal="false" height="90%">
+				<Table id="partnerSchemaTableId" noDataText="{sharedi18n>NoDataFilter}" class="sapUiTinyMarginTop sapUiSmallMargin" inset="false"
+					sticky="ColumnHeaders" items="{path: 'Partners', sorter: [ {path: 'partnerrole' }, {path: 'partnername' } ], templateShareable: true}">
+					<columns>
+						<Column width="25%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+							<header>
+								<Text text="{sharedi18n>role}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							</header>
+							<footer/>
+						</Column>
+						<Column width="12%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+							<header>
+								<Text text="{sharedi18n>code}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							</header>
+							<footer/>
+						</Column>
+						<Column width="29%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+							<header>
+								<Text text="{sharedi18n>description}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							</header>
+							<footer/>
+						</Column>
+						<Column width="29%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+							<header>
+								<Text text="{sharedi18n>address}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							</header>
+							<footer/>
+						</Column>
+						<!-- actions -->
+						<Column width="5%" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+							<header>
+								<Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							</header>
+							<footer/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Active">
+							<cells>
+								<Text text="{partnerrole} - {partnerroledescr}" wrapping="false" textAlign="Begin" textDirection="Inherit" class="boldHI"/>
+								
+								<!--if partner is editable, enable edit -->
+								<Input id="editPartnerSelectionId" value="{partnernr}" type="Text" placeholder="{sharedi18n>selectPartnerPlaceholder}" showSuggestion="true" maxSuggestionWidth="20em"
+									enabled="{= !${noteditable} &amp;&amp; !${viewModel>/readOnly} }" showTableSuggestionValueHelp="false" suggestionItemSelected="_onInputCodeChange" suggest="_onstartInlinePartnerCodeSuggest" 
+									suggestionRows ="{path: '/PartnerWithRole', suspended: true, parameters:{$$groupId:'libraryGroup'}, templateShareable: true}">
+									<suggestionColumns>
+										<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true" width="40%">
+											<Label text="{sharedi18n>code}"/>
+										</Column>
+										<Column hAlign="Begin" popinDisplay="Inline" demandPopin="false" width="60%">
+											<Label text="{sharedi18n>name}"/>
+										</Column>
+									</suggestionColumns>
+									<suggestionRows>
+										<ColumnListItem>
+											<cells>
+												<Label text="{partnernr}"/>
+												<Label text="{name}"/>
+											</cells>
+										</ColumnListItem>
+									</suggestionRows>
+								</Input>
+
+								<Text text="{partnername}" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+								<Text text="{partneraddress}" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+							
+								<HBox renderType="Bare" visible="{= !${viewModel>/readOnly} }">
+									<core:Icon src="sap-icon://sys-cancel" press="_onPartnerDeletePress" visible="{= !${noteraseable} }" class="sapUiSmallMarginEnd" color="red"/>
+								</HBox>
+									
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</content>
+		<buttons>
+			<Button text="{sharedi18n>okButton}" type="Reject" iconFirst="true" width="auto" enabled="true" visible="false" iconDensityAware="false"
+				press="_onSaveButtonPress"/>
+			<Button text="{sharedi18n>cancelButton}" icon="sap-icon://decline" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+				press="_onCancelButtonPress"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,308 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns:uitab="sap.ui.table">
+	<Popover title="{$this>title}" class="" placement="Auto" id="FreightOrderListPopover" contentWidth="75em" contentHeight="50em"
+		verticalScrolling="false" horizontalScrolling="false" modal="true" afterOpen="._interanlAfterOpen">
+		<content>
+			<html:style>
+				.FOpadding { padding: 2em; } .FOpaddingSmall { padding: 1em; } .border2 ul{border: 2px solid;} .stopColor li[data-startstoragelocation="X"]{
+				background:#d2dfe9!important;} .boldBig {font-size:1.5em!important; font-weight:bold !important;} .Big {font-size:1.5em!important}
+				.stopColor li[data-isfullycompatible="X"]{background: #43d96b !important;} .FOsmallText .sapMText{font-size: 0.8rem !important;}
+				.backStage{background: #e7ecf6;}
+			</html:style>
+			<IconTabBar id="idIconTabBarFOlist" stretchContentHeight="true" expandable="false" expanded="true" applyContentPadding="false"
+				tabDensityMode="Compact">
+				<items>
+					<IconTabFilter icon="sap-icon://shipping-status" iconColor="Positive" text="Per data" key="perdate">
+						<content>
+							<Page showFooter="false" showHeader="false">
+								<HBox height="7%" alignItems="Center">
+									<VBox width="1em"></VBox>
+									<Title class="Big" text="Freight orders for node: "></Title>
+									<VBox width="2em"></VBox>
+									<Title id="headerSloc" class="boldBig" text=""></Title>
+									<VBox width="4em"></VBox>
+									<core:Icon src="sap-icon://clear-filter" press=".clearFilters" visible="{$this>filtersenabled}"></core:Icon>
+									<VBox width="1em"></VBox>
+									<DatePicker id="DP1" placeholder="Data partenza" change="handleFilterDates" visible="{$this>filtersenabled}"/>
+									<Text text=">>" class="sapUiTinyMarginBegin sapUiTinyMarginEnd" visible="{$this>filtersenabled}"></Text>
+									<DatePicker id="DP2" placeholder="Data arrivo" change="handleFilterDates" visible="{$this>filtersenabled}"/>
+								</HBox>
+								<HBox renderType="Bare" height="93%" width="100%">
+									<fio:FioritalUITreeTable id="uitablefolistfiltered" rows="{path:'FOJSMODEL>/value', parameters: {arrayNames:['FreightOrderStage']}}"
+										autoHeightAdjustment="true" autoResizeAdjustment="true" selectionMode="None" visibleRowCountMode="Auto" columnHeaderVisible="false"
+										threshold="40" rowHeightEm="4.8">
+										<fio:columns>
+											<uitab:Column width="100%" sorted="true">
+												<Label text="Tipo"/>
+												<uitab:template>
+													<HBox height="4.3em" width="100%" renderType="Bare">
+														<fio:FioritalHbox renderType="Bare" height="4.3em" width="100%" visible="{= ${FOJSMODEL>isStage} === true ? false : true }"
+															press="onFreightOrderSelect">
+															<VBox renderType="Bare" height="4.3em" width="20%" class="sapUiTinyMargin" alignItems="Center" justifyContent="Center">
+																<tnt:InfoLabel visible="{path:'FOJSMODEL>priorityorder',formatter:'.formatPriority'}" text="FO CON PRIORITA'" colorScheme="3"
+																	class="sapUiTinyMarginBottom"/>
+																<tnt:InfoLabel text="{path:'FOJSMODEL>mtr',formatter:'.formatMTR'}" colorScheme="{path:'FOJSMODEL>mtr',formatter:'.formatMTRcolor'}"
+																	class="sapUiTinyMarginBottom"/>
+															</VBox>
+															<VBox renderType="Bare" height="4.3em" width="10%" alignItems="Center" justifyContent="Center">
+																<core:Icon src="sap-icon://shipping-status" size="2em"></core:Icon>
+															</VBox>
+															<VBox renderType="Bare" height="4.3em" width="65%">
+																<ObjectIdentifier title="{path:'FOJSMODEL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}" text="{FOJSMODEL>labeltext}"
+																	class="sapUiTinyMarginBottom"/>
+																<fio:FioritalText text="{FOJSMODEL>carrieridname}"/>
+															</VBox>
+															<VBox renderType="Bare" height="4.3em" width="30%" justifyContent="Center">
+																<fio:FioritalText bold="true" text="{path:'FOJSMODEL>firstnodedate', formatter:'.dateLocale'}" fontSize="1em" class="sapUiTinyMarginBottom"/>
+																<fio:FioritalText bold="true" text="{FOJSMODEL>firstnodetime}" fontSize="1em"/>
+															</VBox>
+															<VBox renderType="Bare" height="4.3em" width="5%" alignItems="Center" justifyContent="Center">
+																<fio:FioritalIcon src="sap-icon://overview-chart" size="1.6em" visible="{path:'FOJSMODEL>dgrid',formatter:'.showDGRID',targetType:'any'}"
+																	padBegin="0.5em" padTop="0.5em" color="cornflowerblue"/>
+															</VBox>
+														</fio:FioritalHbox>
+														<fio:FioritalHbox renderType="Bare" height="4.3em" width="100%" visible="{= ${FOJSMODEL>isStage} === true ? true : false }"
+															class="backStage">
+															<VBox renderType="Bare" height="4.3em" width="20%" class="sapUiTinyMargin" alignItems="Center" justifyContent="Center"/>
+															<VBox renderType="Bare" height="4.3em" width="80%" class="sapUiTinyMargin" alignItems="Center" justifyContent="Center">
+																<customData>
+																	<core:CustomData key="startstoragelocation"
+																		value="{parts:['FOJSMODEL>startstoragelocation','FOJSMODEL>endstoragelocation'],formatter:'.setStartLocationFlag'}" writeToDom="true"></core:CustomData>
+																	<core:CustomData key="isfullycompatible" value="{FOJSMODEL>isfullycompatible}" writeToDom="true"/>
+																</customData>
+																<HBox width="100%" renderType="Bare" height="6em" class="FOsmallText">
+																	<core:Icon src="sap-icon://arrow-top" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																	<VBox width="25%" alignItems="Start" justifyContent="Center">
+																		<ObjectIdentifier title="{FOJSMODEL>startnode}" text="{path:'FOJSMODEL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}"/>
+																	</VBox>
+																	<core:Icon src="sap-icon://history" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																	<VBox width="15%" alignItems="Center" justifyContent="Center">
+																		<ObjectIdentifier title="{path:'FOJSMODEL>startnodedate',formatter:'.dateLocale'}" text="{FOJSMODEL>startnodetime}"/>
+																	</VBox>
+																	<VBox width="25%" alignItems="Start" justifyContent="Center">
+																		<ObjectIdentifier title="{FOJSMODEL>endnode}" text=""/>
+																	</VBox>
+																	<core:Icon src="sap-icon://history" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																	<VBox width="10%" alignItems="Center" justifyContent="Center">
+																		<ObjectIdentifier title="{path:'FOJSMODEL>endnodedate',formatter:'.dateLocale'}" text="{FOJSMODEL>endnodetime}"/>
+																	</VBox>
+																	<VBox width="25%" alignItems="Center" justifyContent="Center" renderType="Bare">
+																		<ProgressIndicator percentValue="{FOJSMODEL>utilmass}" displayValue="{FOJSMODEL>utilmass} KG" showValue="true" state="Success" width="8em"/>
+																		<ProgressIndicator percentValue="{FOJSMODEL>utilvolume}" displayValue="{FOJSMODEL>utilvolume} M3" showValue="true" state="Success"
+																			width="8em"/>
+																	</VBox>
+																</HBox>
+															</VBox>
+														</fio:FioritalHbox>
+													</HBox>
+												</uitab:template>
+											</uitab:Column>
+										</fio:columns>
+									</fio:FioritalUITreeTable>
+								</HBox>
+								<!--
+								<ScrollContainer height="93%" width="100%" vertical="true">
+									<List id="FreightOrderListStops" busyIndicatorDelay="0" items="{ path:'FOJSMODEL>/value', templateShareable:true }">
+										<CustomListItem type="Active" press="onFreightOrderSelect">
+											<HBox width="100%" renderType="Bare" class="FOpadding">
+												<VBox width="35%" justifyContent="Center">
+													<tnt:InfoLabel visible="{path:'FOJSMODEL>priorityorder',formatter:'.formatPriority'}" text="FO CON PRIORITA'" displayOnly="true"
+														colorScheme="3" class="sapUiTinyMarginBottom"/>
+													<tnt:InfoLabel text="{path:'FOJSMODEL>mtr',formatter:'.formatMTR'}" displayOnly="true"
+														colorScheme="{path:'FOJSMODEL>mtr',formatter:'.formatMTRcolor'}" class="sapUiTinyMarginBottom"/>
+													<core:Icon src="sap-icon://shipping-status" size="2em"></core:Icon>
+													<VBox height="1em"></VBox>
+													<ObjectIdentifier title="{path:'FOJSMODEL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}" text="{FOJSMODEL>labeltext}"/>
+													<VBox height="1em"></VBox>
+													<ObjectIdentifier title="{FOJSMODEL>carrieridname}" text="Carrier"/>
+													<fio:FioritalIcon src="sap-icon://overview-chart" size="1.6em" visible="{path:'FOJSMODEL>dgrid',formatter:'.showDGRID',targetType:'any'}"
+														padBegin="0.5em" padTop="0.5em" color="cornflowerblue"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<List items="{FOJSMODEL>FreightOrderStage}" class="border2 stopColor">
+													<CustomListItem>
+														<customData>
+															<core:CustomData key="startstoragelocation"
+																value="{parts:['FOJSMODEL>startstoragelocation','FOJSMODEL>endstoragelocation'],formatter:'.setStartLocationFlag'}" writeToDom="true"></core:CustomData>
+															<core:CustomData key="isfullycompatible" value="{FOJSMODEL>isfullycompatible}" writeToDom="true"/>
+														</customData>
+														<HBox width="100%" renderType="Bare" height="6em" class="FOsmallText">
+															<core:Icon src="sap-icon://arrow-top"></core:Icon>
+															<VBox width="25%">
+																<ObjectIdentifier title="{FOJSMODEL>startnode}" text="{path:'FOJSMODEL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}"/>
+															</VBox>
+															<core:Icon src="sap-icon://history"></core:Icon>
+															<VBox width="15%">
+																<ObjectIdentifier title="{path:'FOJSMODEL>startnodedate',formatter:'.dateLocale'}" text="{FOJSMODEL>startnodetime}"/>
+															</VBox>
+															<VBox width="25%">
+																<ObjectIdentifier title="{FOJSMODEL>endnode}" text=""/>
+															</VBox>
+															<core:Icon src="sap-icon://history"></core:Icon>
+															<VBox width="10%">
+																<ObjectIdentifier title="{path:'FOJSMODEL>endnodedate',formatter:'.dateLocale'}" text="{FOJSMODEL>endnodetime}"/>
+															</VBox>
+															<VBox width="25%" alignItems="Center" justifyContent="Center" renderType="Bare">
+																<ProgressIndicator percentValue="{FOJSMODEL>utilmass}" displayValue="{FOJSMODEL>utilmass} KG" showValue="true" state="Success" width="8em"/>
+																<ProgressIndicator percentValue="{FOJSMODEL>utilvolume}" displayValue="{FOJSMODEL>utilvolume} M3" showValue="true" state="Success"
+																	width="8em"/>
+															</VBox>
+														</HBox>
+													</CustomListItem>
+												</List>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer> -->
+							</Page>
+						</content>
+					</IconTabFilter>
+					<IconTabSeparator icon=""/>
+					<IconTabFilter icon="sap-icon://shipping-status" iconColor="Neutral" text="Tutti viaggi" key="all">
+						<content>
+							<Page showFooter="false" showHeader="false">
+								<fio:FioritalUITreeTable id="uitablefolist" rows="{path:'FOJSMODELALL>/value', parameters: {arrayNames:['FreightOrderStage']}}"
+									autoHeightAdjustment="true" autoResizeAdjustment="true" selectionMode="None" visibleRowCountMode="Auto" columnHeaderVisible="false"
+									threshold="40" rowHeightEm="4.8">
+									<fio:columns>
+										<uitab:Column width="100%" sorted="true">
+											<Label text="Tipo"/>
+											<uitab:template>
+												<HBox height="4.3em" width="100%" renderType="Bare">
+													<fio:FioritalHbox renderType="Bare" height="4.3em" width="100%" visible="{= ${FOJSMODELALL>isStage} === true ? false : true }"
+														press="onFreightOrderAllSelect">
+														<VBox renderType="Bare" height="4.3em" width="20%" class="sapUiTinyMargin" alignItems="Center" justifyContent="Center">
+															<tnt:InfoLabel visible="{path:'FOJSMODELALL>priorityorder',formatter:'.formatPriority'}" text="FO CON PRIORITA'" colorScheme="3"
+																class="sapUiTinyMarginBottom"/>
+															<tnt:InfoLabel text="{path:'FOJSMODELALL>mtr',formatter:'.formatMTR'}" colorScheme="{path:'FOJSMODELALL>mtr',formatter:'.formatMTRcolor'}"
+																class="sapUiTinyMarginBottom"/>
+														</VBox>
+														<VBox renderType="Bare" height="4.3em" width="10%" alignItems="Center" justifyContent="Center">
+															<core:Icon src="sap-icon://shipping-status" size="2em"></core:Icon>
+														</VBox>
+														<VBox renderType="Bare" height="4.3em" width="65%">
+															<ObjectIdentifier title="{path:'FOJSMODELALL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}" text="{FOJSMODELALL>labeltext}"
+																class="sapUiTinyMarginBottom"/>
+															<fio:FioritalText text="{FOJSMODELALL>carrieridname}"/>
+														</VBox>
+														<VBox renderType="Bare" height="4.3em" width="30%" justifyContent="Center">
+															<fio:FioritalText bold="true" text="{path: 'FOJSMODELALL>firstnodedate', formatter:'.dateLocale'}" fontSize="1em" class="sapUiTinyMarginBottom"/>
+															<fio:FioritalText bold="true" text="{FOJSMODELALL>firstnodetime}" fontSize="1em"/>
+														</VBox>
+														<VBox renderType="Bare" height="4.3em" width="5%" alignItems="Center" justifyContent="Center">
+															<fio:FioritalIcon src="sap-icon://overview-chart" size="1.6em" visible="{path:'FOJSMODELALL>dgrid',formatter:'.showDGRID',targetType:'any'}"
+																padBegin="0.5em" padTop="0.5em" color="cornflowerblue"/>
+														</VBox>
+													</fio:FioritalHbox>
+													<fio:FioritalHbox renderType="Bare" height="4.3em" width="100%" visible="{= ${FOJSMODELALL>isStage} === true ? true : false }"
+														class="backStage">
+														<VBox renderType="Bare" height="4.3em" width="20%" class="sapUiTinyMargin" alignItems="Center" justifyContent="Center"/>
+														<VBox renderType="Bare" height="4.3em" width="80%" class="sapUiTinyMargin" alignItems="Center" justifyContent="Center">
+															<customData>
+																<core:CustomData key="startstoragelocation"
+																	value="{parts:['FOJSMODELALL>startstoragelocation','FOJSMODELALL>endstoragelocation'],formatter:'.setStartLocationFlag'}" writeToDom="true"></core:CustomData>
+																<core:CustomData key="isfullycompatible" value="{FOJSMODELALL>isfullycompatible}" writeToDom="true"/>
+															</customData>
+															<HBox width="100%" renderType="Bare" height="6em" class="FOsmallText">
+																<core:Icon src="sap-icon://arrow-top" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																<VBox width="25%" alignItems="Start" justifyContent="Center">
+																	<ObjectIdentifier title="{FOJSMODELALL>startnode}" text="{path:'FOJSMODELALL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}"/>
+																</VBox>
+																<core:Icon src="sap-icon://history" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																<VBox width="15%" alignItems="Center" justifyContent="Center">
+																	<ObjectIdentifier title="{path:'FOJSMODELALL>startnodedate',formatter:'.dateLocale'}" text="{FOJSMODELALL>startnodetime}"/>
+																</VBox>
+																<core:Icon src="sap-icon://arrow-bottom" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																<VBox width="25%" alignItems="Start" justifyContent="Center">
+																	<ObjectIdentifier title="{FOJSMODELALL>endnode}" text=""/>
+																</VBox>
+																<core:Icon src="sap-icon://history" class="sapUiTinyMarginEnd sapUiSmallMarginTop"></core:Icon>
+																<VBox width="10%" alignItems="Center" justifyContent="Center">
+																	<ObjectIdentifier title="{path:'FOJSMODELALL>endnodedate',formatter:'.dateLocale'}" text="{FOJSMODELALL>endnodetime}"/>
+																</VBox>
+																<VBox width="25%" alignItems="Center" justifyContent="Center" renderType="Bare">
+																	<ProgressIndicator percentValue="{FOJSMODELALL>utilmass}" displayValue="{FOJSMODELALL>utilmass} KG" showValue="true" state="Success"
+																		width="8em"/>
+																	<ProgressIndicator percentValue="{FOJSMODELALL>utilvolume}" displayValue="{FOJSMODELALL>utilvolume} M3" showValue="true" state="Success"
+																		width="8em"/>
+																</VBox>
+															</HBox>
+														</VBox>
+													</fio:FioritalHbox>
+												</HBox>
+											</uitab:template>
+										</uitab:Column>
+									</fio:columns>
+								</fio:FioritalUITreeTable>
+							</Page>
+							<!--
+								<ScrollContainer height="100%" width="100%" vertical="true">
+								<List id="FreightOrderListStopsAll" busyIndicatorDelay="0" items="{ path:'FOJSMODELALL>/value', templateShareable:true }">
+									<CustomListItem type="Active" press="onFreightOrderAllSelect">
+										<HBox width="100%" renderType="Bare" class="FOpadding">
+											<VBox width="35%" justifyContent="Center">
+												<tnt:InfoLabel visible="{path:'FOJSMODELALL>priorityorder',formatter:'.formatPriority'}" text="FO CON PRIORITA'" displayOnly="true" colorScheme="3" class="sapUiTinyMarginBottom"/>
+												<tnt:InfoLabel text="{path:'FOJSMODELALL>mtr',formatter:'.formatMTR'}" displayOnly="true"  colorScheme="{path:'FOJSMODELALL>mtr',formatter:'.formatMTRcolor'}" class="sapUiTinyMarginBottom"/>
+												<core:Icon src="sap-icon://shipping-status" size="2em"></core:Icon>
+												<VBox height="1em"></VBox>
+												<ObjectIdentifier title="{path:'FOJSMODELALL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}" text="{FOJSMODELALL>labeltext}"/>
+												<VBox height="1em"></VBox>
+												<ObjectIdentifier title="{FOJSMODELALL>carrieridname}" text="Carrier"/>
+												<fio:FioritalIcon src="sap-icon://overview-chart" size="1.6em" visible="{path:'FOJSMODELALL>dgrid',formatter:'.showDGRID',targetType:'any'}" padBegin="0.5em" padTop="0.5em" color="cornflowerblue"/>
+											</VBox>
+											<HBox width="3em"></HBox>
+											<List items="{FOJSMODELALL>FreightOrderStage}" class="border2 stopColor">
+												<CustomListItem>
+													<customData>
+														<core:CustomData key="startstoragelocation"
+															value="{parts:['FOJSMODELALL>startstoragelocation','FOJSMODELALL>endstoragelocation'],formatter:'.setStartLocationFlag'}" writeToDom="true"></core:CustomData>
+														<core:CustomData key="isfullycompatible" value="{FOJSMODELALL>isfullycompatible}" writeToDom="true"/>
+													</customData>
+													<HBox width="100%" renderType="Bare" height="6em" class="FOpaddingSmall FOsmallText">
+														<VBox width="20%">
+															<core:Icon src="sap-icon://arrow-top"></core:Icon>
+															<VBox height="1em"></VBox>
+															<ObjectIdentifier title="{FOJSMODELALL>startnode}" text="{path:'FOJSMODELALL>freightorderid',formatter:'.SharedFormatter.alphaOutput'}"/>
+														</VBox>
+														<VBox width="15%">
+															<core:Icon src="sap-icon://history"></core:Icon>
+															<VBox height="1em"></VBox>
+															<ObjectIdentifier title="{path:'FOJSMODELALL>startnodedate',formatter:'.dateLocale'}" text="{FOJSMODELALL>startnodetime}"/>
+														</VBox>
+														<VBox width="25%">
+															<core:Icon src="sap-icon://arrow-bottom"></core:Icon>
+															<VBox height="1em"></VBox>
+															<ObjectIdentifier title="{FOJSMODELALL>endnode}" text=""/>
+														</VBox>
+														<VBox width="15%">
+															<core:Icon src="sap-icon://history"></core:Icon>
+															<VBox height="1em"></VBox>
+															<ObjectIdentifier title="{path:'FOJSMODELALL>endnodedate',formatter:'.dateLocale'}" text="{FOJSMODELALL>endnodetime}"/>
+														</VBox>
+														<VBox width="25%" alignItems="Center" justifyContent="Center" renderType="Bare">
+															<ProgressIndicator percentValue="{FOJSMODELALL>utilmass}" displayValue="{FOJSMODELALL>utilmass} KG" showValue="true" state="Success"
+																width="8em"/>
+															<ProgressIndicator percentValue="{FOJSMODELALL>utilvolume}" displayValue="{FOJSMODELALL>utilvolume} M3" showValue="true" state="Success"
+																width="8em"/>
+														</VBox>
+													</HBox>
+												</CustomListItem>
+											</List>
+										</HBox>
+									</CustomListItem>
+								</List>
+							</ScrollContainer>
+							-->
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

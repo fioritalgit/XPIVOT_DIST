@@ -1,0 +1,189 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout.cssgrid">
+	<Popover title="Virtual Keyboard {$this>keyboardType}"  placement="Auto" initialFocus="" id="VKMPopover"  contentHeightNO="25em"
+		verticalScrolling="false" horizontalScrolling="false" modal="true" class="" afterClose="onAfterCloseVKPopover">
+		<content>
+			<html:style>
+				.textButtonC bdi { color: forestgreen !important; }
+				.txtButtonT bdi { font-size: x-large }
+				.txtButtonSP bdi { font-size: x-large; }
+				.txtButtonDEL bdi { font-size: x-large; color: red !important; }
+				.txtButtonRET bdi { font-size: x-large; }
+			</html:style>
+			<VBox justifyContent="Center" alignItems="Center" >
+
+				<HBox alignItems="Center" justifyContent="Center">
+				<VBox width="100%" alignItems="Center" justifyContent="Center">
+					<HBox justifyContent="Center">
+						<Button text="Q" width="5.0em" class="txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="W" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="E" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="R" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="T" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="Y" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="U" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="I" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="O" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="P" width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+					</HBox>
+					<HBox justifyContent="Center">
+						<Button text="A" width="5.0em" class="txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="S" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="D" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="F" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="G" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="H" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="J" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="K" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="L" width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+					</HBox>
+					<HBox justifyContent="Center">
+						<Button text="Z" width="5.0em" class="txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="X" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="C" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="V" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="B" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="N" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="M" width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasAlphabeticKeys}" />
+						<Button text="," width="5.0em" class="sapUiTinyMarginBegin txtButtonT"
+								press="pressKey" visible="{$this>hasPunctuationKeys}" />
+						<Button text="." width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT"
+								press="pressKey" visible="{$this>hasPunctuationKeys}" />
+					</HBox>
+					<HBox alignItems="Center" justifyContent="Center">
+						<HBox alignItems="Center" justifyContent="Center">
+							<Switch state="true" customTextOn="Up" customTextOff="Low" change="changeUpperLower" visible="{$this>hasAlphabeticKeys}">
+								<layoutData>
+									<FlexItemData growFactor="1"/>
+								</layoutData>
+							</Switch>
+						</HBox>
+						<Button text="Space" width="25em" class="sapUiTinyMarginBegin txtButtonO txtButtonH txtButtonI txtButtonSP textButtonIcon"
+							press="pressKey" icon="sap-icon://minimize" visible="{$this>hasAlphabeticKeys}" >
+							<customData>
+								<core:CustomData key="type" value="space"></core:CustomData>
+							</customData>
+						</Button>
+						<Button text="Enter" width="10em" class="sapUiTinyMarginBegin   txtButtonT txtButtonI txtButtonRET"
+							press="pressKey" icon="sap-icon://sys-enter" visible="{$this>hasAlphabeticKeys}">
+							<customData>
+								<core:CustomData key="type" value="enter"></core:CustomData>
+							</customData>
+						</Button>
+						<!-- DELETE KEY -->
+						<Button width="5.0em" class="sapUiTinyMarginBegin txtButtonDEL"
+							press="pressKey" icon="sap-icon://nav-back" visible="{$this>hasAlphabeticKeys}" type="Reject" tooltip="Delete">
+							<customData>
+								<core:CustomData key="type" value="delete"></core:CustomData>
+							</customData>
+						</Button>
+						<!-- CLEAR KEY --> 
+						<Button width="5.0em" class="sapUiTinyMarginBegin txtButtonDEL"
+							press="pressKey" icon="sap-icon://sys-cancel" visible="{$this>hasAlphabeticKeys}" type="Reject" tooltip="Delete all">
+							<customData>
+								<core:CustomData key="type" value="clear"></core:CustomData>
+							</customData>
+						</Button>
+					</HBox>
+				</VBox>
+				<VBox alignItems="Center" justifyContent="Center">
+					<HBox alignItems="Center" justifyContent="Center">
+						<Button text="1" width="5.0em" class="txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<Button text="2" width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<Button text="3" width="5.0em" class="txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+					</HBox>
+					<HBox alignItems="Center" justifyContent="Center">
+						<Button text="4" width="5.0em" class="txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<Button text="5" width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<Button text="6" width="5.0em" class="txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+					</HBox>
+					<HBox alignItems="Center" justifyContent="Center">
+						<Button text="7" width="5.0em" class="txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<Button text="8" width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<Button text="9" width="5.0em" class="txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+					</HBox>
+					<HBox alignItems="Center" justifyContent="Center">
+						<!--
+						{= $this>hasAlphabeticKeys === false &amp;&amp; $this>hasDecimalKeys === true }
+						-->
+						<Button id="DecimalSeparator" text="{$this>localizedDecimalSeparator}" width="5.0em" class="textButtonC"
+							press="pressKey" visible="{$this>hasDecimalKeys}" enabled="{$this>enabledDecimalSeparator}" >
+							<customData>
+								<core:CustomData key="type" value="decimal_separator"></core:CustomData>
+							</customData>
+						</Button>
+						<Button text="0" width="5.0em" class="sapUiTinyMarginBeginEnd txtButtonT textButtonC"
+							press="pressKey" visible="{$this>hasNumericKeys}" />
+						<!-- DELETE KEY -->
+						<Button width="5.0em" class="txtButtonDEL"
+							press="pressKey" icon="sap-icon://nav-back" visible="{$this>hasNumericCtrlKeys}" type="Accept" tooltip="Delete">
+							<customData>
+								<core:CustomData key="type" value="delete"></core:CustomData>
+							</customData>
+						</Button>
+					</HBox>
+					<HBox alignItems="Center" justifyContent="Center" >
+						<!-- Shown only with numeric keys -->
+						<Button text="Enter" width="10.7em" class="sapUiTinyMarginEnd txtButtonT"
+							press="pressKey" icon="sap-icon://sys-enter" visible="{$this>hasNumericCtrlKeys}">
+							<customData>
+								<core:CustomData key="type" value="enter"></core:CustomData>
+							</customData>
+						</Button>
+						<!-- CLEAR ALL KEY -->
+						<Button width="5.0em" class="txtButtonDEL"
+							press="pressKey" icon="sap-icon://sys-cancel" visible="{$this>hasNumericCtrlKeys}" type="Reject" tooltip="Delete all">
+							<customData>
+								<core:CustomData key="type" value="clear"></core:CustomData>
+							</customData>
+						</Button>
+					</HBox>
+				</VBox>
+				</HBox>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<HBox width="0.3em"></HBox>
+				<core:Icon src="sap-icon://text-align-justified"></core:Icon>
+				<ToolbarSpacer/>
+				<Label id="actualText" text="{$this>typedValue}"></Label>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

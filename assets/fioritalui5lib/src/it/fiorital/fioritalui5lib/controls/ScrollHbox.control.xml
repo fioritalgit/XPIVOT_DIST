@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<ScrollContainer height="100%" width="100%" vertical="false" horizontal="true" class="nooverflowxScrollHbox">
+		<html:style>
+			.nooverflowxScrollHbox { overflow-x: hidden !important;}
+			.newsincoming { animation: blink 1s linear infinite; font-weight: bold; font-size: large;}
+		</html:style>
+		<VBox height="100%" width="100%" renderType="Bare">
+			<HBox height="100%" id="internalHbox" renderType="Bare"></HBox>
+			<HBox height="100%" id="internalHboxText" visible="false" renderType="Bare" alignContent="Center" alignItems="Center" justifyContent="Center">
+				<Text text="{$this>newDataText}" class="newsincoming" id="alertText"></Text>
+			</HBox>
+		</VBox>
+	</ScrollContainer>
+</core:FragmentDefinition>

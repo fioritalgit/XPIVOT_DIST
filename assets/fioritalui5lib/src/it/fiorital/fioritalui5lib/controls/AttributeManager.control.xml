@@ -1,0 +1,116 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	<Popover title="{$this>title} {= ${$this>batch} !== '' ? '-' : ''} {$this>batch}" class="" placement="Auto" initialFocus="email" id="attributeManagerPopover" contentWidth="65em"
+		verticalScrolling="false" horizontalScrolling="false" modal="true">
+		<content>
+			<html:style>
+				.bigPoints { font-size: x-large; font-weight: bold; color: darkseagreen } .numberCircle { border-radius: 50%; width: 1.7em; height: 1.7em;
+				background: #2b7c2b94; color: white; font-weight: bold; line-height: 1.8em; text-align: Center !important; } .numberCircleGreen {
+				border-radius: 50%; width: 1.7em; height: 1.7em; background: #418ac7d1; color: white; font-weight: bold; line-height: 1.8em; text-align:
+				Center !important; } 
+				
+				.smallScrollBar div::-webkit-scrollbar-thumb { background-color: #f2f6fc; outline: 0.1em solid slategrey; }
+				.smallScrollBar div::-webkit-scrollbar { width: 0.1em !important; }
+				span[data-MULTI="S"]{ width: 0px; }
+				span[data-SINGLE="M"]{ width: 0px; }
+			</html:style>
+			<VBox renderType="Bare" height="40em" class="smallScrollBar">
+				<IconTabBar id="idIconTabBar" select="handleIconTabBarSelect" stretchContentHeight="true" class="noPadding sapUiTinyMargin"
+					expandable="false" tabDensityMode="Compact">
+					<items>
+						<IconTabFilter icon="sap-icon://official-service" iconColor="Positive" text="law requirements" key="law">
+							<content>
+								<ScrollContainer height="100%" width="100%" vertical="true">
+									<List id="attributeManagerListLaw" busyIndicatorDelay="0">
+										<CustomListItem>
+											<HBox width="100%" renderType="Bare" height="4em">
+												<VBox width="3%" justifyContent="Center" alignItems="Center" renderType="Bare"></VBox>
+												<VBox width="37%" justifyContent="Center" alignItems="Start" renderType="Bare">
+													<HBox renderType="Bare">
+														<HBox justifyContent="Center" renderType="Bare" alignContent="Center" alignItems="Center">
+															<Label text="M" class="numberCircle">
+																<customData>
+																	<core:CustomData key="MULTI" value="{valueAssignment}" writeToDom="true"/>
+																</customData>
+															</Label>
+															<Label text="S" class="numberCircleGreen">
+																<customData>
+																	<core:CustomData key="SINGLE" value="{valueAssignment}" writeToDom="true"/>
+																</customData>
+															</Label>
+															<HBox width="1.5em"></HBox>
+															<core:Icon src="sap-icon://business-card" size="2rem"/>
+														</HBox>
+														<VBox justifyContent="Center" renderType="Bare">
+															<Label text="{atbez}" class="textLarge sapUiSmallMarginBegin"/>
+														</VBox>
+													</HBox>
+												</VBox>
+												<VBox width="55%" justifyContent="Center" alignItems="Center" renderType="Bare">
+													<HBox renderType="Bare">
+														<fio:MultiInputControl change=".onMultiChange" iSmultiInput="{valueAssignment}" inputType="{dataType}" hasSuggestion="{charactvalues}" valuesAggregation="Values" blocked="{readonly}"
+															singleValue="{atwrt}" suggestionAggregation="PossibleValues" width="30em" singleDescription="{atwtb}" showDescriptionLabel="Y" readOnly="{LOCALJSON>/readOnly}"></fio:MultiInputControl>
+													</HBox>
+												</VBox>
+												<VBox width="5%" justifyContent="Center" alignItems="Center" renderType="Bare"></VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</content>
+						</IconTabFilter>
+						<IconTabSeparator icon=""/>
+						<IconTabFilter icon="sap-icon://tag" iconColor="Neutral" text="others" key="other">
+							<content>
+								<ScrollContainer height="100%" width="100%" vertical="true">
+									<List id="attributeManagerListOther" busyIndicatorDelay="0">
+										<CustomListItem>
+											<HBox width="100%" renderType="Bare">
+												<VBox width="3%" justifyContent="Center" alignItems="Center" renderType="Bare"></VBox>
+												<VBox width="37%" justifyContent="Center" alignItems="Start" renderType="Bare">
+													<HBox renderType="Bare">
+														<HBox justifyContent="Center" renderType="Bare" alignContent="Center" alignItems="Center">
+															<Label text="M" visible="{ parts: ['valueAssignment'], formatter: '.showMulti' }" class="numberCircle">
+																<customData>
+																	<core:CustomData key="MULTI" value="{valueAssignment}" writeToDom="true"/>
+																</customData>
+															</Label>
+															<Label text="S" visible="{ parts: ['valueAssignment'], formatter: '.showMulti' }" class="numberCircleGreen">
+																<customData>
+																	<core:CustomData key="SINGLE" value="{valueAssignment}" writeToDom="true"/>
+																</customData>
+															</Label>
+															<HBox width="1.5em"></HBox>
+															<core:Icon src="sap-icon://business-card" size="2rem"/>
+														</HBox>
+														<VBox justifyContent="Center" renderType="Bare">
+															<Label text="{atbez}" class="textLarge sapUiSmallMarginBegin"/>
+														</VBox>
+													</HBox>
+												</VBox>
+												<VBox width="55%" justifyContent="Center" alignItems="Center" renderType="Bare">
+													<HBox renderType="Bare">
+														<fio:MultiInputControl iSmultiInput="{valueAssignment}" inputType="{dataType}" hasSuggestion="{charactvalues}" valuesAggregation="Values" blocked="{readonly}"
+															singleValue="{atwrt}" suggestionAggregation="PossibleValues" width="30em" singleDescription="{atwtb}" showDescriptionLabel="Y" readOnly="{LOCALJSON>/readOnly}"></fio:MultiInputControl>
+													</HBox>
+												</VBox>
+												<VBox width="5%" justifyContent="Center" alignItems="Center" renderType="Bare"></VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</content>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<!--<Button id="saveButton" icon="sap-icon://save" text="{sharedi18n>saveButton}" press="_onSaveButtonPress"/>-->
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

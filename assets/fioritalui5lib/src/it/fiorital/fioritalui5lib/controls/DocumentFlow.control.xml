@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover title="{$this>title}" class="sapUiContentPadding smallScrollBarFlow" placement="Auto" initialFocus="closeButtonFlow"
+		id="popoverFlow" contentWidth="55em" contentHeight="25em" verticalScrolling="false" modal="true">
+		<content>
+			<html:style>
+				.smallScrollBarFlow div ::-webkit-scrollbar { width: 0.2em !important; } .textParent{ font-size: x-small !important; } .textParentPos{
+				font-size: smaller !important; font-weight: bold; }
+			</html:style>
+			<ScrollContainer id="scrollFlow" height="100%" width="100%" vertical="true" >
+				<List id="listFlow">
+					<CustomListItem id="listTemplate">
+						<HBox height="3.5em" alignItems="Center">
+							<VBox width="10%">
+								<core:Icon src="{path:'prevDocumentType',formatter:'.formatImageDoc'}" size="1.5em" color="darkgrey"></core:Icon>
+							</VBox>
+							<VBox width="15%">
+								<Label text="{prevDocumentDescr}" class="textLarge"></Label>
+							</VBox>
+							<VBox width="15%">
+								<Link text="{path: 'prevDocument', formatter: '.SharedFormatter.alphaOutput'}{path: 'prevDocumentPos', formatter: '.alphaOutputPos'}"
+									class="textLarge"></Link>
+								<HBox visible="{path:'hasparent',type: 'it.fiorital.fioritalui5lib.extension.BooleanParse'}">
+									<Text text="Posizione padre:" class="textParent"></Text>
+									<HBox width="1em"></HBox>
+									<Text text="{path:'parentpos',formatter:'.deleteTrailZeros'}" class="textParentPos"></Text>
+								</HBox>
+								
+							</VBox>
+							<VBox width="5%">
+								<core:Icon src="sap-icon://feeder-arrow" size="2em"></core:Icon>
+							</VBox>
+							<VBox width="10%">
+								<core:Icon src="{path:'nextDocumentType',formatter:'.formatImageDoc'}" size="1.5em" color="darkgrey"></core:Icon>
+							</VBox>
+							<VBox width="15%">
+								<Label text="{nextDocumentDescr}" class="textLarge"></Label>
+							</VBox>
+							<VBox width="15%">
+								<Link text="{path: 'nextDocument', formatter: '.SharedFormatter.alphaOutput'}{path: 'nextDocumentPos', formatter: '.alphaOutputPos'}"
+									class="textLarge"></Link>
+							</VBox>
+							<VBox width="15%">
+								<ObjectIdentifier title="{docdate}" text="{doctime}" textDirection="Inherit" visible="true"/>
+							</VBox>
+						</HBox>
+					</CustomListItem>
+				</List>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButtonFlow" text="{sharedi18n>documentFlowClose}" press="_closeButtonFlowPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

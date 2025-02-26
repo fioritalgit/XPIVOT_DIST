@@ -1,0 +1,64 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"  xmlns:flib="it.fiorital.fioritalui5lib.controls">
+	<Popover title="{$this>title}" class="" placement="Auto" initialFocus="email" id="textManagerPopover" contentWidth="60em"
+		contentHeight="25em" verticalScrolling="false" modal="true">
+		<content>
+			<html:style>
+				.smallScrollBar::-webkit-scrollbar { width: 0.2rem !important; } .textType { font-weight: bold; font-size: medium !important; color:
+				cornflowerblue; }
+				.smallChangeTxt { font-size: small !important; color: darkgrey;}
+			</html:style>
+			<ScrollContainer height="100%" width="100%" vertical="true" class="smallScrollBar">
+				<List id="textManagerList">
+					<CustomListItem>
+						<HBox width="100%" height="10em">
+							<VBox width="45%" justifyContent="Center" alignItems="Start">
+								<HBox class="sapUiSmallMarginBegin" width="100%">
+									<VBox justifyContent="Center" width="17%">
+										<core:Icon src="sap-icon://business-card" size="2rem"/>
+									</VBox>
+									<VBox justifyContent="Center" width="80%">
+										<flib:FioritalText id="labelId" text="{id}" fontSize="1.3em" color="cornflowerblue" bold="true"/>
+										<Label id="labelIdTxt" text="{idtext}" class="textLarge"/>
+										<HBox height="1.5em"></HBox>
+										<HBox>
+											<VBox width="50%" visible="{path:'creationdate',formatter:'.hideModification'}">
+												<Text text="Creato il:" class="smallChangeTxt"></Text>
+												<HBox height="0.5em"></HBox>
+												<Text text="{creationdate} - {creationtime}"></Text>
+												<Text text="{creationuser}"></Text>
+											</VBox>
+											<VBox width="50%" visible="{path:'modificationdate',formatter:'.hideModification'}">
+												<Text text="Modificato il:" class="smallChangeTxt"></Text>
+												<HBox height="0.5em"></HBox>
+												<Text text="{modificationdate} - {modificationtime}"></Text>
+												<Text text="{modificationuser}"></Text>
+											</VBox>
+										</HBox>
+									</VBox>
+									<VBox width="3%"></VBox>
+								</HBox>
+							</VBox>
+							<VBox width="50%" justifyContent="Center" alignItems="Center" id="vboxCentral">
+								<HBox height="2em" renderType="Bare"/>
+								<HBox renderType="Bare" height="100%">
+									<TextArea enabled="{editableModel>/isEnabled}" id="textAreaId" value="{text}" rows="4" width="35em" change="textChange"/>
+								</HBox>
+								<HBox height="2em" renderType="Bare"/>
+							</VBox>
+							<VBox width="5%" justifyContent="Center" alignItems="Center">
+								<core:Icon src="sap-icon://save" size="2em" press="_onSaveButtonPress" visible="false" color="red"/>
+							</VBox>
+						</HBox>
+					</CustomListItem>
+				</List>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="saveButton" icon="sap-icon://save" text="{sharedi18n>saveButton}" press="_onSaveButtonPress"/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

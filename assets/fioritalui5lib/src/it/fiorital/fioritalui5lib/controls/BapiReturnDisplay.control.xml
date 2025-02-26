@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog title="{$this>title}" class="smallScrollBarFlow nopaddingabap" id="BapiReturnDisplayDialog" contentWidth="50%"
+		contentHeight="50%" verticalScrolling="false" showHeader="false" beforeClose="._beforeCloseEvent" afterClose="._afterClose">
+		<content>
+			<html:style>
+				.smallScrollBarFlow div ::-webkit-scrollbar { width: 0.2em !important; } .textParent{ font-size: x-small !important; }
+				.nopaddingabap{ padding: 0px !important;  }
+			</html:style>
+			<Page title="SAP process messages" id="BAPItitle">
+				<ScrollContainer height="100%" width="100%" vertical="true">
+					<List items="{BAPImessages>/}">
+						<CustomListItem id="listTemplate">
+							<HBox height="3.5em" alignItems="Center" width="100%">
+								<VBox width="10%" alignItems="Center">
+									<core:Icon src="{path:'BAPImessages>TYPE',formatter:'.formatBAPIImage'}" size="1.5em" color="{path:'BAPImessages>TYPE',formatter:'.formatBAPIImageColor'}"></core:Icon>
+								</VBox>
+								<VBox width="90%">
+									<Text text="{path:'BAPImessages>MESSAGE'}"></Text>
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+				</ScrollContainer>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="closeButtonFlow" icon="sap-icon://decline" press="_closeButtonBAPIretPress"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

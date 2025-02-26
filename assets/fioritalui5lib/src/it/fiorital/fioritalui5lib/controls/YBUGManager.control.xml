@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout.cssgrid">
+	<Dialog title="Report a bug" id="YBUGdialog" contentWidth="60em" contentHeight="48em" verticalScrolling="false" showHeader="false">
+		<html:style></html:style>
+		<Page title="Report a bug">
+			<VBox renderType="Bare" width="97%" height="40%" class="sapUiSmallMarginBegin">
+				<Label text="Titolo" class="sapUiSmallMarginTop"></Label>
+				<Input placeholder="Inserire titolo" width="100%" class="sapUiTinyMarginTop" id="titleId"></Input>
+				<Label text="Descrizione" class="sapUiSmallMarginTop"></Label>
+				<TextArea placeholder="Inserire descrizione" rows="9" width="100%" class="sapUiTinyMarginTop" id="descrId"></TextArea>
+			</VBox>
+			<VBox renderType="Bare" width="97%" height="40%" class="sapUiSmallMarginBegin" id="roiVBoxid">
+				<Label text="R.O.I. - Valore Atteso definizione" class="sapUiSmallMarginTop"></Label>
+				<TextArea placeholder="Inserire definizione R.O.I." rows="9" width="100%" class="sapUiTinyMarginTop" id="roiDefId"></TextArea>
+				<Label text="R.O.I. - Valore Atteso Mensile" class="sapUiSmallMarginTop"></Label>
+				<Input placeholder="Inserire R.O.I. mensile" width="100%" class="sapUiTinyMarginTop" id="roiMId"></Input>
+			</VBox>
+			<HBox renderType="Bare" width="97%" height="20%" class="sapUiSmallMarginBegin" id="infoHBoxId">
+				<VBox renderType="Bare" width="50%">
+					<Label text="Tipo Richiesta" class="sapUiSmallMarginTop"></Label>
+					<ComboBox id="cbReqId" showSecondaryValues="true" filterSecondaryValues="false" placeholder="Seleziona tipo richiesta"
+						items="{ISSUETYPE>/}">
+						 <core:ListItem key="{ISSUETYPE>id}" text="{ISSUETYPE>name}"/>
+					</ComboBox>
+				</VBox>
+				<VBox renderType="Bare" width="50%" class="sapUiSmallMarginBegin">
+					<Label text="Applicazione" class="sapUiSmallMarginTop"></Label>
+					<ComboBox id="cbFuncId"  showSecondaryValues="true" filterSecondaryValues="false" placeholder="Seleziona App/Funzionalità"
+						items="{APPFUNZ>/}">
+						<core:ListItem key="{APPFUNZ>label}" text="{APPFUNZ>label}"/>
+					</ComboBox>
+				</VBox>
+			</HBox>
+			<footer>
+				<Toolbar>
+					<content>
+						<Label text="Emergenza?" class="sapUiTinyMarginEnd"/>
+						<Switch id="switchEmergencyId" type="AcceptReject" state="false" change="onChangeSwitchEmrgenze">
+							<layoutData>
+								<FlexItemData growFactor="1"/>
+							</layoutData>
+						</Switch>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://share-2" text="Invia" type="Accept" press=".sendBug"/>
+						<Button icon="sap-icon://sys-back" text="annulla" type="Reject" press=".exitBug"/>
+					</content>
+				</Toolbar>
+			</footer>
+		</Page>
+	</Dialog>
+</core:FragmentDefinition>

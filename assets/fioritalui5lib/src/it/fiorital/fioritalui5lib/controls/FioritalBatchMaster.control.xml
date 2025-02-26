@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls" xmlns:u="sap.ui.unified" xmlns:fiorital="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover id="PopoverBatchMaster" modal="false" placement="Auto" showHeader="true" title="batch attachment and notes" verticalScrolling="false"
+		contentWidth="70em" contentHeight="15em">
+		<content>
+			<html:style>
+				.nofilesOutline li{ outline: none !important; } 
+			</html:style>
+			<HBox width="99%" height="100%" renderType="Bare" class="sapUiTinyMarginBegin sapUiTinyMarginEnd">
+				<ScrollContainer width="70%" height="100%" vertical="true" horizontal="false">
+				<List items="{path:'BATCHMASTERDATA>/BatchFiles'}" id="PopoverBatchMasterList" class="nofilesOutline">
+					<CustomListItem>
+						<HBox height="3em" width="100%">
+							<VBox width="10%" justifyContent="Center" alignItems="Center">
+								<core:Icon size="1.8em" src="{path:'BATCHMASTERDATA>mimetype',formatter:'.fileIcon'}"></core:Icon>
+							</VBox>
+							<VBox width="70%" justifyContent="Center">
+								<Text text="{BATCHMASTERDATA>fileName}"></Text>
+							</VBox>
+							<VBox width="10%" justifyContent="Center" alignItems="Center">
+								<core:Icon size="1.4em" src="sap-icon://download-from-cloud" press=".downloadFile"></core:Icon>
+							</VBox>
+							<VBox width="10%" justifyContent="Center" alignItems="Center">
+								<core:Icon size="1.4em" src="sap-icon://sys-cancel" press=".deleteFile" color="red"></core:Icon>
+							</VBox>
+						</HBox>
+					</CustomListItem>
+				</List>
+				</ScrollContainer>
+				<TextArea value="{BATCHMASTERDATA>/extendedtext}" width="30%" height="98%" id="batchExtNotes"></TextArea>
+			</HBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<content>
+					<u:FileUploader id="fileUploader" uploadUrl="upload/" tooltip="seleziona file" placeholder="File"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://upload-to-cloud" text="carica file" type="Accept" press=".loadFile"/>
+					<Button icon="sap-icon://save" text="salva testo" type="Accept" press=".saveText"/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,569 @@
+/* Enter your custom styles here */
+
+.forceDisplayNone {
+	display: none !important;
+}
+
+.iconTabFilterNoBack {
+	color: #0854a0 !important;
+	border: 0px solid !important;
+	background: transparent !important;
+}
+
+.smallIconTabBarPaddingTop div[role="tablist"] {
+    padding-top: 0.4em !important;
+}
+
+
+.diagFioritalInput .sapMInputBaseContentWrapper{
+	background-image: linear-gradient(to top left, white 50%, #e9730c52 50%) !important;
+}
+
+.popoverNoOverflow .sapMPopoverCont{
+	overflow: hidden !important;
+}
+
+/* -------------------------------------------------------------- */
+
+
+/* Display properties                                             */
+
+
+/* -------------------------------------------------------------- */
+
+.hiddenElement {
+    display: none !important;
+}
+
+.spacerTop {
+    margin-top: 2rem;
+}
+
+.htpad1 {
+    padding: 1em;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
+/* Foreground Colors                                              */
+
+
+/* -------------------------------------------------------------- */
+
+.black {
+    color: black important;
+}
+
+.green {
+    color: #008000 !important;
+}
+
+.red {
+    color: #ff0000 !important;
+}
+
+.orange {
+    color: #FFA500 !important;
+}
+
+.blueInfo {
+    color: #427cac !important;
+}
+
+.greyInfo {
+    color: #c0c0c0 !important;
+}
+
+.bluelightHI {
+    color: #5c85d6 !important;
+}
+
+.blueCobalt {
+    color: #4974bc !important;
+}
+
+.greenHI {
+    color: #66FF33 !important;
+}
+
+.blueHI {
+    color: #0000FF !important;
+}
+
+.tileHI {
+    color: #3591ff !important;
+}
+
+.transparentColor {
+    color: transparent !important;
+}
+
+.greenBoldHI {
+    color: #66FF33 !important;
+    font-weight: bold !important;
+}
+
+.yellowHI {
+    color: #E3BF2D !important;
+}
+
+.yellowBoldHI {
+    color: #E3BF2D !important;
+    font-weight: bold !important;
+}
+
+.redHI {
+    color: #FF3300 !important;
+}
+
+.blueIcon:before {
+    color: #5c85d6;
+}
+
+.greenIcon:before {
+    color: #66FF33;
+}
+
+.redIcon:before {
+    color: #FF3300;
+}
+
+.yellowIcon:before {
+    color: #F9FFAC;
+}
+
+.smashingText {
+    color: #FFA500 !important;
+}
+
+.highlightedText {
+    color: #d9e6f2 !important;
+}
+
+.link {
+    color: #0a6ed1 !important;
+}
+
+.link:hover {
+    color: #0854a0 !important;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
+/* Background Colors                                              */
+
+
+/* -------------------------------------------------------------- */
+
+.whitebackHI {
+    background-color: white !important;
+}
+
+.redbackHI {
+    background-color: #F5BABA !important;
+}
+
+
+/* Colors for custom row backgrounds */
+
+.disabledRow {
+    background-color: #e0e0eb !important;
+}
+
+.highlightedRow {
+    background-color: #d9e6f2 !important;
+}
+
+.lightBlueRow {
+    background-color: #ccefff !important;
+}
+
+.lightGreenRow {
+    background-color: #99ff99 !important;
+}
+
+.lightYellowRow {
+    background-color: #ffff80 !important;
+}
+
+.smashingRow {
+    background-color: #FFA500 !important;
+}
+
+.selectedRow {
+    background-color: #CCCCCC !important;
+}
+
+.redRow {
+    background-color: #FF4D4D !important;
+}
+
+.greenRow {
+    background-color: #b9e8d5 !important;
+}
+
+.yellowRow {
+    background-color: #F9FFAC !important;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
+/* Font properties                                                */
+
+
+/* -------------------------------------------------------------- */
+
+.italic {
+    font-style: italic !important;
+}
+
+.redBoldHI {
+    color: #FF3300 !important;
+    font-weight: bold !important;
+}
+
+.boldHI {
+    font-weight: bold !important;
+}
+
+.boldHI2 {
+    font-weight: bold !important;
+    font-size: x-large !important;
+}
+
+.boldBigHI {
+    font-weight: bold !important;
+    font-size: large !important;
+}
+
+.boldBigGReenHI {
+    font-weight: bold !important;
+    font-size: x-large !important;
+    color: #66FF33 !important;
+}
+
+.boldBigGReenDarkHI {
+    font-weight: bold !important;
+    font-size: x-large !important;
+    color: #4D8528 !important;
+}
+
+.inputFontSizeBigger input {
+    font-size: 1.5em !important;
+}
+
+.listLevel1 {
+    font-weight: bold !important;
+    font-size: 1.5em !important;
+    color: #007cc0;
+}
+
+.listLevel2 {
+    font-weight: bold !important;
+    font-size: 1.5em !important;
+    color: #00c0b7;
+}
+
+.listLevel3 {
+    font-weight: bold !important;
+    font-size: 1.5em !important;
+    color: #7dc0e4;
+}
+
+.userAvatarColor {
+    background-color: #d81e1e !important;
+}
+
+.tinierLabel{
+	font-size: 0.6rem !important;
+}
+
+.tinyLabel{
+	font-size: 0.7rem !important;
+}
+
+.smallLabel{
+	font-size: 0.8rem !important;
+}
+
+.mediumLabel{
+	font-size: 0.9em !important;
+}
+
+/* ICON WITH NO CONTENT */
+
+.noContentIcon {
+    color: #c2d1d6;
+}
+
+.sk-cube-grid {
+    width: 25px;
+    height: 25px;
+    bottom: 5em;
+    position: fixed;
+    right: 1em;
+    z-index: 999;
+    top: 0.5em;
+}
+
+.sk-cube-grid .sk-cube {
+    width: 33%;
+    height: 33%;
+    background-color: #6396c1;
+    float: left;
+    -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.sk-cube-grid .sk-cube1 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube2 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube3 {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+
+.sk-cube-grid .sk-cube4 {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube5 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube6 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube7 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+.sk-cube-grid .sk-cube8 {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube9 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+    0%,
+    70%,
+    100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    }
+    35% {
+        -webkit-transform: scale3D(0, 0, 1);
+        transform: scale3D(0, 0, 1);
+    }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+    0%,
+    70%,
+    100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    }
+    35% {
+        -webkit-transform: scale3D(0, 0, 1);
+        transform: scale3D(0, 0, 1);
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0
+    }
+    49% {
+        opacity: 0
+    }
+    50% {
+        opacity: 1
+    }
+}
+
+.showCursorPointer {
+    cursor: pointer;
+}
+
+.busyInvisible {
+    visibility: hidden;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
+/* REDUCED SCROLLBAR                                              */
+
+
+/* -------------------------------------------------------------- */
+
+.smallScrollBar div::-webkit-scrollbar-thumb {
+    background-color: #f2f6fc;
+    outline: 1px solid slategrey;
+}
+
+.smallScrollBar div::-webkit-scrollbar {
+    width: 0.5em !important;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
+/* REDUCED PANEL (for add row)                                    */
+
+
+/* -------------------------------------------------------------- */
+
+.smallPanel {
+    margin: 0px !important;
+}
+
+.smallPanel header {
+    height: 1.7em;
+}
+
+.smallPanel .sapMPanelHdr {
+    height: 1.5em;
+    line-height: 1.5rem;
+    font-size: 0.8rem;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
+/* CUSTOM INFOLABEL LIKE                                          */
+
+
+/* -------------------------------------------------------------- */
+
+.circleInfoLabel {
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    color: white !important;
+    font-weight: bold !important;
+    line-height: 1.8em !important;
+    text-align: Center !important;
+}
+
+.circleInfoLabelDefault {
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    background: #427cac;
+    color: white !important;
+    font-weight: bold !important;
+    line-height: 1.8em !important;
+    text-align: Center !important;
+}
+
+.circleInfoLabelGreen {
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    background: #c1ffde;
+    color: black !important;
+    font-weight: bold !important;
+    line-height: 1.8em !important;
+    text-align: Center !important;
+}
+
+.circleInfoLabelCyan {
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    background: #02b5d1;
+    color: white !important;
+    font-weight: bold !important;
+    line-height: 1.8em !important;
+    text-align: Center !important;
+}
+
+.infoLabel {
+    border-radius: 30%;
+    width: 3em;
+    height: 1.7em;
+    color: white !important;
+    font-weight: bold !important;
+    line-height: 1.8em !important;
+    text-align: Center !important;
+}
+
+.infoLabelDefault {
+    background: #427cac;
+}
+
+.infoLabelCyan {
+    background: #02b5d1;
+}
+
+.infoLabelGreen {
+    background: #c1ffde;
+}
+
+
+/*START BOX MANAGER*/
+
+.sectionBgTop {
+    border-bottom: 2px solid #cccccc;
+}
+
+.sectionBgBottom {
+    border-top: 2px solid #cccccc;
+}
+
+.microChartCustomColorGood .sapSuiteBMCBarValue.sapSuiteBMCSemanticColorGood,
+.microChartCustomColorGood .sapSuiteBMCBarValueMarker.sapSuiteBMCSemanticColorGood,
+.microChartCustomColorGood .sapSuiteBMCThreshold.sapSuiteBMCSemanticColorGood {
+    background-color: #5496cd;
+}
+
+.microChartCustomColorCritical .sapSuiteBMCBarValue.sapSuiteBMCSemanticColorCritical,
+.microChartCustomColorCritical .sapSuiteBMCBarValueMarker.sapSuiteBMCSemanticColorCritical,
+.microChartCustomColorCritical .sapSuiteBMCThreshold.sapSuiteBMCSemanticColorCritical {
+    background-color: #65ddf2;
+}
+
+.noPadding .sapMITBContent {
+    padding: 0em !important;
+}
+
+.showCursorPointer {
+	cursor: pointer;
+}
+
+.smallerCharact{
+	font-weight: bold;
+}
+
+.smallerCharactBold{
+	font-size: smaller;
+	font-weight: bold;	
+}
+/*END BOX MANAGER*/

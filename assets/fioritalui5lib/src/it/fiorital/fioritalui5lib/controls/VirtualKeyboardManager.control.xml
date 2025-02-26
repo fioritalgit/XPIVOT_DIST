@@ -1,0 +1,134 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout.cssgrid">
+	<Popover title="Virtual keyboard"  placement="Auto" initialFocus="email" id="VKMPopover"  contentHeight="25em"
+		verticalScrolling="false" horizontalScrolling="false" modal="false" class="">
+		<content>
+			<html:style>
+				.padl { padding-left: 0.7em; } .txtButtonO { height: 5em !important; } .contentupIcon .sapMBtnIcon { line-height: 1.1em !important; } .contentupText .sapMBtnContent {  line-height: 1.8em !important; }
+				.txtButtonH .sapMBtnInner{ height: 3em; } .txtButtonI
+				.sapMBtnContent{ padding-top:0.5em; } .txtButtonT bdi { font-size: x-large } .textButtonC bdi{ color: forestgreen !important; }
+				.textButtonIcon .sapMBtnIcon{ font-size: x-large; padding-top: 0.3em; padding-left: 0.2em;}
+				.VKMback .sapMPopoverScroll{ background-color: beige; }
+			</html:style>
+			<VBox justifyContent="Center" alignContent="Center" height="100%">
+				<grid:CSSGrid id="gridButtons" gridTemplateRows="1fr" gridTemplateColumns="repeat(10,1fr)" gridGap="0.1rem" class="padl">
+					<grid:items>
+						<Button text="A" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="B" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="C" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="D" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="E" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="F" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="G" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="H" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="K" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="I" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="J" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="L" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="M" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="N" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="O" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="P" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="Q" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="R" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="S" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="T" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="U" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="V" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="Z" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="W" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="X" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="Y" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT"
+							press="pressKey"/>
+						<Button text="0" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="1" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="2" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="3" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="4" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="5" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="6" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="7" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="8" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button text="9" width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+						<Button id="DecimalSeparator" text="." width="5.0em" class="contentupIcon contentupText sapMBtnContent txtButtonO txtButtonH txtButtonI txtButtonT textButtonC"
+							press="pressKey"/>
+					</grid:items>
+				</grid:CSSGrid>
+				<HBox alignItems="Center">
+					<HBox width="0.7em"></HBox>
+					<Button text="Delete" width="21.8em" class="contentupIcon contentupText txtButtonO txtButtonH txtButtonI txtButtonT textButtonIcon"
+						press="pressKey" icon="sap-icon://nav-back">
+						<customData>
+							<core:CustomData key="type" value="delete"></core:CustomData>
+						</customData>
+					</Button>
+					<HBox width="0.8em"></HBox>
+					<Button text="Enter" width="27.4em" class="contentupIcon contentupText txtButtonO txtButtonH txtButtonI txtButtonT textButtonIcon"
+						press="pressKey" icon="sap-icon://sys-enter">
+						<customData>
+							<core:CustomData key="type" value="enter"></core:CustomData>
+						</customData>
+					</Button>
+					<HBox width="0.5em"></HBox>
+					<Switch state="true" customTextOn="Up" customTextOff="Low" change="changeUpperLower">
+						<layoutData>
+							<FlexItemData growFactor="1"/>
+						</layoutData>
+					</Switch>
+				</HBox>
+				<HBox alignItems="Center">
+					<HBox width="0.7em"></HBox>
+					<Button text="Space" width="56em" class="contentupIcon contentupTexttxtButtonO txtButtonH txtButtonI txtButtonT textButtonIcon"
+						press="pressKey" icon="sap-icon://minimize">
+						<customData>
+							<core:CustomData key="type" value="space"></core:CustomData>
+						</customData>
+					</Button>
+				</HBox>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<HBox width="0.3em"></HBox>
+				<core:Icon src="sap-icon://text-align-justified"></core:Icon>
+				<ToolbarSpacer/>
+				<Label id="actualText" text=""></Label>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

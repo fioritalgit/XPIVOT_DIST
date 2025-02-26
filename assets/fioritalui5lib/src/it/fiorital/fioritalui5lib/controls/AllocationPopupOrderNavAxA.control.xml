@@ -1,0 +1,534 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fiorital="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:grid="sap.ui.layout.cssgrid" xmlns:uitab="sap.ui.table">
+	<Dialog id="allocationPopupAxA" contentWidth="100%" contentHeight="100%" verticalScrolling="false" horizontalScrolling="false"
+		showHeader="false" afterClose="onAfterClose" afterOpen="onAfterOpen" class="forceDialogDim noOutlineDialog">
+		<SplitApp id="spliAllcoationPopup" beforeMasterOpen=".allocationsOpen" mode="HideMode" masterButtonText="Allocazioni attive">
+			<detailPages>
+				<Page title="General Availability AxA" class="smallScrollBarAltRoute" enableScrolling="false" id="axapage">
+					<content>
+						<html:style>
+							.smallScrollBarAltRoute div ::-webkit-scrollbar { width: 0.2em !important; } .noPaddingPanel .sapMPanelContent{padding:0px;} .hdrAllocation1
+							{ font-size: x-large; font-weight: bold} .noMargin { margin: 0px !important;} .AllocationsBorder {border-top: 1px solidlightgray}
+							.masterpagewidth{ width: 30rem !important} .sapMNav.sapMSplitContainerMaster{width: 30rem !important;} .smallScrollBar::-webkit-scrollbar {
+							height: 0.4rem !important; } .bigSourceATPC { font-size: large !important; font-weight:bold !important} .smallRouteId {font-size:small
+							!important; color:grey !important;} .boldPopoverAlternativeRoute {font-weight: bold !important} .borderRightAlternativeRoutesPopup{
+							border-right: 1px solid lightgrey} .textInRoute{color:darkgreen} .textOutRoute{color: darkred} .transparentSupplyTable{background:
+							transparent;} .markClusterRed tr[data-clusterok="X"]{background-color:#ff000059;} .blinking {animation:blinkingText 0.8s infinite;}
+							@keyframes blinkingText{ 0%{ color: red; } 49%{ color: transparent; } 50%{ color: transparent; } 99%{ color:transparent; } 100%{ color: red;
+							} } .producttext {font-size: larger !important;} .matnrCluster .sapMTextBreakWord{ font-size: large !important;} .infottoolLightColor
+							.sapMListInfoTBar { background-color: cadetblue; } .vendorname { font-size: small !important;} .smalltextBD{ font-size: smaller !important;
+							color: lightblue !important;} .charactRequirement{ font-weight: bold;} .moveIconLeft { left:-0.3em;} .bordersubtable { border-bottom: 1px
+							solid lightgrey;} div[data-LASTBATCH="X"]{ border-bottom: 0px !important; } .smallerRouteId {font-size:smaller !important;
+							color:grey!important;} .matnrsmall {font-size: small !important;} .matnrbold {font-weight: bold !important;} .tdnopad td{ padding: 0px
+							!important;} .itemPad3{padding-left:0.7em;} .genericBatch span[data-BATCHID="GENERIC"]{ color: brown !important; font-weight: bold
+							!important; } .genericBatch span[data-BATCHID="GENERIC"]{ color: brown !important; font-weight: bold !important; } .orderqty {color: coral
+							!important; font-size: 0.9em !important;} .bigUMO {font-size:large !important;} .smalltextLabels{ font-size: smaller !important; color:
+							darkgrey !important;} .linesInOrder div[data-inorder="X"] { border-left: 0.3em solid cornflowerblue !important; } .padTopRoute {
+							padding-top: 0.5em; } .smallCarrier {font-size:small !important; color: cornflowerblue !important;} .routechain {font-size:small !important;
+							color:#107e3e !important;} div[data-reacheable="N"]{ visibility: hidden !important; } tr[data-reacheablecluster=""]{ } .backcolorcadet {
+							background: cadetblue; } .colortextwhite { color: white !important;} .forcestyleinitial { font-style: initial !important; }
+							.forcestyleinitiallabel label { font-style: initial !important;} .padright05{ padding-right: 0.5em; } .labelGreySmall {font-size: x-small
+							!important; color: lightgrey; } .borderTransoparent { border-left: 0.3em solid transparent; } .hidethead thead {visibility: collapse;}
+							.noborderSelect li { outline: 0 !important; } .noborderSelect tr { outline: 0 !important; } .goodsQuality{font-size: x-small !important;
+							font-weight: bold !important; color: #085caf !important; } .smalltextCUSTname {font-size: 0.75em !important; color: cornflowerblue
+							!important} .smalltextCUST {font-size: 0.7em !important; color: black !important} .labelLanguage{ font-size: x-small !important;
+							font-weight: bold !important; } .forceDialogDim{ top: 0px !important; left: 0px !important; max-width: unset !important; min-height: unset
+							!important; } .uitablerocellbord [role="gridcell"]{border-right: 0px;border-left: 0px;} .blink_me {animation: blinker 1s linear
+							infinite;}@keyframes blinker {50% { opacity: 0;}} .noOutlineDialog div { outline-style: none !important; outline-color: white !important; }
+							.noOutlineDialog span { outline-style: none !important; outline-color: white !important;} .noOutlineDialog td { outline-style: none
+							!important; outline-color: white !important;} .nodatamargintop{margin-top: 15em;}
+						</html:style>
+						<HBox renderType="Bare" height="100%">
+							<fiorital:FioritalUITreeTable id="availabilityTreeTable" rows="{path:'SUPPLYJSONMODEL>/', parameters: {arrayNames:['subgroup']}}"
+								autoHeightAdjustment="true" autoResizeAdjustment="true" visibleRowCount="28" visibleRowCountMode="Auto" threshold="40"
+								class="columnborderdaily uitablerocellbord" rowHeightEm="3em" enableSelectAll="false" ariaLabelledBy="title" selectionMode="None"
+								enableColumnReordering="false">
+								<fiorital:extension>
+									<OverflowToolbar style="Clear">
+										<HBox width="12.5%" alignItems="Center" justifyContent="Center">
+											<Text text="Solo dispo mag. partenza" class="sapUiTinyMarginEnd"></Text>
+											<Switch id="onlylocalavailability" state="true" customTextOn="Yes" customTextOff="No" change=".changeLocalFlag"></Switch>
+										</HBox>
+										<HBox width="12.5%" alignItems="Center" justifyContent="Center">
+											<Text text="Solo dispo riservate" class="sapUiTinyMarginEnd"></Text>
+											<Switch id="onlyPartner" state="false" customTextOn="Yes" customTextOff="No" change=".changeBPFlag"></Switch>
+										</HBox>
+										<HBox width="12.5%" alignItems="Center" justifyContent="Center"> 
+											<Text text="Solo disponibile" class="sapUiTinyMarginEnd"></Text>
+											<Switch id="onlyAvailable" customTextOn="Yes" customTextOff="No" change=".changeOnlyAvailable" state="{PARAMETERS>/showavailableonly}"></Switch>
+										</HBox>
+										<ToolbarSpacer/>
+										<Label text="Raggruppa per" class="sapUiTinyMarginEnd"/>
+										<ComboBox selectedKey="{PARAMETERS>/groupTreeProperty}" id="groupingCbId" change="onChangecompactMode" width="13em"
+											class="sapUiMediumMarginEnd">
+											<core:ListItem key="matnr" text="Materiale"/>
+											<core:ListItem key="nogrp" text="Non raggruppare"/>
+										</ComboBox>
+										<Button text="Chiudi tutto" press="onCollapseAll"/>
+										<Button text="Espandi tutto" press="onExpandFirstLevel"/>
+										<HBox renderType="Bare" width="5em" height="100%" class="sapUiMediumMarginStart" alignItems="Center">
+											<Button icon="sap-icon://activity-items" class="sapUiSmallMarginEnd" id="allocationListButtonId" type="Default" press=".showPreSelected">
+												<customData>
+													<BadgeCustomData key="badge" value="" visible=""/>
+												</customData>
+											</Button>
+											<core:Icon src="sap-icon://play" color="red" size="1.7em" visible="{= ${LOCALMODEL>/count} > 0 ? true : false }" class="blink_me"/>
+										</HBox>
+									</OverflowToolbar>
+								</fiorital:extension>
+								<fiorital:noData>
+									<VBox class="nodatamargintop">
+										<core:Icon src="sap-icon://question-mark" size="4em" color="darkgrey" class="sapUiSmallMarginBottom"></core:Icon>
+										<fiorital:FioritalText text="Nessun prodotto trovato" fontSize="1.3em" color="darkgray" bold="true"></fiorital:FioritalText>
+									</VBox>
+								</fiorital:noData>
+								<fiorital:columns>
+									<uitab:Column resizable="false" width="auto" sorted="true" sortProperty="key">
+										<Label text="Prodotto"/>
+										<uitab:template>
+											<VBox renderType="Bare" tooltip="{SUPPLYJSONMODEL>matnr} - {SUPPLYJSONMODEL>maktx}">
+												<fiorital:FioritalText bold="true" text="{SUPPLYJSONMODEL>key}" visible="{= ${SUPPLYJSONMODEL>showControls} === false}"/>
+												<fiorital:FioritalText color="{ path:'PARAMETERS>/groupTreeProperty', formatter:'.changeColorMaterialGrouping'}"
+													text="{SUPPLYJSONMODEL>matnr}" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}" bold="true"/>
+												<fiorital:FioritalText color="{ path:'PARAMETERS>/groupTreeProperty', formatter:'.changeColorMaterialGrouping'}"
+													text="{SUPPLYJSONMODEL>maktx}" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}"/>
+											</VBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="15em" resizable="false">
+										<Label text="Supply"/>
+										<uitab:template>
+											<HBox renderType="Bare" alignItems="Center" justifyContent="Start">
+												<core:Icon src="{ parts: ['SUPPLYJSONMODEL>supplyType'], formatter: '.formatIconSupplyType' }" size="1.3em"
+													class="itemPad3 sapUiSmallMarginEnd"
+													tooltip="{SUPPLYJSONMODEL>matnr}-{SUPPLYJSONMODEL>node}-{SUPPLYJSONMODEL>supplyType}-{SUPPLYJSONMODEL>supplyId}" color="darkgrey"></core:Icon>
+												<VBox tooltip="{SUPPLYJSONMODEL>matnr}-{SUPPLYJSONMODEL>node}-{SUPPLYJSONMODEL>supplyType}-{SUPPLYJSONMODEL>supplyId}">
+													<fiorital:FioritalText fontSize="0.8em" text="{SUPPLYJSONMODEL>node}"/>
+													<fiorital:FioritalText fontSize="0.8em" text="{path:'SUPPLYJSONMODEL>supplyType',formatter:'.supplyTypeText'}"/>
+													<Text text="{parts:['SUPPLYJSONMODEL>supplyType','SUPPLYJSONMODEL>supplyId'],formatter:'.supplyIdFormat'}"
+														visible="{parts:['SUPPLYJSONMODEL>supplyType','SUPPLYJSONMODEL>supplyId'],formatter:'.hideSupplyId'}" class="smalltextLabels"></Text>
+													<VBox visible="{path:'SUPPLYJSONMODEL>atpcCustomer',formatter:'.hideAtpcCustomer'}">
+														<Text text="{SUPPLYJSONMODEL>atpcCustomer}" class="sapUiTinyMarginBottom smalltextCUST"/>
+														<Text text="{SUPPLYJSONMODEL>atpcCustomerName}" class="smalltextCUSTname"></Text>
+													</VBox>
+												</VBox>
+											</HBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="6em" resizable="false">
+										<Label text="Rotte"/>
+										<uitab:template>
+											<VBox renderType="Bare" alignItems="Center">
+												<core:Icon src="{ parts: ['SUPPLYJSONMODEL>routesCnt','SUPPLYJSONMODEL>adiacentRoute'], formatter: '.formatIconMultiRoute' }" size="1.2em"
+													press=".multiRouteShow"
+													visible="{ parts: ['SUPPLYJSONMODEL>routesCnt','SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node','SUPPLYJSONMODEL>adiacentRoute'], formatter: '.formatIconMultiRouteVisible' }"
+													color="{ parts: ['SUPPLYJSONMODEL>routesCnt','SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node','SUPPLYJSONMODEL>adiacentRoute'], formatter: '.formatIconMultiRouteColor' }"
+													></core:Icon>
+												<fiorital:FioritalText text="{SUPPLYJSONMODEL>routeid}" press=".multiRouteShowSingle" fontSize="0.7em"
+													visible="{parts:['SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node','SUPPLYJSONMODEL>adiacentRoute','SUPPLYJSONMODEL>routesCnt'],formatter:'.hideRouteOnStock'}"></fiorital:FioritalText>
+											</VBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="6.5em" resizable="false">
+										<Label text="Disponibilità"/>
+										<uitab:template>
+											<VBox renderType="Bare" alignItems="Start" justifyContent="Start" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}">
+												<ObjectIdentifier title="{ parts: ['SUPPLYJSONMODEL>sourceAvailabilityDate','SUPPLYJSONMODEL>supplyType'], formatter: '.formatAvailDate' }"
+													text="{ parts: ['SUPPLYJSONMODEL>sourceAvailabilityTime','SUPPLYJSONMODEL>supplyType'], formatter: '.formatAvailTimePopover' }"
+													titleActive="false"/>
+											</VBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="4em" resizable="false">
+										<Label text="UM"/>
+										<uitab:template>
+											<VBox renderType="Bare" alignItems="Center">
+												<fiorital:FioritalText text="{SUPPLYJSONMODEL>uom}" fontSize="0.9em"/>
+											</VBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="16em" resizable="false">
+										<Label text="Batch"/>
+										<uitab:template>
+											<HBox>
+												<VBox renderType="Bare" justifyContent="Center" alignItems="Baseline" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}">
+													<fiorital:FioritalText text="{SUPPLYJSONMODEL>charg}" width="8em"></fiorital:FioritalText>
+													<fiorital:FioritalText text="HU: {path:'SUPPLYJSONMODEL>exidv',formatter:'.deleteTrailZeros'}" fontSize="0.8em"
+														visible="{= ${SUPPLYJSONMODEL>exidv} !== '' ? true : false }"/>
+													<fiorital:FioritalText text="({path:'SUPPLYJSONMODEL>exidv2',formatter:'.deleteTrailZeros'})" fontSize="0.8em" color="darkgrey"
+														visible="{= ${SUPPLYJSONMODEL>exidv2} !== '' ? true : false }"/>
+													<HBox renderType="Bare">
+														<core:Icon size="1em" color="green" src="sap-icon://heating-cooling"
+															visible="{path:'SUPPLYJSONMODEL>specialBatch',formatter:'.showIceRework'}" class="sapUiTinyMarginEnd" tooltip="batch righiacciato"/>
+														<core:Icon size="1em" color="blue" src="sap-icon://e-care"
+															visible="{path:'SUPPLYJSONMODEL>specialBatch',formatter:'.showSanificationRework'}" tooltip="batch bonificato"/>
+													</HBox>
+												</VBox>
+												<VBox renderType="Bare" justifyContent="Center" alignItems="Baseline" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}">
+													<fiorital:FioritalText text="{SUPPLYJSONMODEL>originPo}" bold="false" color="#427cac" fontSize="0.7rem"/>
+													<fiorital:FioritalText text="{SUPPLYJSONMODEL>vendorBatch}" bold="false" color="red" fontSize="0.7rem"/>
+												</VBox>
+											</HBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="13em" resizable="false">
+										<Label text="Quantità"/>
+										<uitab:template>
+											<VBox>
+												<HBox renderType="Bare" justifyContent="Center" alignItems="Center" visible="{= ${SUPPLYJSONMODEL>showControls} === false}" width="70%">
+													<fiorital:FioritalText text="{SUPPLYJSONMODEL>qtyAvailable} / {SUPPLYJSONMODEL>qtyTotal}" width="6em" press=".showExistingAllocations"></fiorital:FioritalText>
+												</HBox>
+												<HBox renderType="Bare" justifyContent="Center" alignItems="Center" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}" width="70%">
+													<fiorital:FioritalInput type="Number" width="6em" value="{SUPPLYJSONMODEL>allocateQty}" change=".valueAllocationChange"
+														background="{ parts: ['SUPPLYJSONMODEL>qtyAvailable', 'SUPPLYJSONMODEL>allocateQty'], formatter: '.setInputBackground'}"
+														onFocus=".inputFocusIn" onFocusOut=".inputFocusOut" onlyInteger="true" busy="{SUPPLYJSONMODEL>isAllocating}" busyIndicatorSize="Small"
+														busyIndicatorDelay="0" avoidWheelEvent="true">
+														<fiorital:customData>
+															<core:CustomData key="REFCOL" value="1" writeToDom="true"/>
+															<core:CustomData key="DATACOL" value="X" writeToDom="true"/>
+															<core:CustomData key="reacheable" value="{= ${SUPPLYJSONMODEL>reacheable} === '' ? 'N' : 'Y'}" writeToDom="true"/>
+														</fiorital:customData>
+													</fiorital:FioritalInput>
+													<HBox width="1em"></HBox>
+													<VBox renderType="Bare" width="30%">
+														<fiorital:FioritalText text="{path:'SUPPLYJSONMODEL>kgHuAvailable'} kg" fontSize="0.8em" color="darkgrey" padBottom="0.2em"
+															visible="{= ${SUPPLYJSONMODEL>exidv2} !== '' ? true : false }"/>
+														<fiorital:FioritalText text="{SUPPLYJSONMODEL>qtyAvailable} / {SUPPLYJSONMODEL>qtyTotal}" width="6em" press=".showExistingAllocations"></fiorital:FioritalText>
+														<fiorital:FioritalText text="all. {SUPPLYJSONMODEL>allocatedQty}" bold="true" fontSize="0.95em"/>
+													</VBox>
+												</HBox>
+											</VBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="32em" resizable="false">
+										<Label text="Caratteristiche"/>
+										<uitab:template>
+											<HBox height="100%" renderType="Bare" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}" alignItems="Center">
+												<HBox renderType="Bare" width="8.5em" height="100%">
+													<VBox width="35%" renderType="Bare" height="100%">
+														<HBox renderType="Bare" height="50%" alignItems="Center">
+															<Text text="{SUPPLYJSONMODEL>origin}" class="smallLabel blueInfo" tooltip="origine"/>
+														</HBox>
+														<HBox renderType="Bare" height="50%" alignItems="Center">
+															<Text text="{SUPPLYJSONMODEL>pezzatura}" class="smallLabel blueInfo" tooltip="pezzatura"/>
+														</HBox>
+													</VBox>
+													<VBox width="65%" renderType="Bare" height="100%">
+														<HBox width="100%" height="50%" alignItems="Center">
+															<Text text="{SUPPLYJSONMODEL>faozone}" class="smallLabel blueInfo" tooltip="zona fao"/>
+														</HBox>
+														<HBox width="100%" height="50%" alignItems="Center">
+															<Text text="{SUPPLYJSONMODEL>fishgear}" class="smallLabel blueInfo" tooltip="attrezzo di pesca"/>
+														</HBox>
+													</VBox>
+												</HBox>
+												<VBox width="19em">
+													<HBox visible="{parts:['SUPPLYJSONMODEL>producer','SUPPLYJSONMODEL>vendorpartner','SUPPLYJSONMODEL>charg'],formatter:'.vendorVisible'}">
+														<Text text="{SUPPLYJSONMODEL>vendorpartnername}" width="100%" class="vendorname"></Text>
+													</HBox>
+													<HBox visible="{parts:['SUPPLYJSONMODEL>producer','SUPPLYJSONMODEL>vendorpartner','SUPPLYJSONMODEL>charg'],formatter:'.producerVisible'}">
+														<Text text="{SUPPLYJSONMODEL>producername}" width="100%" class="vendorname"></Text>
+													</HBox>
+												</VBox>
+												<VBox width="8.5em">
+													<HBox>
+														<fiorital:FioritalText fontSize='0.7em' text="Arr:" width="3em" class="smalltextLabels"></fiorital:FioritalText>
+														<Text text="{path:'SUPPLYJSONMODEL>batchLastemDate',formatter:'.formatBatchDates'}" width="6.5em" class="vendorname"></Text>
+													</HBox>
+													<HBox>
+														<fiorital:FioritalText fontSize='0.7em' text="Scad:" width="3em" class="smalltextLabels"></fiorital:FioritalText>
+														<Text text="{path:'SUPPLYJSONMODEL>batchExpireDate',formatter:'.formatBatchDates'}" width="6.5em" class="vendorname"></Text>
+													</HBox>
+												</VBox>
+											</HBox>
+										</uitab:template>
+									</uitab:Column>
+									<uitab:Column width="10em">
+										<Label text="Prezzo ATPC"/>
+										<uitab:template>
+											<HBox renderType="Bare" justifyContent="Center" alignItems="Center" visible="{= ${SUPPLYJSONMODEL>showControls} !== false}" width="100%">
+												<VBox width="50%" class="sapUiTinyMarginEnd">
+													<HBox visible="{path:'SUPPLYJSONMODEL>pricetreshholdlow',formatter:'.hidePrice'}">
+														<core:Icon src="sap-icon://lead" color="darkgreen" tooltip="Dispo price"></core:Icon>
+														<HBox width="0.3em"></HBox>
+														<Text text="{path:'SUPPLYJSONMODEL>pricetreshholdlow',formatter:'.priceNull'}" width="2.65em"></Text>
+													</HBox>
+													<HBox visible="{path:'SUPPLYJSONMODEL>pricetreshholdmax',formatter:'.hidePrice'}">
+														<core:Icon src="sap-icon://lead" color="darkred" tooltip="maxiumum price"></core:Icon>
+														<HBox width="0.3em"></HBox>
+														<Text text="{path:'SUPPLYJSONMODEL>pricetreshholdmax',formatter:'.priceNull'}" width="2.65em"></Text>
+													</HBox>
+												</VBox>
+												<fiorital:FioritalInput value="{path: 'SUPPLYJSONMODEL>inputprice', type: '.FloatParse2D'}" change=".onInputPriceChange" width="50%"
+													avoidNegatives="true" disableKeyDownHandling="true" selectOnSelect="true" onFocus=".inputFocusIn"
+													onFocusOut=".inputFocusOut" busy="{SUPPLYJSONMODEL>isAllocating}" busyIndicatorSize="Small" busyIndicatorDelay="0" avoidWheelEvent="true">
+													<fiorital:customData>
+														<core:CustomData key="REFCOL" value="2" writeToDom="true"/>
+														<core:CustomData key="DATACOL" value="X" writeToDom="true"/>
+													</fiorital:customData>
+												</fiorital:FioritalInput>
+											</HBox>
+										</uitab:template>
+									</uitab:Column>
+								</fiorital:columns>
+							</fiorital:FioritalUITreeTable>
+						</HBox>
+					</content>
+					<footer>
+						<Toolbar>
+							<HBox width="30em" height="100%" alignItems="Center">
+								<core:Icon src="sap-icon://shipping-status" size="1em" press="showMainFO" class="sapUiSmallMarginEnd"></core:Icon>
+								<fiorital:FioritalText bold="true" fontSize="1em" text="{SUPPLYJSONMODELBASE>/zzlgort}" class="sapUiTinyMarginEnd"/>
+								<Text text="{SUPPLYJSONMODELBASE>/storagelocationdescr}" class="sapUiTinyMarginEnd"></Text>
+								<Text text="@ {SUPPLYJSONMODELBASE>/fodeparturedate} h: {SUPPLYJSONMODELBASE>/fodeparturetime}" class="sapUiTinyMarginEnd"></Text>
+							</HBox>
+							<HBox width="30em" alignItems="Center">
+								<core:Icon src="sap-icon://message-error" visible="{= ${LOCALMODEL>/dynamicFilter}.length > 0 ? true : false }" class="sapUiSmallMarginEnd"
+									press=".clearDynamicFilter"/>
+								<fiorital:FioritalText canFocus="true" id="dynamicFilterIn" bold="true" fontSize="1em" text="{LOCALMODEL>/dynamicFilterText}"
+									class="sapUiTinyMarginEnd"/>
+							</HBox>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://chain-link" text="Alloca e continua" press=".runAllocationContinue" type="Default"/>
+							<Button icon="sap-icon://chain-link" text="Alloca e chiudi" press=".runAllocation" type="Default" id="btnAllocation"/>
+							<Button icon="sap-icon://decline" text="Annulla allocazione" press=".closeAllocation" type="Reject"/>
+						</Toolbar>
+					</footer>
+					<dependents>
+						<Popover contentWidth="80em" id="preSelectedItems" placement="Bottom" title="trade items selezionati">
+							<List items="{PRESELECTEDITEMS>/}">
+								<CustomListItem>
+									<HBox width="100%">
+										<VBox width="10%" class="sapUiMediumMarginBegin sapUiTinyMarginEnd" justifyContent="Center" height="5em">
+											<ObjectIdentifier title="{PRESELECTEDITEMS>node}" text="{PRESELECTEDITEMS>nodeName}"/>
+										</VBox>
+										<VBox width="15%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<ObjectIdentifier title="{path:'PRESELECTEDITEMS>supplyType',formatter:'.supplyTypeText'}"
+												text="{parts:['PRESELECTEDITEMS>supplyType','PRESELECTEDITEMS>supplyId'],formatter:'.supplyIdFormat'}"/>
+										</VBox>
+										<VBox width="15%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<ObjectIdentifier title="{PRESELECTEDITEMS>matnr}" text="{PRESELECTEDITEMS>maktx}"/>
+										</VBox>
+										<VBox width="10%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<Text text="{PRESELECTEDITEMS>charg}"></Text>
+										</VBox>
+										<VBox width="5%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<Text text="{PRESELECTEDITEMS>uom}"></Text>
+										</VBox>
+										<VBox width="5%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<Text text="{PRESELECTEDITEMS>allocateQty}" class="boldPopoverAlternativeRoute"></Text>
+										</VBox>
+										<VBox width="10%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<HBox>
+												<Text text="Origine:" width="6em" class="smalltextLabels"></Text>
+												<Text text="{PRESELECTEDITEMS>origin}" width="100%" class="vendorname"></Text>
+											</HBox>
+											<HBox>
+												<Text text="FAO:" width="6em" class="smalltextLabels"></Text>
+												<Text text="{PRESELECTEDITEMS>faozone}" width="100%" class="vendorname"></Text>
+											</HBox>
+										</VBox>
+										<VBox width="25%" justifyContent="Center" class="sapUiTinyMarginEnd">
+											<HBox>
+												<Text text="Attrezzo:" width="6em" class="smalltextLabels"></Text>
+												<Text text="{PRESELECTEDITEMS>fishgear}" width="100%" class="vendorname"></Text>
+											</HBox>
+											<HBox>
+												<Text text="Produttore:" width="6em" class="smalltextLabels"></Text>
+												<Text text="{PRESELECTEDITEMS>producername}" width="100%" class="vendorname"></Text>
+											</HBox>
+										</VBox>
+										<VBox width="5%" justifyContent="Center">
+											<core:Icon src="sap-icon://sys-cancel" press=".deleteFromPreSelected" color="red"></core:Icon>
+										</VBox>
+									</HBox>
+								</CustomListItem>
+							</List>
+						</Popover>
+						<Popover id="popoverAternativeRoutes" contentHeight="30em" contentWidth="75em" enableScrolling="false" title="Select alternative route"
+							class="smallScrollBarAltRoute">
+							<HBox width="100%" height="100%" renderType="Bare">
+								<ScrollContainer width="40%" height="100%" vertical="true" horizontal="false" class="borderRightAlternativeRoutesPopup">
+									<List width="100%" items="{ALTERNATIVEROUTESPOPOVER>/value}" mode="SingleSelectMaster" id="alternativeRouteList"
+										selectionChange="selectAlternativeRoute">
+										<CustomListItem>
+											<HBox height="7.5em" width="100%" renderType="Bare" alignItems="Center">
+												<core:Icon src="sap-icon://radar-chart" size="2em" width="20%"></core:Icon>
+												<VBox renderType="Bare" width="75%">
+													<HBox renderType="Bare" width="100%">
+														<Text text="{ALTERNATIVEROUTESPOPOVER>routeid}" class="boldPopoverAlternativeRoute"></Text>
+														<VBox width="0.5em"></VBox>
+														<Text text="@ {ALTERNATIVEROUTESPOPOVER>arrivalDate} > {path:'ALTERNATIVEROUTESPOPOVER>arrivalTime',formatter:'.formatFOtime'}"></Text>
+													</HBox>
+													<HBox height="0.3em"></HBox>
+													<Text text="{ALTERNATIVEROUTESPOPOVER>nodeChain}" class="routechain" maxLines="1" width="100%"></Text>
+													<HBox height="0.3em"></HBox>
+													<HBox renderType="Bare" width="100%">
+														<Text text="Carrier out: " width="30%"></Text>
+														<Text text="{ALTERNATIVEROUTESPOPOVER>carrierOut}" class="smallCarrier" width="70%"></Text>
+													</HBox>
+													<HBox height="0.3em"></HBox>
+													<HBox renderType="Bare" width="100%">
+														<Text text="Carrier in:" width="30%"></Text>
+														<Text text="{ALTERNATIVEROUTESPOPOVER>carrierIn}" class="smallCarrier" width="70%"></Text>
+													</HBox>
+												</VBox>
+												<VBox renderType="Bare" width="5%"></VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+								<ScrollContainer width="60%" height="100%" vertical="true" horizontal="false">
+									<List width="100%" items="{ALTERNATIVEROUTESPOPOVERNODES>/}">
+										<CustomListItem>
+											<HBox height="4.5em" width="100%" renderType="Bare" alignItems="Center">
+												<VBox width="5%"></VBox>
+												<Text text="{ALTERNATIVEROUTESPOPOVERNODES>node}" width="15%" class="hdrAllocation1"></Text>
+												<VBox width="50%" height="100%" alignContent="Center">
+													<HBox height="50%" width="100%" alignItems="Center">
+														<core:Icon src="sap-icon://past"></core:Icon>
+														<VBox width="0.5em"></VBox>
+														<Text text="IN" width="3em" class="textInRoute"></Text>
+														<Text
+															text="{path:'ALTERNATIVEROUTESPOPOVERNODES>foIn',formatter:'.deleteTrailZeros'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>arrivalDate',formatter:'.formatFOdate'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>arrivalTime',formatter:'.formatFOtime'}"></Text>
+													</HBox>
+													<HBox height="50%" width="100%" alignItems="Center">
+														<core:Icon src="sap-icon://future"></core:Icon>
+														<VBox width="0.5em"></VBox>
+														<Text text="OUT" width="3em" class="textOutRoute"></Text>
+														<Text
+															text="{path:'ALTERNATIVEROUTESPOPOVERNODES>foOut',formatter:'.deleteTrailZeros'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>departureDate',formatter:'.formatFOdate'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>departureTime',formatter:'.formatFOtime'}"></Text>
+													</HBox>
+												</VBox>
+												<VBox width="25%" renderType="Bare" height="100%">
+													<HBox renderType="Bare" width="100%" height="50%" alignItems="Center">
+														<Text text="% Vol." class="smallRouteId" width="30%"></Text>
+														<ProgressIndicator class="sapUiSmallMarginBottom" percentValue="50" displayValue="123 mc" showValue="true" state="Success" width="70%"/>
+													</HBox>
+													<HBox renderType="Bare" width="100%" height="50%" alignItems="Center">
+														<Text text="% Mass" class="smallRouteId" width="30%"></Text>
+														<ProgressIndicator class="sapUiSmallMarginBottom" percentValue="40" displayValue="12355 kg" showValue="true" state="Success" width="70%"/>
+													</HBox>
+												</VBox>
+												<VBox width="5%"></VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</HBox>
+							<footer>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://radar-chart" text="select route" press=".selectedAlternativeSupplyRoute"/>
+									<Button icon="sap-icon://sys-back" text="back" press=".backFromRouteDetail"/>
+								</Toolbar>
+							</footer>
+						</Popover>
+						<fiorital:FreightOrderManager id="foManagerId"/>
+						<fiorital:ATPCDetail id="ATPCdetailExistingAllocation"></fiorital:ATPCDetail>
+						<fiorital:AttributeManager id="attributeManagerId" itemsLaw="{path: 'Attribute'}" itemsOther="{path: 'Attribute'}"/>
+						<Popover id="popoverAllocationsExisting" contentHeight="20em" contentWidth="65em" verticalScrolling="true" title="Existing Allocations"
+							placement="Auto" class="smallScrollBar">
+							<List items="{path:'/SotItem', suspended:true }" id="popoverAllocationsExistingList" growing="false" class="allocationtype">
+								<CustomListItem>
+									<fiorital:FioriTile width="98%" padding="0.5em" class="noPaddingtop" draggable="true"
+										color="{ path: 'validity', formatter: '.backColorAllocationType' }">
+										<grid:CSSGrid gridTemplateRows="1fr" gridTemplateColumns="1fr 2fr 3fr 2fr 2fr 2fr" gridGap="1rem" width="100%">
+											<grid:items>
+												<VBox justifyContent="Center" alignItems="Center">
+													<core:Icon src="{path:'demandType',formatter:'.iconDemandType'}" size="1.5em"></core:Icon>
+												</VBox>
+												<VBox justifyContent="Center" height="3.7em">
+													<Text text="{path:'validity',formatter:'.textAllocation'}" class="allocationtypetxt"></Text>
+													<HBox>
+														<HBox width="1em"></HBox>
+														<Text text="type: "></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{demandType}" class="qtybatch demandtype"></Text>
+													</HBox>
+													<HBox>
+														<HBox width="1em"></HBox>
+														<Text text="ID: "></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{path:'demand',formatter:'.deleteTrailZeros'} / {path:'demandPos',formatter:'.deleteTrailZeros'}" class="qtybatch"></Text>
+													</HBox>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Start">
+													<Text text="{customerid}"></Text>
+													<Text text="{customername}"></Text>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Start">
+													<HBox>
+														<Text text="Batch: " class="colorcharactbatch"></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{charg}"></Text>
+													</HBox>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Start">
+													<HBox>
+														<Text text="{openqty}" class="allocationQty"></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{uom}"></Text>
+													</HBox>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Center">
+													<Text text="Prep. warehouse " class="colorcharactbatch"></Text>
+													<HBox width="1em"></HBox>
+													<Text text="{path:'preparationwh',formatter:'.prepWarehouse'}"></Text>
+												</VBox>
+											</grid:items>
+										</grid:CSSGrid>
+									</fiorital:FioriTile>
+								</CustomListItem>
+							</List>
+							<footer>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://cancel" text="exit" press=".closePopoverExixstingAllocations" type="Reject"/>
+								</Toolbar>
+							</footer>
+						</Popover>
+					</dependents>
+				</Page>
+			</detailPages>
+			<masterPages>
+				<Page title="Allocazioni attive" class="smallScrollBar masterpagewidth">
+					<content>
+						<ScrollContainer vertical="true" horizontal="false" width="100%" height="100%">
+							<VBox class="AllocationsBorder"
+								items="{ path:'SOALLOCATIONS>/value', sorter: {path: 'docpos', descending: false}, filters: [{path: 'postype', operator: 'EQ', value1: 'ZALL'}]}"
+								width="100%">
+								<items>
+									<fiorital:FioriTile height="5em" width="95%">
+										<HBox alignItems="Center" height="100%">
+											<core:Icon src="sap-icon://database" size="1.5em" width="2em" color="darkgrey"></core:Icon>
+											<VBox justifyContent="Center">
+												<HBox>
+													<fiorital:FioritalText text="{SOALLOCATIONS>productcode}"/>
+												</HBox>
+												<HBox class="sapUiSmallMarginBottom">
+													<fiorital:FioritalText bold="true" fontSize="0.9em" text="{SOALLOCATIONS>productdescr}"/>
+												</HBox>
+												<HBox>
+													<Label text="{SOALLOCATIONS>qty} {SOALLOCATIONS>uom}"></Label>
+												</HBox>
+												<HBox>
+													<Text text="{SOALLOCATIONS>batchnr}"></Text>
+												</HBox>
+											</VBox>
+										</HBox>
+									</fiorital:FioriTile>
+								</items>
+							</VBox>
+						</ScrollContainer>
+					</content>
+					<footer>
+						<Toolbar>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</footer>
+				</Page>
+			</masterPages>
+		</SplitApp>
+	</Dialog>
+</core:FragmentDefinition>

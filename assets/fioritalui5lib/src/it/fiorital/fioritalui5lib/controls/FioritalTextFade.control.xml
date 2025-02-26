@@ -1,0 +1,8 @@
+<core:FragmentDefinition controllerName="it.fiorital.fioritalui5lib.controls.FioritalTextFade" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:micro="sap.suite.ui.microchart">
+		<HBox renderType="Bare">
+			<core:Icon src="sap-icon://alert" visible="false" id="fadingIcon"></core:Icon>
+			<HBox width="0.3em" alignContent="Center" alignItems="Center"></HBox>
+			<Text id="fadingtext" text=""></Text>
+		</HBox>
+</core:FragmentDefinition>

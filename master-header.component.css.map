@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/custom-components/master-header/master-header.component.css"],
+  "sourcesContent": ["\n\n.noPadding::part(content){\n    padding: 0px;\n}"],
+  "mappings": ";AAEA,CAAC,SAAS,OAAO;AACb,WAAS;AACb;",
+  "names": []
+}

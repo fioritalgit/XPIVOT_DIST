@@ -1,0 +1,86 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{$this>title}" class="" placement="Auto" initialFocus="email" id="popoverMessageOutputDirect" contentWidth="55em"
+		contentHeight="25em" verticalScrolling="false" modal="true">
+		<content>
+			<ScrollContainer height="100%" width="100%" vertical="true">
+				<Table selectionChange="handleSelectionChange" items="{path: 'NastMessages', templateShareable: true}" inset="false"
+					id="listMessage" sticky="ColumnHeaders,HeaderToolbar" visible="true">
+					<!--<headerToolbar>-->
+					<!--	<Toolbar-->
+					<!--		id="idCrumbToolbar" />-->
+					<!--</headerToolbar>-->
+					<columns>
+						<Column width="5rem" id="statusColumn" hAlign="Center">
+							<Text text="{sharedi18n>statusColumnLabel}"/>
+						</Column>
+						<Column width="7rem" id="messageTypeColumn" minScreenWidth="Tablet" demandPopin="true" hAlign="Center" visible="true">
+							<Text text="{sharedi18n>messageTypeColumnLabel}"/>
+						</Column>
+						<Column id="typeDescriptionColumn" minScreenWidth="Tablet" demandPopin="true" hAlign="Center" visible="true">
+							<Text text="{sharedi18n>typeDescriptionColumnLabel}"/>
+						</Column>
+						<Column width="12rem" id="communicationTypeDescriptionColumn" hAlign="Center">
+							<Text text="{sharedi18n>communicationTypeDescriptionColumnLabel}"/>
+						</Column>
+						<Column id="destinationColumn" hAlign="Center">
+							<Text text="{sharedi18n>destinationColumnLabel}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation" press="_onMessagePress">
+							<cells>
+								<ObjectStatus
+									icon="{= ${status} === '0' ? 'sap-icon://status-inactive' : ${status} === '1' ? 'sap-icon://status-positive' : 'sap-icon://status-negative' }"
+									state="{= ${status} === '0' ? 'None' : ${status} === '1' ? 'Success' : 'Error' }"/>
+							</cells>
+							<cells>
+								<Label text="{messagetype}"/>
+							</cells>
+							<cells>
+								<Label text="{messagetypedescription}"/>
+							</cells>
+							<cells>
+								<Label text="{commtypedescr}"/>
+							</cells>
+							<cells>
+								<Label text="{destination}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Table inset="false" id="listLogs" sticky="ColumnHeaders,HeaderToolbar" visible="false"
+					items="{path: '/NastLogs', suspended: true, templateShareable: true}">
+					<headerToolbar>
+						<Toolbar>
+							<Button icon="sap-icon://nav-back" press="_backToMessages" text="{sharedi18n>backToMessagesButtonText}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="5rem" hAlign="Center" visible="true">
+							<Text text="{sharedi18n>logTypeColumnLabel}"/>
+						</Column>
+						<Column hAlign="Center" visible="true">
+							<Text text="{sharedi18n>logMessageColumnLabel}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem id="LogsColumnListItemId">
+							<ObjectStatus
+								icon="{= ${logtype} === 'I' ? 'sap-icon://status-inactive' : ${logtype} === 'S' ? 'sap-icon://status-positive' : 'sap-icon://status-negative' }"
+								state="{= ${logtype} === 'I' ? 'None' : ${logtype} === 'S' ? 'Success' : 'Error' }"/>
+							<cells>
+								<Label text="{message1}{message2}{message3}{message4}" wrapping="true"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>closeButtonLabel}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

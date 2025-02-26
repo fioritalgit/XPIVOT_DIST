@@ -1,0 +1,145 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover title="{$this>title} - ( {path:'routedescription',formatter:'.routeDescription'} )" class="" placement="Auto" id="FreightOrderPopover" contentWidth="65em" 
+		verticalScrolling="false" busyIndicatorDelay="0" busyIndicatorSize="Medium" horizontalScrolling="false" modal="true">
+		<subHeader>
+			<HBox height="7em" id="subHederFOmanager" busyIndicatorDelay="0">
+				<VBox width="10%" alignContent="Center" alignItems="Center" justifyContent="Center">
+					<core:Icon src="sap-icon://document-text" size="3em"></core:Icon>
+					<Label text="{uniquekey}" visible="false"></Label>
+				</VBox>
+				<VBox width="20%" alignContent="Center" alignItems="Start" justifyContent="Center">
+					<ObjectIdentifier titleActive="true" titlePress=".goToFIoriApp" title="{path:'freightorderid',formatter:'.deleteTrailZeros'}" text="freight order n°"/>
+					<VBox height="1em"></VBox>
+					<ObjectIdentifier title="{type}" text="doc. type"/>
+				</VBox>
+				<VBox width="10%" alignContent="Center" alignItems="Center" justifyContent="Center">
+					<!--<core:Icon src="sap-icon://shipping-status" size="3em"></core:Icon>-->
+					<core:Icon src="{parts: ['transpCode'], formatter: '.SharedFormatter.getTransportationIcon'}" size="3em"></core:Icon>
+					
+				</VBox>
+				<VBox width="40%" alignContent="Center" alignItems="Start" justifyContent="Center">
+					<ObjectIdentifier title="{ parts:[{path: 'carrierid'},{path: 'carrieridname'}], formatter: '.carrier' }" text="carrier"/>
+					<VBox height="1em"></VBox>
+					<HBox>
+						<ObjectIdentifier title="{parts:[{path: 'transpCode'},{path: 'transpName'}], formatter: '.transportationMode'}" text="transportation type" class="sapUiMediumMarginEnd"/>
+						<ObjectIdentifier visible="{isairtransported}" title="{awbcode}" text="AWB"/>
+					</HBox>
+				</VBox>
+				<VBox width="20%" alignContent="Center" alignItems="Start" justifyContent="Center">
+					<ObjectIdentifier title="{sumdocqty}" text="totale box"/>
+					<VBox height="1em"></VBox>
+					<ObjectIdentifier title="{sumgrossweight}" text="totale peso lordo"/>
+				</VBox>
+			</HBox>
+		</subHeader>
+		<content>
+			<html:style>
+				.noPadding [role="tabpanel"]{ padding: 0px !important; }
+				.width97 { width: 98.5%; }
+				.whiteBackFOlist [role="tabpanel"]{ background: white; }
+			</html:style>
+			<VBox renderType="Bare" height="25em" id="contentVboxFOmanager">
+				<IconTabBar id="idIconTabBar" select="handleIconTabBarSelect" stretchContentHeight="true" class="noPadding width97 sapUiTinyMargin whiteBackFOlist" busyIndicatorDelay="0"
+					expandable="false" tabDensityMode="Compact">
+					<items>
+						<IconTabFilter icon="sap-icon://cancel-share" iconColor="Positive" count="{FreightOrderStage/$count}" text="stages" key="stops" class="noPadding">
+							<content>
+								<ScrollContainer height="100%" width="100%" vertical="true" horizontal="false">
+									<List id="FreightOrderListStops" items="{FreightOrderStage}">
+										<CustomListItem>
+											<HBox width="100%" renderType="Bare" height="6em" alignItems="Center">
+												<HBox width="2em"></HBox>
+												<VBox width="25%">
+													<core:Icon src="sap-icon://arrow-top"></core:Icon>
+													<VBox height="1em"></VBox>
+													<ObjectIdentifier title="{startnode}" text="{startlocationid}"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<VBox width="25%">
+													<core:Icon src="sap-icon://history"></core:Icon>
+													<VBox height="1em"></VBox>
+													<ObjectIdentifier title="{startnodedate}" text="{startnodetime}"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<VBox width="25%">
+													<core:Icon src="sap-icon://arrow-bottom"></core:Icon>
+													<VBox height="1em"></VBox>
+													<ObjectIdentifier title="{endnode}" text="{endlocationid}"/>
+												</VBox>
+												<VBox width="25%">
+													<core:Icon src="sap-icon://history"></core:Icon>
+													<VBox height="1em"></VBox>
+													<ObjectIdentifier title="{endnodedate}" text="{endnodetime}"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</content>
+						</IconTabFilter>
+						<IconTabSeparator icon=""/>
+						<IconTabFilter icon="sap-icon://tag" iconColor="Neutral" count="{FreightOrderItem/$count}" text="content" key="items">
+							<content>
+								<ScrollContainer height="100%" width="100%" vertical="true" horizontal="false">
+									<List id="FreightOrderListContent" items="{FreightOrderItem}">
+										<CustomListItem>
+											<HBox width="100%" renderType="Bare" height="4em" alignItems="Center">
+												<HBox width="2em"></HBox>
+												<VBox width="7em">
+													<ObjectIdentifier title="{path:'freightunitid',formatter:'.deleteTrailZeros'}" text="freight unit"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<VBox width="10em">
+													<ObjectIdentifier title="{ parts:[{path: 'docnr'},{path: 'docpos'}], formatter: '.documentReference' }" text="{doctyp}"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<VBox width="15em">
+													<ObjectIdentifier title="{material}" text=" {materialdescription}"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<VBox>
+													<ObjectIdentifier title="{ parts:[{path: 'grossweight'}], formatter: '.grossWeight' }" text=" {groosweightunit}"/>
+												</VBox>
+												<HBox width="3em"></HBox>
+												<VBox>
+													<ObjectIdentifier title="{ parts:[{path: 'docqty'}], formatter: '.grossWeight' }" text=" {docuomext}"/>
+												</VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</content>
+						</IconTabFilter>
+						<IconTabSeparator icon=""/>
+						<IconTabFilter icon="sap-icon://group" iconColor="Neutral" count="{FreightOrderPartner/$count}" text="partners" key="partners">
+							<content>
+								<ScrollContainer height="100%" width="100%" vertical="true">
+									<List id="FreightOrderListPartners" items="{FreightOrderPartner}">
+										<CustomListItem>
+											<HBox width="100%" renderType="Bare" height="4em" alignItems="Center">
+												<HBox width="2em"></HBox>
+												<HBox width="35%">
+													<ObjectIdentifier title="{roledescr}" text="partner role"/>
+												</HBox>
+												<HBox width="3em"></HBox>
+												<ObjectIdentifier title="{ptyname}" text="{ parts:[{path: 'address'},{path: 'city'},{path: 'country'}], formatter: '.address' }"/>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</content>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

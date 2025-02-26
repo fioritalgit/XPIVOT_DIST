@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">>
+	<Popover title="{$this>title}" class="" placement="Auto" id="objectStstusesPopover" contentWidth="50em"
+		verticalScrolling="false" horizontalScrolling="false" modal="true">
+		<content>
+			<List items="{STATUSES>/value}">
+				<CustomListItem>
+					<HBox width="100%" renderType="Bare" height="4em">
+						<VBox width="50%" height="100%" renderType="Bare" alignContent="Center" justifyContent="Center">
+							<fio:FioritalText text="{STATUSES>statusdescription}" bold="true" padBegin="0.4em" padBottom="0.3em"></fio:FioritalText>
+							<HBox>
+								<fio:FioritalText text="{STATUSES>statusupdateuser}" fontSize="0.8em" padEnd="0.3em" padBegin="0.4em"></fio:FioritalText>
+								<fio:FioritalText text="{STATUSES>statusupdatedate}" fontSize="0.8em" padEnd="0.3em"></fio:FioritalText>
+								<fio:FioritalText text="{path:'STATUSES>statusupdatetime',formatter:'.formatTimeUpdate'}" fontSize="0.8em"></fio:FioritalText>
+							</HBox>
+							
+						</VBox>
+						<VBox width="20%" height="100%" renderType="Bare" alignContent="Center" justifyContent="Center">
+							<Switch type="AcceptReject" state="{path:'STATUSES>statusvalue', type: '.BooleanParseXfeld'}" change=".changeStatus"/>
+						</VBox>
+						<VBox width="30%" height="100%" renderType="Bare" alignContent="Center" justifyContent="Center">
+							<TextArea value="{path:'STATUSES>statusnotes'}" class="sapUiTinyMarginEnd"></TextArea>
+						</VBox>
+					</HBox>
+				</CustomListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<core:Icon src="sap-icon://message-warning" class="sapUiTinyMarginLeft" visible="{GENERAL>/changedStatus}" color="red"></core:Icon>
+				<fio:FioritalText text="modifiche attive" bold="true" color="red" padBegin="0.4em" visible="{GENERAL>/changedStatus}"></fio:FioritalText>
+				<ToolbarSpacer/>
+				<Button id="saveButton" icon="sap-icon://save" text="{sharedi18n>saveButton}" press="_onSaveButtonPress"/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

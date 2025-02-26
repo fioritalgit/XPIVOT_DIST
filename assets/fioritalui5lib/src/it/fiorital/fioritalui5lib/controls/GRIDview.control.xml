@@ -1,0 +1,76 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fiorital="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover id="popoverAternativeRoutes" contentHeight="30em" contentWidth="50em" enableScrolling="false" title="Select alternative route"
+		class="smallScrollBarAltRoute">
+		<html:style>
+							.smallScrollBarAltRoute div ::-webkit-scrollbar { width: 0.2em !important; } .noPaddingPanel .sapMPanelContent{padding:0px;} .hdrAllocation1
+							{ font-size: x-large; font-weight: bold} .noMargin { margin: 0px !important;} .FOlistBorder {border-top: 1px solidlightgray;}
+							.smallScrollBar::-webkit-scrollbar { height: 0.4rem !important; } .bigSourceATPC { font-size: large !important; font-weight:bold !important}
+							.smallRouteId {font-size:small !important; color:grey !important;} .boldPopoverAlternativeRoute {font-weight: bold !important}
+							.borderRightAlternativeRoutesPopup{ border-right: 1px solid lightgrey} .textInRoute{color:darkgreen} .textOutRoute{color: darkred}
+							.transparentSupplyTable{background: transparent;} .markClusterRed tr[data-clusterok="X"]{background-color:#ff000059;} .blinking
+							{animation:blinkingText 0.8s infinite;} @keyframes blinkingText{ 0%{ color: red; } 49%{ color: transparent; } 50%{ color: transparent; }
+							99%{ color:transparent; } 100%{ color: red; } } .folarger {font-size: larger !important;} .matnrCluster .sapMTextBreakWord{ font-size: large
+							!important;} .infottoolLightColor .sapMListInfoTBar { background-color: cadetblue; } .vendorname { font-size: small !important;}
+							.smalltextBD{ font-size: smaller !important; color: lightblue !important;} .charactRequirement{ font-weight: bold;} .moveIconLeft {
+							left:-0.3em;} .bordersubtable { border-bottom: 1px solid lightgrey;} div[data-LASTBATCH="X"]{ border-bottom: 0px !important; }
+							.smallerRouteId {font-size:smaller !important; color:grey!important;} .matnrsmall {font-size: small !important;} .matnrbold {font-weight:
+							bold !important;} .tdnopad td{ padding: 0px !important;} .itemPad3{padding-left:0.7em;} .genericBatch span[data-BATCHID="GENERIC"]{ color:
+							brown !important; font-weight: bold !important; } .genericBatch span[data-BATCHID="GENERIC"]{ color: brown !important; font-weight: bold
+							!important; } .orderqty {color: coral !important; font-size: 0.9em !important;} .bigUMO {font-size:large !important;} .smalltextLabels{
+							font-size: smaller !important; color: darkgrey !important;} .linesInOrder div[data-inorder="X"] { background-color: #0a6ed117;} .padTopRoute
+							{ padding-top: 0.5em; } .smallCarrier {font-size:small !important; color: cornflowerblue !important;} .routechain {font-size:small
+							!important; color:#107e3e !important;}
+							
+							div[data-reacheable=""]{ visibility: hidden !important; }
+							tr[data-reacheablecluster=""]{  }
+		</html:style>
+		<HBox width="100%" height="100%" renderType="Bare">
+			<ScrollContainer width="100%" height="100%" vertical="true" horizontal="false">
+				<List width="100%" items="{ALTERNATIVEROUTESPOPOVERNODES>/}" id="listRoutePositions">
+					<CustomListItem>
+						<HBox height="4.5em" width="100%" renderType="Bare" alignItems="Center">
+							<VBox width="5%"></VBox>
+							<Text text="{ALTERNATIVEROUTESPOPOVERNODES>node}" width="15%" class="hdrAllocation1"></Text>
+							<VBox width="50%" height="100%" alignContent="Center">
+								<HBox height="50%" width="100%" alignItems="Center">
+									<core:Icon src="sap-icon://past"></core:Icon>
+									<VBox width="0.5em"></VBox>
+									<Text text="IN" width="3em" class="textInRoute"></Text>
+									<Text
+										text="{path:'ALTERNATIVEROUTESPOPOVERNODES>foIn',formatter:'.deleteTrailZeros'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>arrivalDate',formatter:'.formatFOdate'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>arrivalTime',formatter:'.formatFOtime'}"></Text>
+								</HBox>
+								<HBox height="50%" width="100%" alignItems="Center">
+									<core:Icon src="sap-icon://future"></core:Icon>
+									<VBox width="0.5em"></VBox>
+									<Text text="OUT" width="3em" class="textOutRoute"></Text>
+									<Text
+										text="{path:'ALTERNATIVEROUTESPOPOVERNODES>foOut',formatter:'.deleteTrailZeros'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>departureDate',formatter:'.formatFOdate'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>departureTime',formatter:'.formatFOtime'}"></Text>
+								</HBox>
+							</VBox>
+							<VBox width="25%" renderType="Bare" height="100%">
+								<HBox renderType="Bare" width="100%" height="50%" alignItems="Center">
+									<Text text="% Vol." class="smallRouteId" width="30%"></Text>
+									<ProgressIndicator class="sapUiSmallMarginBottom" percentValue="{parts:['ALTERNATIVEROUTESPOPOVERNODES>groVolVal','ALTERNATIVEROUTESPOPOVERNODES>groVolValcap','ALTERNATIVEROUTESPOPOVERNODES>groVolUni'],formatter:'.capacityPerc'}" 
+									displayValue="{parts:['ALTERNATIVEROUTESPOPOVERNODES>groVolVal','ALTERNATIVEROUTESPOPOVERNODES>groVolValcap','ALTERNATIVEROUTESPOPOVERNODES>groVolUni'],formatter:'.capacityText'}" showValue="true" state="Success" width="70%"/>
+								</HBox>
+								<HBox renderType="Bare" width="100%" height="50%" alignItems="Center">
+									<Text text="% Mass" class="smallRouteId" width="30%"></Text>
+									<ProgressIndicator class="sapUiSmallMarginBottom" percentValue="{parts:['ALTERNATIVEROUTESPOPOVERNODES>groWeiVal','ALTERNATIVEROUTESPOPOVERNODES>groWeiValcap','ALTERNATIVEROUTESPOPOVERNODES>groWeiUni'],formatter:'.capacityPerc'}" 
+									displayValue="{parts:['ALTERNATIVEROUTESPOPOVERNODES>groWeiVal','ALTERNATIVEROUTESPOPOVERNODES>groWeiValcap','ALTERNATIVEROUTESPOPOVERNODES>groWeiUni'],formatter:'.capacityText'}" showValue="true" state="Success" width="70%"/>
+								</HBox>
+							</VBox>
+							<VBox width="5%"></VBox>
+						</HBox>
+					</CustomListItem>
+				</List>
+			</ScrollContainer>
+		</HBox>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://sys-back" text="indietro" press=".backFromRouteDetail"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

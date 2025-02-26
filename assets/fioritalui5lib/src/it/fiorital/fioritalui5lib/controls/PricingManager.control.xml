@@ -1,0 +1,92 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover title="{$this>title}" class="" placement="Auto" id="pricingManagerPopover" contentWidth="65em" verticalScrolling="false"
+		horizontalScrolling="false" modal="true">
+		<content>
+			<html:style>
+					.rowTotal { font-weight: bold !important; } .eurItalic { font-style: italic; width: 3em; }
+					.smallScrollBar::-webkit-scrollbar {
+						width: 0.2rem !important;
+					}
+					.subtotalline tr[data-subtotalline="X"] {
+						background-color: beige; 
+					}
+					.statline tr[data-statline="X"] {
+						background-color: #d3d3d378; 
+					}
+					.statText {
+						font-size: smaller !important;
+					}
+				
+			</html:style>
+			<VBox renderType="Bare" height="35em">
+				<ScrollContainer height="100%" width="100%" vertical="true" class="smallScrollBar">
+					<Table id="pricingManagerList" inset="false" sticky="ColumnHeaders,InfoToolbar" class="subtotalline statline">
+						<headerToolbar></headerToolbar>
+						<!--<infoToolbar>
+							<Toolbar active="ture">
+								<Label text="price conditions"/>
+							</Toolbar>
+						</infoToolbar>-->
+						<columns>
+							<Column width="5%" hAlign="Center" vAlign="Middle">
+								<Text text=""/>
+							</Column>
+							<Column width="20%" hAlign="Center" vAlign="Middle">
+								<Text text="condition"/>
+							</Column>
+							<Column width="15%" hAlign="Center" vAlign="Middle">
+								<Text text="type"/>
+							</Column>
+							<Column width="10%" hAlign="Center" vAlign="Middle">
+								<Text text="unit value"/>
+							</Column>
+							<Column width="8%" hAlign="Center" vAlign="Middle">
+							</Column>
+							<Column width="8%" hAlign="Center" vAlign="Middle">
+							</Column>
+							<Column width="8%" hAlign="Center" vAlign="Middle">
+								<Text text="cond. unit"/>
+							</Column>
+							<Column width="15%" hAlign="End" vAlign="Middle">
+								<Text text="value"/>
+							</Column>
+							<Column width="10%" hAlign="Center" vAlign="Middle">
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<customData>
+									<core:CustomData key="subtotalline" value="{subtotal}" writeToDom="true"/>
+									<core:CustomData key="statline" value="{conditionisforstatistics}" writeToDom="true"/>
+								</customData>
+								<cells>
+									<VBox>
+										<core:Icon src="{ parts:[{path: 'conditioninactivereason'},{path: 'subtotal'},{path:'conditionisforstatistics'}], formatter: '.activeCondition' }" 
+										color="{ parts:[{path: 'conditioninactivereason'},{path: 'subtotal'},{path:'conditionisforstatistics'}], formatter: '.activeConditionColor' }"></core:Icon>
+										<Text text="(stat)" visible="{conditionisforstatistics}" class="statText"></Text>
+									</VBox>
+									<ObjectIdentifier title="{conditiontype}" text="{conditiontypename}"/>
+									<Label text="{conditioncalculationtypetext}"></Label>
+									<Input type="Number" enabled="{ parts: ['editable', '$this>forceDisable'], formatter: '.disableInput'}" value="{ path: 'conditionratevalue', formatter: '.conditionRate' }" visible="{ parts:[{path: 'subtotal'}], formatter: '.hideSubTotalInput' }"
+									change="valueChange"></Input>
+									<Label text="{conditionratevalueunit}"></Label>
+									<Label text="{ parts:[{path: 'conditionquantity'}], formatter: '.condquantity' }"></Label>
+									<Label text="{conditionbasevalueunit}" class="eurItalic"></Label>
+									<Label text="{conditionamount}" class="rowTotal"></Label>
+									<Label text="{transactioncurrency}" class="eurItalic"></Label>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="closeButton" icon="sap-icon://decline" text="{sharedi18n>cancelButton}" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

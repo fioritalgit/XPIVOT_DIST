@@ -1,0 +1,122 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="pricingManagerPopup" title="{sharedi18n>pricingManagerPopupTitle}">
+		<content>
+			<VBox fitContainer="true">
+				<f:SimpleForm id="headerInfoForm" minWidth="1024" maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="4"
+					labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+					<f:content>
+						<!--<FlexBox-->
+						<!--alignItems="Start"-->
+						<!--justifyContent="Center">-->
+						<!--<items>-->
+						<!--<core:Title/>-->
+						<HBox justifyContent="Center" alignItems="Center">
+							<Label text="{sharedi18n>PricingDateLabelText}"/>
+							<DatePicker id="pricingDatePicker" value="{PricingDate}" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+						</HBox>
+						<!--<core:Title/>-->
+						<HBox>
+							<VBox>
+								<HBox class="sapUiMediumMarginBeginEnd">	
+									<Label text="{sharedi18n>netPriceLabelText}" class="sapUiSmallMarginEnd"/>
+									<Input value="{netprice}" class="sapUiTinyMarginEnd" editable="false"/>
+									<Text text="{currency}" class="sapUiSmallMarginEnd" />
+								</HBox>
+								<HBox class="sapUiMediumMarginBeginEnd">
+									<Label text="{sharedi18n>taxesLabelText}" class="sapUiSmallMarginEnd"/>
+									<Input value="{netprice}" class="sapUiTinyMarginEnd" editable="false"/>
+									<Text text="{currency}" class="sapUiSmallMarginEnd" />
+								</HBox>
+							</VBox>
+						</HBox>
+						
+						<!--<core:Title/>-->
+						<HBox>
+							<Label text="{sharedi18n>itemQtyLabelText}"/>
+							<Input value="{qty}" editable="false"/>
+							<Text text="{uom}"/>
+						</HBox>
+						<!--</items>-->
+						<!--</FlexBox>-->
+					</f:content>
+					<!--<f:layoutData>-->
+					<!--	<FlexItemData shrinkFactor="0" backgroundDesign="Solid" styleClass="sapContrastPlus"/>-->
+					<!--</f:layoutData>-->
+				</f:SimpleForm>
+				<IconTabBar upperCase="true" id="idIconTabBar" select="handleIconTabBarSelect" class="sapUiResponsiveContentPadding" expandable="false"
+					applyContentPadding="true">
+					<items>
+						<IconTabFilter text="{sharedi18n>conditionIconTabText}" key="{sharedi18n>conditionIconTabText}"/>
+						<IconTabFilter text="{sharedi18n>statisticPricingIconTabText}" key="{sharedi18n>statisticPricingIconTabText}"/>
+					</items>
+					<content>
+						<Table id="PricingConditionList" items="{ path: 'Pricing', parameters: {$$updateGroupId: 'batchGroupAPI', $$groupId: 'directGroup' } }">
+							<columns>
+								<Column id="conditionTypeColumn">
+									<Text text="{sharedi18n>pricingConditionTypeLabelText}"/>
+								</Column>
+								<Column id="descriptionColumn">
+									<Text text="{sharedi18n>pricingConditionDescriptionLabelText}"/>
+								</Column>
+								<Column id="unitValueColumn">
+									<Text text="{sharedi18n>unitValueLabelText}"/>
+								</Column>
+								<Column id="UnitUoMColumn">
+									<Text text="{sharedi18n>unitUoMLabelText}"/>
+								</Column>
+								<Column id="PerUoMColumn">
+									<Text text="{sharedi18n>perUoMLabelText}"/>
+								</Column>
+								<Column id="TotalValueColumn">
+									<Text text="{sharedi18n>totalValueLabelText}"/>
+								</Column>
+								<Column id="TotalUoMColumn">
+									<Text text="{sharedi18n>totalUoMLabelText}"/>
+								</Column>
+								<Column id="actionColumn">
+									<Text text="{sharedi18n>actionLabelText}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Input value="{conditiontype}" editable="false"/>
+									</cells>
+									<cells>
+										<Input value="{conditiontypename}" editable="false"/>
+									</cells>
+									<cells>
+										<Input value="{conditionratevalue}" editable="false"/>
+									</cells>
+									<cells>
+										<Input value="{conditionratevalueunit}" editable="false"/>
+									</cells>
+									<cells>
+										<Input value="{conditionbasevalueunit}" editable="false"/>
+									</cells>
+									<cells>
+										<Input value="{conditionamount}" editable="false"/>
+									</cells>
+									<cells>
+										<Input value="{transactioncurrency}" editable="false"/>
+									</cells>
+									<cells>
+										<HBox alignItems="Center" justifyContent="SpaceAround">
+											<Button id="deleteCondition" icon="sap-icon://delete" tooltip="{i18n>deleteConditionButtonText}" press="onDeleteCondition" visible="false"/>
+										</HBox>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content>
+				</IconTabBar>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="{sharedi18n>pricingManagerCreateButtonText}" type="Accept" press=".onPopupConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="{sharedi18n>closeButton}" press=".onPopupClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

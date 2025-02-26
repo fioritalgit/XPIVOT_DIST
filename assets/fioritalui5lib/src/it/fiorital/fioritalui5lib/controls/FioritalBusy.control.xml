@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fio="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<core:HTML id="FioBusy" visible="true"
+
+		content='&lt;div id=&quot;busyfiorital&quot;  class=&quot;sk-cube-grid&quot;&gt; &lt;div class=&quot;sk-cube sk-cube1&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube2&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube3&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube4&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube5&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube6&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube7&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube8&quot;&gt;&lt;/div&gt; &lt;div class=&quot;sk-cube sk-cube9&quot;&gt;&lt;/div&gt; &lt;/div&gt;'>
+		
+	</core:HTML>
+
+
+</core:FragmentDefinition>

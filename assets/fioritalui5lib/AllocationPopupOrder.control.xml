@@ -1,0 +1,456 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fiorital="it.fiorital.fioritalui5lib.controls"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog id="allocationPopup" contentWidth="100%" contentHeight="100%" verticalScrolling="false" horizontalScrolling="false"
+		showHeader="false" afterClose="onAfterClose" afterOpen="onAfterOpen">
+		<SplitApp id="spliAllcoationPopup" orientationChange="onOrientationChange" mode="HideMode">
+			<detailPages>
+				<Page title="{$this>title}" >
+					<content>
+						<html:style>
+							.smallScrollBarAltRoute div ::-webkit-scrollbar { width: 0.2em !important; } .noPaddingPanel .sapMPanelContent{padding:0px;} .hdrAllocation1
+							{ font-size: x-large; font-weight: bold} .noMargin { margin: 0px !important;} .FOlistBorder {border-top: 1px solidlightgray;}
+							.smallScrollBar::-webkit-scrollbar { height: 0.4rem !important; } .bigSourceATPC { font-size: large !important; font-weight:bold !important}
+							.smallRouteId {font-size:small !important; color:grey !important;} .boldPopoverAlternativeRoute {font-weight: bold !important}
+							.borderRightAlternativeRoutesPopup{ border-right: 1px solid lightgrey} .textInRoute{color:darkgreen} .textOutRoute{color: darkred}
+							.transparentSupplyTable{background: transparent;} .markClusterRed tr[data-clusterok="X"]{background-color:#ff000059;} .blinking
+							{animation:blinkingText 0.8s infinite;} @keyframes blinkingText{ 0%{ color: red; } 49%{ color: transparent; } 50%{ color: transparent; }
+							99%{ color:transparent; } 100%{ color: red; } } .folarger {font-size: larger !important;} .matnrCluster .sapMTextBreakWord{ font-size: large
+							!important;} .infottoolLightColor .sapMListInfoTBar { background-color: cadetblue; } .vendorname { font-size: small !important;}
+							.smalltextBD{ font-size: smaller !important; color: lightblue !important;} .charactRequirement{ font-weight: bold;} .moveIconLeft {
+							left:-0.3em;} .bordersubtable { border-bottom: 1px solid lightgrey;} div[data-LASTBATCH="X"]{ border-bottom: 0px !important; }
+							.smallerRouteId {font-size:smaller !important; color:grey!important;} .matnrsmall {font-size: small !important;} .matnrbold {font-weight:
+							bold !important;} .tdnopad td{ padding: 0px !important;} .itemPad3{padding-left:0.7em;} .genericBatch span[data-BATCHID="GENERIC"]{ color:
+							brown !important; font-weight: bold !important; } .genericBatch span[data-BATCHID="GENERIC"]{ color: brown !important; font-weight: bold
+							!important; } .orderqty {color: coral !important; font-size: 0.9em !important;} .bigUMO {font-size:large !important;} .smalltextLabels{
+							font-size: smaller !important; color: darkgrey !important;} .linesInOrder div[data-inorder="X"] { background-color: #0a6ed117;} .padTopRoute
+							{ padding-top: 0.5em; } .smallCarrier {font-size:small !important; color: cornflowerblue !important;} .routechain {font-size:small
+							!important; color:#107e3e !important;}
+							
+							div[data-reacheable=""]{ visibility: hidden !important; }
+							tr[data-reacheablecluster=""]{  }
+						</html:style>
+						<HBox height="8%" alignItems="Center">
+							<VBox width="1%"></VBox>2.5
+							<VBox width="29%">
+								<HBox width="100%">
+									<core:Icon src="sap-icon://example" size="2.5em"></core:Icon>
+									<VBox width="1em"></VBox>
+									<VBox>
+										<Text text="General Availability" class="hdrAllocation1"></Text>
+										<Text text="all products"></Text>
+									</VBox>
+								</HBox>
+							</VBox>
+							<VBox width="12.5%">
+								<Text text="Only local hub availability"></Text>
+								<VBox height="0.2em"></VBox>
+								<Switch id="onlylocalavailability" state="true" customTextOn="Yes" customTextOff="No" change=".changeLocalFlag"></Switch>
+							</VBox>
+							<VBox width="12.5%">
+								<Text text="Only reserved availabilities"></Text>
+								<VBox height="0.2em"></VBox>
+								<Switch id="onlyPartner" state="false" customTextOn="Yes" customTextOff="No" change=".changeBPFlag"></Switch>
+							</VBox>
+							<VBox width="5%"></VBox>
+							<HBox width="45%" height="100%">
+								<HBox width="40%" height="100%" alignItems="Center">
+									<core:Icon src="sap-icon://shipping-status" size="2.5em" press="showMainFO"></core:Icon>
+									<VBox width="1em"></VBox>
+									<VBox>
+										<Text text="{SUPPLYJSONMODELBASE>/zzlgort}" class="hdrAllocation1"></Text>
+										<Text text="{SUPPLYJSONMODELBASE>/storagelocationdescr}"></Text>
+										<Text text="@ {SUPPLYJSONMODELBASE>/fodeparturedate} h: {SUPPLYJSONMODELBASE>/fodeparturetime}"></Text>
+									</VBox>
+								</HBox>
+								<HBox id="alternativeRouteShow" width="60%" height="100%" alignItems="Center">
+									<VBox>
+										<core:Icon src="sap-icon://journey-change" size="1em" color="red"></core:Icon>
+										<core:Icon src="sap-icon://shipping-status" size="1em" color="red"></core:Icon>
+									</VBox>
+									<HBox width="0.5em"></HBox>
+									<VBox>
+										<HBox>
+											<fiorital:FioritalText text="{ parts: ['SELECTEDALTERNATIVEROUTE>/freightorderid'], formatter: '.deleteTrailZeros' }" press=".showFO"/>
+											<HBox width="0.5em"></HBox>
+											<Label
+												text="{SELECTEDALTERNATIVEROUTE>/sotradelgort} - ({SELECTEDALTERNATIVEROUTE>/sotradedate} @{ parts: ['SELECTEDALTERNATIVEROUTE>/sotradetime'], formatter: '.formatFOtime' })"></Label>
+										</HBox>
+										<Text text="{SELECTEDALTERNATIVEROUTE>/carrieridname}"></Text>
+									</VBox>
+								</HBox>
+							</HBox>
+						</HBox>
+						<ScrollContainer height="92%" width="100%" vertical="true" horizontal="false">
+							<Table id="allocationBasicList" inset="false" items="{path:'SUPPLYJSONMODEL>/', length: 9999}" growing="false" sticky="ColumnHeaders,InfoToolbar"
+								class="markClusterRed infottoolLightColor tdnopad">
+								<headerToolbar></headerToolbar>
+								<infoToolbar>
+									<Toolbar active="ture">
+										<core:Icon src="sap-icon://product"></core:Icon>
+										<VBox width="0.1em"></VBox>
+										<Text text="filter code "></Text>
+										<VBox width="0.3em"></VBox>
+										<SearchField width="20em" id="inputtradeitem" search=".gosearchFilterMaterial" liveChange=".searchlivechange"
+											suggestionItems="{ path: 'SUGGESTIONS>/value'}" enableSuggestions="true" suggest=".onSuggest">
+											<suggestionItems>
+												<SuggestionItem text="{SUGGESTIONS>productcode}" description="{SUGGESTIONS>productdescription}" key="{SUGGESTIONS>productcode}"/>
+											</suggestionItems>
+										</SearchField>
+										<VBox width="0.3em"></VBox>
+										<core:Icon src="sap-icon://tree"></core:Icon>
+										<VBox width="0.1em"></VBox>
+										<CheckBox id="showGenericBatches" text="Mostra batch generici" select=".changeShowGenerics"/>
+										<ToolbarSpacer/>
+										<Text text="filter node: "></Text>
+										<ComboBox showSecondaryValues="true" items="{NODESFILTER>/}" width="10em" change=".onChangeNodeFilter" id="comboNodes">
+											<core:ListItem key="{NODESFILTER>node}" text="{NODESFILTER>node}" additionalText="{NODESFILTER>descr}"/>
+										</ComboBox>
+										<core:Icon src="sap-icon://clear-filter" press=".onClearFilterNode"></core:Icon>
+									</Toolbar>
+								</infoToolbar>
+								<columns>
+									<Column width="4%" mergeDuplicates="true" mergeFunctionName="getTooltip">
+										<Text text=''/>
+									</Column>
+									<Column width="6%" mergeDuplicates="true" mergeFunctionName="getTooltip">
+										<Text text="supply type"/>
+									</Column>
+									<Column width="10%" mergeDuplicates="true" mergeFunctionName="getTooltip">
+										<Text text="trade item"/>
+									</Column>
+									<Column width="6%">
+										<Text text="route"/>
+									</Column>
+									<Column width="5%">
+										<Text text='avail. time'/>
+									</Column>
+									
+									<Column width="4%">
+										<Text text="max qty."/>
+									</Column>
+									<Column width="3%">
+										<Text text=""/>
+									</Column>
+									<Column width="62%">
+										<Text text="batches"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem >
+										<customData>
+											<core:CustomData key="CLUSTEROK" value="{SUPPLYJSONMODEL>overAllocation}" writeToDom="true"/>
+											<core:CustomData key="reacheablecluster" value="{SUPPLYJSONMODEL>reacheablecluster}" writeToDom="true"/>
+										</customData>
+										<cells>
+											<core:Icon src="{ parts: ['SUPPLYJSONMODEL>supplyType'], formatter: '.formatIconSupplyType' }" size="2em" color="lightgrey" class="itemPad3" 
+											tooltip="{SUPPLYJSONMODEL>matnr}-{SUPPLYJSONMODEL>node}-{SUPPLYJSONMODEL>supplyType}"></core:Icon>
+											<VBox tooltip="{SUPPLYJSONMODEL>matnr}-{SUPPLYJSONMODEL>node}-{SUPPLYJSONMODEL>supplyType}">
+												<Text text="{SUPPLYJSONMODEL>node}" class="bigSourceATPC"></Text>
+												<Text text="{path:'SUPPLYJSONMODEL>supplyType',formatter:'.supplyTypeText'}"></Text>
+												<Text text="{parts:['SUPPLYJSONMODEL>supplyType','SUPPLYJSONMODEL>supplyId'],formatter:'.supplyIdFormat'}"
+													visible="{parts:['SUPPLYJSONMODEL>supplyId','SUPPLYJSONMODEL>supplyType'],formatter:'.hideSupplyId'}" class="smalltextLabels"></Text>
+												<HBox visible="{path:'SUPPLYJSONMODEL>atpcCustomer',formatter:'.hideAtpcCustomer'}">
+													<Text text="{SUPPLYJSONMODEL>atpcCustomer}"></Text>
+													<HBox width="0.3em"></HBox>
+													<Text text="{SUPPLYJSONMODEL>atpcCustomerName}" class="smalltextCUST"></Text>
+												</HBox>
+											</VBox>
+											<VBox tooltip="{SUPPLYJSONMODEL>matnr}-{SUPPLYJSONMODEL>node}-{SUPPLYJSONMODEL>supplyType}">
+												<Text text="{SUPPLYJSONMODEL>matnr}" class="matnrbold"></Text>
+												<Text text="{SUPPLYJSONMODEL>maktx}" class="matnrsmall"></Text>
+											</VBox>
+											<VBox renderType="Bare" alignItems="Center">
+												<core:Icon src="{ parts: ['SUPPLYJSONMODEL>routesCnt','SUPPLYJSONMODEL>adiacentRoute'], formatter: '.formatIconMultiRoute' }" size="1.5em"
+													press=".multiRouteShow"
+													visible="{ parts: ['SUPPLYJSONMODEL>routesCnt','SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node','SUPPLYJSONMODEL>adiacentRoute'], formatter: '.formatIconMultiRouteVisible' }"
+													color="{ parts: ['SUPPLYJSONMODEL>routesCnt','SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node','SUPPLYJSONMODEL>adiacentRoute'], formatter: '.formatIconMultiRouteColor' }"
+													class="moveIconLeft"></core:Icon>
+												<fiorital:FioritalText text="{SUPPLYJSONMODEL>routeid}" width="6em" class="smallerRouteId" press=".multiRouteShowSingle"
+													visible="{parts:['SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node','SUPPLYJSONMODEL>adiacentRoute','SUPPLYJSONMODEL>routesCnt'],formatter:'.hideRouteOnStock'}"></fiorital:FioritalText>
+											</VBox>
+											<ObjectIdentifier
+												title="{ parts: ['SUPPLYJSONMODEL>sourceAvailabilityDate','SUPPLYJSONMODEL>supplyType','SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node'], formatter: '.formatAvailDate' }"
+												text="{ parts: ['SUPPLYJSONMODEL>sourceAvailabilityTime','SUPPLYJSONMODEL>supplyType','SUPPLYJSONMODEL>destNode','SUPPLYJSONMODEL>node'], formatter: '.formatAvailTimePopover' }"
+												titleActive="false"/>
+											
+											<Text text="{SUPPLYJSONMODEL>qtyMaxCluster}" class="bigSourceATPC"></Text>
+											<Text text="{SUPPLYJSONMODEL>uom}" class="bigUMO"></Text>
+											<List id="batchList" visible="true" class="genericBatch linesInOrder"
+												items="{path: 'SUPPLYJSONMODEL>batches' , filters: [{ path: 'defaultRouteid', operator: 'EQ', value1: 'X'}]}">
+												<items>
+													<CustomListItem class="transparentSupplyTable">
+														<HBox height="3.7em" alignContent="Center" alignItems="Center" renderType="Bare" class="bordersubtable">
+															<customData>
+																<core:CustomData key="LASTBATCH" value="{SUPPLYJSONMODEL>LASTBATCH}" writeToDom="true"/>
+																<core:CustomData key="inorder" value="{path: 'SUPPLYJSONMODEL>sorefqty', formatter:'.isPresentInOrder' }" writeToDom="true"></core:CustomData>
+															</customData>
+															<HBox width="1em"></HBox>
+															<core:Icon src="sap-icon://blank-tag" press=".showBatchDetails"></core:Icon>
+															<HBox width="1em"></HBox>
+															<Label text="{SUPPLYJSONMODEL>charg}" width="6em">
+																<customData>
+																	<core:CustomData key="BATCHID" value="{SUPPLYJSONMODEL>charg}" writeToDom="true"/>
+																</customData>
+															</Label>
+															<HBox width="1em"></HBox>
+															<fiorital:FioritalInput type="Number" width="4em" value="{SUPPLYJSONMODEL>allocateQty}" change=".valueAllocationChange">
+																<fiorital:customData>
+																	<core:CustomData key="REFCOL" value="1" writeToDom="true"/>
+																	<core:CustomData key="DATACOL" value="X" writeToDom="true"/>
+																	<core:CustomData key="reacheable" value="{SUPPLYJSONMODEL>reacheable}" writeToDom="true"/>
+																</fiorital:customData>
+															</fiorital:FioritalInput>
+															<HBox width="1em"></HBox>
+															<Text text="{SUPPLYJSONMODEL>qtyAvailable} / {SUPPLYJSONMODEL>qtyTotal}" width="7em"></Text>
+															<HBox width="1em"></HBox>
+															<Text text="{SUPPLYJSONMODEL>origin}" width="3em" class="vendorname"></Text>
+															<HBox width="0.5em"></HBox>
+															<Text text="{SUPPLYJSONMODEL>faozone}" width="3em" class="vendorname"></Text>
+															<HBox width="0.5em"></HBox>
+															<Text text="{SUPPLYJSONMODEL>fishgear}" width="7em" class="vendorname"></Text>
+															<HBox width="1em"></HBox>
+															<VBox width="18em">
+																<HBox visible="{parts:['SUPPLYJSONMODEL>producer','SUPPLYJSONMODEL>vendorpartner','SUPPLYJSONMODEL>charg'],formatter:'.vendorVisible'}">
+																	<Text text="Fornitore:" width="6em" class="smalltextLabels"></Text>
+																	<Text text="{SUPPLYJSONMODEL>vendorpartnername}" width="100%" class="vendorname"></Text>
+																</HBox>
+																<HBox visible="{parts:['SUPPLYJSONMODEL>producer','SUPPLYJSONMODEL>vendorpartner','SUPPLYJSONMODEL>charg'],formatter:'.producerVisible'}">
+																	<Text text="Produttore:" width="6em" class="smalltextLabels"></Text>
+																	<Text text="{SUPPLYJSONMODEL>producername}" width="100%" class="vendorname"></Text>
+																</HBox>
+															</VBox>
+															<VBox width="12em">
+																<HBox>
+																	<Text text="Arrivo:" width="5.5em" class="smalltextLabels"></Text>
+																	<Text text="{path:'SUPPLYJSONMODEL>batchLastemDate',formatter:'.formatBatchDates'}" width="6.5em" class="vendorname"></Text>
+																</HBox>
+																<HBox>
+																	<Text text="Scadenza:" width="5.5em" class="smalltextLabels"></Text>
+																	<Text text="{path:'SUPPLYJSONMODEL>batchExpireDate',formatter:'.formatBatchDates'}" width="6.5em" class="vendorname"></Text>
+																</HBox>
+															</VBox>
+															<VBox width="4.5em">
+																<HBox visible="{path:'SUPPLYJSONMODEL>pricetreshholdlow',formatter:'.hidePrice'}">
+																	<core:Icon src="sap-icon://lead" color="darkgreen" tooltip="Dispo price"></core:Icon>
+																	<HBox width="0.3em"></HBox>
+																	<Text text="{path:'SUPPLYJSONMODEL>pricetreshholdlow',formatter:'.priceNull'}" width="3em"></Text>
+																</HBox>
+																<HBox height="0.2em"></HBox>
+																<HBox visible="{path:'SUPPLYJSONMODEL>pricetreshholdmax',formatter:'.hidePrice'}">
+																	<core:Icon src="sap-icon://lead" color="darkred" tooltip="maxiumum price"></core:Icon>
+																	<HBox width="0.3em"></HBox>
+																	<Text text="{path:'SUPPLYJSONMODEL>pricetreshholdmax',formatter:'.priceNull'}" width="3em"></Text>
+																</HBox>
+															</VBox>
+														</HBox>
+													</CustomListItem>
+												</items>
+											</List>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ScrollContainer>
+					</content>
+					<footer>
+						<Toolbar>
+							<VBox width="0.5em"></VBox>
+							<core:Icon src="sap-icon://database" id="iconOverSelection" class="blinking">
+								<core:customData>
+									<core:CustomData key="OVERSELECTION" value="" writeToDom="true"/>
+								</core:customData>
+							</core:Icon>
+							<VBox width="0.5em"></VBox>
+							<Text text="selected boxes: "></Text>
+							<Text text="-" id="qtySelected"></Text>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://chain-link" text="Allocate" press=".runAllocation" type="Accept"/>
+							<Button icon="sap-icon://decline" text="Cancel" press=".closeAllocation" type="Reject"/>
+						</Toolbar>
+					</footer>
+					<dependents>
+						<Popover id="popoverAternativeRoutes" contentHeight="30em" contentWidth="75em" enableScrolling="false" title="Select alternative route"
+							class="smallScrollBarAltRoute">
+							<HBox width="100%" height="100%" renderType="Bare">
+								<ScrollContainer width="40%" height="100%" vertical="true" horizontal="false" class="borderRightAlternativeRoutesPopup">
+									<List width="100%" items="{ALTERNATIVEROUTESPOPOVER>/value}" mode="SingleSelectMaster" id="alternativeRouteList"
+										selectionChange="selectAlternativeRoute">
+										<CustomListItem>
+											<HBox height="7.5em" width="100%" renderType="Bare" alignItems="Center">
+												<core:Icon src="sap-icon://radar-chart" size="2em" width="20%"></core:Icon>
+												<VBox renderType="Bare" width="75%">
+													<HBox renderType="Bare" width="100%">
+														<Text text="{ALTERNATIVEROUTESPOPOVER>routeid}" class="boldPopoverAlternativeRoute"></Text>
+														<VBox width="0.5em"></VBox>
+														<Text text="@ {ALTERNATIVEROUTESPOPOVER>arrivalDate} > {path:'ALTERNATIVEROUTESPOPOVER>arrivalTime',formatter:'.formatFOtime'}"></Text>
+													</HBox>
+													<HBox height="0.3em"></HBox>
+													<Text text="{ALTERNATIVEROUTESPOPOVER>nodeChain}" class="routechain" maxLines="1" width="100%"></Text>
+													<HBox height="0.3em"></HBox>
+													<HBox renderType="Bare" width="100%">
+														<Text text="Carrier out: " width="30%"></Text>
+														<Text text="{ALTERNATIVEROUTESPOPOVER>carrierOut}" class="smallCarrier" width="70%"></Text>
+													</HBox>
+													<HBox height="0.3em"></HBox>
+													<HBox renderType="Bare" width="100%">
+														<Text text="Carrier in:" width="30%"></Text>
+														<Text text="{ALTERNATIVEROUTESPOPOVER>carrierIn}" class="smallCarrier" width="70%"></Text>
+													</HBox>
+												</VBox>
+												<VBox renderType="Bare" width="5%"></VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+								<ScrollContainer width="60%" height="100%" vertical="true" horizontal="false">
+									<List width="100%" items="{ALTERNATIVEROUTESPOPOVERNODES>/}">
+										<CustomListItem>
+											<HBox height="4.5em" width="100%" renderType="Bare" alignItems="Center">
+												<VBox width="5%"></VBox>
+												<Text text="{ALTERNATIVEROUTESPOPOVERNODES>node}" width="15%" class="hdrAllocation1"></Text>
+												<VBox width="50%" height="100%" alignContent="Center">
+													<HBox height="50%" width="100%" alignItems="Center">
+														<core:Icon src="sap-icon://past"></core:Icon>
+														<VBox width="0.5em"></VBox>
+														<Text text="IN" width="3em" class="textInRoute"></Text>
+														<Text
+															text="{path:'ALTERNATIVEROUTESPOPOVERNODES>foIn',formatter:'.deleteTrailZeros'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>arrivalDate',formatter:'.formatFOdate'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>arrivalTime',formatter:'.formatFOtime'}"></Text>
+													</HBox>
+													<HBox height="50%" width="100%" alignItems="Center">
+														<core:Icon src="sap-icon://future"></core:Icon>
+														<VBox width="0.5em"></VBox>
+														<Text text="OUT" width="3em" class="textOutRoute"></Text>
+														<Text
+															text="{path:'ALTERNATIVEROUTESPOPOVERNODES>foOut',formatter:'.deleteTrailZeros'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>departureDate',formatter:'.formatFOdate'} - {path:'ALTERNATIVEROUTESPOPOVERNODES>departureTime',formatter:'.formatFOtime'}"></Text>
+													</HBox>
+												</VBox>
+												<VBox width="25%" renderType="Bare" height="100%">
+													<HBox renderType="Bare" width="100%" height="50%" alignItems="Center">
+														<Text text="% Vol." class="smallRouteId" width="30%"></Text>
+														<ProgressIndicator class="sapUiSmallMarginBottom" percentValue="50" displayValue="123 mc" showValue="true" state="Success" width="70%"/>
+													</HBox>
+													<HBox renderType="Bare" width="100%" height="50%" alignItems="Center">
+														<Text text="% Mass" class="smallRouteId" width="30%"></Text>
+														<ProgressIndicator class="sapUiSmallMarginBottom" percentValue="40" displayValue="12355 kg" showValue="true" state="Success" width="70%"/>
+													</HBox>
+												</VBox>
+												<VBox width="5%"></VBox>
+											</HBox>
+										</CustomListItem>
+									</List>
+								</ScrollContainer>
+							</HBox>
+							<footer>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://radar-chart" text="select route" press=".selectedAlternativeSupplyRoute"/>
+									<Button icon="sap-icon://sys-back" text="back" press=".backFromRouteDetail"/>
+								</Toolbar>
+							</footer>
+						</Popover>
+						<fiorital:FreightOrderManager id="foManagerId"/>
+						<fiorital:ATPCDetail id="ATPCdetailExistingAllocation"></fiorital:ATPCDetail>
+						<fiorital:AttributeManager id="attributeManagerId" itemsLaw="{path: 'Attribute'}" itemsOther="{path: 'Attribute'}"/>
+						<Popover id="popoverAllocationsExisting" contentHeight="20em" contentWidth="65em" verticalScrolling="true" title="Existing Allocations"
+							placement="Auto" class="smallScrollBar">
+							<List items="{path:'/SotItem', suspended:true }" id="popoverAllocationsExistingList" growing="false" class="allocationtype">
+								<CustomListItem>
+									<fiorital:FioriTile width="98%" padding="0.5em" class="noPaddingtop" draggable="true"
+										color="{ path: 'validity', formatter: '.backColorAllocationType' }">
+										<grid:CSSGrid gridTemplateRows="1fr" gridTemplateColumns="1fr 2fr 3fr 2fr 2fr 2fr" gridGap="1rem" width="100%">
+											<grid:items>
+												<VBox justifyContent="Center" alignItems="Center">
+													<core:Icon src="{path:'demandType',formatter:'.iconDemandType'}" size="1.5em"></core:Icon>
+												</VBox>
+												<VBox justifyContent="Center" height="3.7em">
+													<Text text="{path:'validity',formatter:'.textAllocation'}" class="allocationtypetxt"></Text>
+													<HBox>
+														<HBox width="1em"></HBox>
+														<Text text="type: "></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{demandType}" class="qtybatch demandtype"></Text>
+													</HBox>
+													<HBox>
+														<HBox width="1em"></HBox>
+														<Text text="ID: "></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{path:'demand',formatter:'.deleteTrailZeros'} / {path:'demandPos',formatter:'.deleteTrailZeros'}" class="qtybatch"></Text>
+													</HBox>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Start">
+													<Text text="{customerid}"></Text>
+													<Text text="{customername}"></Text>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Start">
+													<HBox>
+														<Text text="Batch: " class="colorcharactbatch"></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{charg}"></Text>
+													</HBox>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Start">
+													<HBox>
+														<Text text="{openqty}" class="allocationQty"></Text>
+														<HBox width="1em"></HBox>
+														<Text text="{uom}"></Text>
+													</HBox>
+												</VBox>
+												<VBox justifyContent="Center" alignItems="Center">
+													<Text text="Prep. warehouse " class="colorcharactbatch"></Text>
+													<HBox width="1em"></HBox>
+													<Text text="{path:'preparationwh',formatter:'.prepWarehouse'}"></Text>
+												</VBox>
+											</grid:items>
+										</grid:CSSGrid>
+									</fiorital:FioriTile>
+								</CustomListItem>
+							</List>
+							<footer>
+								<Toolbar>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://cancel" text="exit" press=".closePopoverExixstingAllocations" type="Reject"/>
+								</Toolbar>
+							</footer>
+						</Popover>
+						
+					</dependents>
+				</Page>
+			</detailPages>
+			<masterPages>
+				<Page title="Alternative outbound" class="smallScrollBar">
+					<content>
+						<ScrollContainer vertical="true" horizontal="false" width="100%" height="100%">
+							<VBox class="FOlistBorder" items="{ALTERNATIVEROUTES>/}" width="100%">
+								<items>
+									<fiorital:FioriTile height="6em" padding="0.5em" color="{ parts: ['ALTERNATIVEROUTES>sotradeitemfo'], formatter: '.FOtileColor' }"
+										width="95%">
+										<HBox alignItems="Center" height="100%">
+											<core:Icon src="sap-icon://shipping-status" size="1.5em" width="2em"></core:Icon>
+											<VBox justifyContent="Center">
+												<HBox>
+													<Link text="{ parts: ['ALTERNATIVEROUTES>freightorderid'], formatter: '.deleteTrailZeros' }" press=".onPressFO" class="folarger"/>
+												</HBox>
+												<HBox>
+													<Label
+														text="{ALTERNATIVEROUTES>sotradelgort} - ({ALTERNATIVEROUTES>sotradedate} @{ parts: ['ALTERNATIVEROUTES>sotradetime'], formatter: '.formatFOtime' })"></Label>
+												</HBox>
+												<HBox>
+													<Text text="{ALTERNATIVEROUTES>carrieridname}"></Text>
+												</HBox>
+											</VBox>
+										</HBox>
+									</fiorital:FioriTile>
+								</items>
+							</VBox>
+						</ScrollContainer>
+					</content>
+					<footer>
+						<Toolbar>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</footer>
+				</Page>
+			</masterPages>
+		</SplitApp>
+	</Dialog>
+</core:FragmentDefinition>

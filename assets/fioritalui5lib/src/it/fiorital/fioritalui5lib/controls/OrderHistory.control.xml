@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="it.fiorital.FullAppTemplate.controller.DialogPOHeaderHistory"
+	xmlns="sap.m" xmlns:commons="sap.suite.ui.commons" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Popover id="orderHistoryDialogId" showHeader="true" title="Changes" verticalScrolling="false" contentWidth="25%" contentHeight="80%" class="smallScrollBarChanges"
+		modal="true">
+		<content>
+			<html:style>
+				.smallScrollBarChanges div ::-webkit-scrollbar { width: 0.2em !important; }
+				.textModHistoryDate {
+					font-size: larger !important;
+				    color: cornflowerblue !important;
+				}
+				.textModTypeHistory {
+					font-size: larger !important;
+				    font-weight: bold;
+				    color: cornflowerblue !important;
+				}
+				.colorPositionHistory {
+					font-weight: bold !important;
+				    color: burlywood !important;
+    			}
+			</html:style>
+			<commons:Timeline id="timelineId" enableDoubleSided="false" sortOldestFirst="false" alignment="Right" enableScroll="true" lazyLoading="true"
+				growingThreshold="15" showHeaderBar="false" >
+				<commons:content>
+					<commons:TimelineItem userName="{sharedi18n>modifiedBy}: {createdbyuser}" icon="sap-icon://history">
+						<VBox>
+							<Text text="{creationdate} {sharedi18n>at} {creationtime}" class="sapUiTinyMarginBottom textModHistoryDate"/>
+							<Text text="{changetypetext}" class="sapUiTinyMarginBottom sapUiTinyMarginEnd textModTypeHistory"/>
+							<Text text="{tabletext}" class="sapUiTinyMarginBottom textBold"/>
+							<Text text="{fieldtext}" class="sapUiTinyMarginBottom colorPositionHistory"/>
+							<HBox height="2em"></HBox>
+							<HBox class="sapUiTinyMarginBottom">
+								<Label text="Posizione:" class="sapUiSmallMarginEnd" width="8em"/>
+								<Text text="{path:'docpos',formatter:'.deleteTrailZerosOrHeader'}"/>
+							</HBox>
+							<HBox class="sapUiTinyMarginBottom" visible="{hasprevvalue}">
+								<Label text="Valore prec.:" class="sapUiSmallMarginEnd" width="8em"/>
+								<Text text="{changedocpreviousfieldvalue}"/>
+							</HBox>
+							<HBox class="sapUiTinyMarginBottom" visible="{hasnewvalue}">
+								<Label text="Nuovo valore:" class="sapUiSmallMarginEnd" width="8em"/>
+								<Text text="{changedocnewfieldvalue}"/>
+							</HBox>
+						</VBox>
+					</commons:TimelineItem>
+				</commons:content>
+			</commons:Timeline>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="close" press="_onCloseButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>
